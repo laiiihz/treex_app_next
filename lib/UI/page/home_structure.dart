@@ -66,6 +66,7 @@ class _HomeStructureState extends wd.State<HomeStructure> {
         : Scaffold(
             floatingActionButton: ap.showFAB
                 ? FloatingActionButton(
+                    heroTag: 'fab',
                     child: Icon(Icons.add),
                     onPressed: () {
                       Navigator.of(context).push(

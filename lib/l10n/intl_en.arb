@@ -48,5 +48,7 @@
   "dangerZone": "Danger Zone",
   "deleteAllData": "Delete All Data",
   "lightMode": "Light Mode",
-  "closeAutoDarkMode": "Close Auto Dark Mode"
+  "closeAutoDarkMode": "Close Auto Dark Mode",
+  "view": "View",
+  "uploadFile": "upload file"
 }

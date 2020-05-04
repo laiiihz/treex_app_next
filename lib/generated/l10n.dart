@@ -467,6 +467,24 @@ class S {
       args: [],
     );
   }
+
+  String get view {
+    return Intl.message(
+      'View',
+      name: 'view',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get uploadFile {
+    return Intl.message(
+      'upload file',
+      name: 'uploadFile',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

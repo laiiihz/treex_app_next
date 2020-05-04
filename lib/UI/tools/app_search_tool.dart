@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:treex_app_next/UI/tools/lists/local_list.dart';
 import 'package:treex_app_next/UI/tools/lists/private_list.dart';
 import 'package:treex_app_next/UI/tools/lists/share_list.dart';
+import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
 class AppSearchTool extends StatefulWidget {
@@ -73,6 +74,9 @@ class _AppSearchToolState extends State<AppSearchTool> {
     return Stack(
       children: <Widget>[
         FlatButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: UU.widgetBorderRadius(),
+          ),
           color: index == _nowIndex ? Colors.pink : Colors.transparent,
           onPressed: () {
             setState(() {

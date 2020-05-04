@@ -68,7 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "sign_up" : MessageLookupByLibrary.simpleMessage("注册"),
     "startScan" : MessageLookupByLibrary.simpleMessage("开始扫码"),
     "title" : MessageLookupByLibrary.simpleMessage("treex"),
+    "uploadFile" : MessageLookupByLibrary.simpleMessage("上传"),
     "userAgreement" : MessageLookupByLibrary.simpleMessage("用户使用协议"),
+    "view" : MessageLookupByLibrary.simpleMessage("视图"),
     "wifi" : MessageLookupByLibrary.simpleMessage("WiFi")
   };
 }

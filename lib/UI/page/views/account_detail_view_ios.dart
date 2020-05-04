@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
+import 'package:treex_app_next/generated/l10n.dart';
 
 class AccountDetailViewIOS extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _AccountDetailViewIOSState extends State<AccountDetailViewIOS> {
         slivers: <Widget>[
           CupertinoSliverNavigationBar(
             largeTitle: buildCupertinoTitle(context, 'User'),
+            previousPageTitle: S.of(context).accountView,
           ),
           SliverList(
             delegate: SliverChildListDelegate([

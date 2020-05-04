@@ -48,5 +48,7 @@
   "dangerZone": "危险区",
   "deleteAllData": "删除所有数据",
   "lightMode": "亮色模式",
-  "closeAutoDarkMode": "关闭自动暗黑模式"
+  "closeAutoDarkMode": "关闭自动暗黑模式",
+  "view": "视图",
+  "uploadFile": "上传"
 }

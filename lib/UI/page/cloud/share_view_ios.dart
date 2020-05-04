@@ -27,6 +27,7 @@ class _ShareViewIOSState extends State<ShareViewIOS> {
         backgroundColor:
             isDark(context) ? CP.cupertinoBGDark : CP.cupertinoBGLight,
         middle: buildCupertinoTitle(context, S.of(context).share_files),
+        previousPageTitle: S.of(context).share_files,
       ),
       child: Listener(
         onPointerDown: (event) {

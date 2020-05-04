@@ -1,5 +1,8 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
+import 'package:treex_app_next/UI/page/cloud/tool/more_tools.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/UI/global_widget/app_bar_big_icon.dart';
 
@@ -9,23 +12,69 @@ class RecycleViewAndroid extends StatefulWidget {
 }
 
 class _RecycleViewAndroidState extends State<RecycleViewAndroid> {
+  bool _showList = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        physics: MIUIScrollPhysics(),
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: 200,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(S.of(context).recycle_bin),
-              background: AppBarBigIcon(
-                icon: Icons.delete,
-                tag: 'recycle_bin',
-              ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: 'fab',
+        child: Icon(MaterialCommunityIcons.filter),
+        onPressed: () {
+          Navigator.of(context, nullOk: false).push(
+            PageRouteBuilder(
+              opaque: false,
+              pageBuilder: (BuildContext context, Animation<double> animation,
+                  Animation<double> secondaryAnimation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: MoreTools(
+                    heroTag: 'fab',
+                    onChanged: (value) {
+                      setState(() {
+                        _showList = value;
+                      });
+                    },
+                    initValue: _showList,
+                  ),
+                );
+              },
             ),
+          );
+        },
+      ),
+      appBar: AppBar(
+        title: Text(S.of(context).recycle_bin),
+        actions: <Widget>[
+          Hero(
+            tag: 'recycle_bin',
+            child: Icon(Icons.delete),
           ),
         ],
+      ),
+      body: PageTransitionSwitcher(
+        reverse: _showList,
+        transitionBuilder: (Widget child, Animation primaryAnimation,
+            Animation secondaryAnimation) {
+          return SharedAxisTransition(
+            animation: primaryAnimation,
+            secondaryAnimation: secondaryAnimation,
+            transitionType: SharedAxisTransitionType.scaled,
+            child: child,
+          );
+        },
+        child: _showList
+            ? ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return Text('test');
+                },
+              )
+            : GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3),
+                itemBuilder: (BuildContext context, int index) {
+                  return Text(index.toString());
+                },
+              ),
       ),
     );
   }

@@ -68,7 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "sign_up" : MessageLookupByLibrary.simpleMessage("SIGN UP"),
     "startScan" : MessageLookupByLibrary.simpleMessage("Start Scan"),
     "title" : MessageLookupByLibrary.simpleMessage("treex"),
+    "uploadFile" : MessageLookupByLibrary.simpleMessage("upload file"),
     "userAgreement" : MessageLookupByLibrary.simpleMessage("User Agreement"),
+    "view" : MessageLookupByLibrary.simpleMessage("View"),
     "wifi" : MessageLookupByLibrary.simpleMessage("WiFi")
   };
 }
