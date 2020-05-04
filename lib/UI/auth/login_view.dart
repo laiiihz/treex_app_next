@@ -177,7 +177,6 @@ class _LoginState extends State<LoginView> {
                             );
                     },
                   ),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -246,7 +245,6 @@ class _LoginState extends State<LoginView> {
                             borderRadius: UU.widgetBorderRadius(),
                           ),
                         ),
-
                   //TODO:dev button
                   RaisedButton(
                     onPressed: () {

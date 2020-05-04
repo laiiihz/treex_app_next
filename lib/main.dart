@@ -29,7 +29,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   final routes = {
-    'splash': (context) => Splash(),
+    '/': (context) => Splash(),
     'startup': (context) => FirstStartUpPage(),
     'login': (context) => LoginView(),
     'settings': (context) => SettingsView(),
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
     final ap = Provider.of<AP>(context);
     return MaterialApp(
         title: 'treex',
-        initialRoute: 'splash',
+        initialRoute: '/',
         builder: BotToastInit(),
         navigatorObservers: [BotToastNavigatorObserver()],
         theme: ap.darkMode
