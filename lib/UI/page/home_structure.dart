@@ -58,7 +58,9 @@ class _HomeStructureState extends wd.State<HomeStructure> {
               }
               return cupertino.CupertinoTabView(
                 builder: (context) {
-                  return cupertino.CupertinoPageScaffold(child: widget);
+                  return index == 2
+                      ? SearchViewIOSParent()
+                      : cupertino.CupertinoPageScaffold(child: widget);
                 },
               );
             },
