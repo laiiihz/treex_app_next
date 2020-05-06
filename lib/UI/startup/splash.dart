@@ -2,7 +2,9 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
+import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/provider/app_provider.dart';
+import 'package:flutter/cupertino.dart' as cup;
 
 class Splash extends StatefulWidget {
   @override
@@ -16,36 +18,64 @@ class _SplashState extends State<Splash> {
     //first startup app
     Future.delayed(Duration.zero, () {
       final ap = Provider.of<AP>(context, listen: false);
-      //init darkMode
-      ap.changeDarkMode(SPU.shared.getBool('darkMode') ?? false, init: true);
-      //init autoDarkMode
-      ap.changeAutoDarkMode(
-        SPU.shared.getBool('autoDarkMode') ?? true,
-        init: true,
-      );
-      //init platform
-      ap.changePlatformInit(SPU.shared.getInt('platform') ?? 0, context);
+      init() async {
+        //init darkMode
+        await ap.changeDarkMode(SPU.shared.getBool('darkMode') ?? false,
+            init: true);
+        //init autoDarkMode
+        await ap.changeAutoDarkMode(
+          SPU.shared.getBool('autoDarkMode') ?? true,
+          init: true,
+        );
+        //init platform
+        await ap.changePlatformInit(
+            SPU.shared.getInt('platform') ?? 0, context);
 
-      //TODO:init baseUrl
+        //not fast startup
 
-      if (!SPU.shared.containsKey('init')) {
-        SPU.shared.setBool('init', true);
-        Navigator.of(context).pushReplacementNamed('startup');
-      } else {
-        //TODO: dev options
-        //SPU.shared.remove('init');
-        Navigator.of(context).pushReplacementNamed('login');
+        ap.changeFastStartUp(
+          SPU.shared.getBool('fastStartup') ?? false,
+          init: true,
+        );
+        if (!ap.fastStartup)
+          await Future.delayed(Duration(milliseconds: 2000), () {});
+
+        //TODO:init baseUrl
       }
+
+      init().then((_) {
+        if (!SPU.shared.containsKey('init')) {
+          SPU.shared.setBool('init', true);
+          Navigator.of(context).pushReplacementNamed('startup');
+        } else {
+          //TODO: dev options
+          //SPU.shared.remove('init');
+          Navigator.of(context).pushReplacementNamed('login');
+        }
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FlareActor(
-        'assets/treex-next.flr',
-        animation: 'logo',
-      ),
-    );
+        body: Column(
+      children: <Widget>[
+        Expanded(
+          child: FlareActor(
+            'assets/treex-next.flr',
+            animation: 'logo',
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(bottom: 50),
+          child: isIOS(context)
+              ? cup.CupertinoActivityIndicator(
+                  radius: 25,
+                )
+              : CircularProgressIndicator(),
+        ),
+      ],
+    ));
   }
 }

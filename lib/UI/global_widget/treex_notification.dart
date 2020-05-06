@@ -86,3 +86,29 @@ showTN(
     },
   );
 }
+
+showLoading(BuildContext context) {
+  BotToast.showCustomLoading(
+    toastBuilder: (_) {
+      return isIOS(context)
+          ? CupertinoActivityIndicator()
+          : CircularProgressIndicator();
+    },
+    wrapAnimation: (animation, _, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+    wrapToastAnimation: (animation, _, child) {
+      return ScaleTransition(
+        scale: animation,
+        child: child,
+      );
+    },
+  );
+}
+
+closeLoading() {
+  BotToast.closeAllLoading();
+}

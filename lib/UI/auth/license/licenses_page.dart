@@ -2,10 +2,9 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:treex_app_next/UI/auth/license/static_licenses.dart';
+import 'package:treex_app_next/generated/l10n.dart';
 
 class LicensesPage extends StatefulWidget {
-  LicensesPage({Key key, this.shrinkWrap = false}) : super(key: key);
-  final bool shrinkWrap;
   @override
   State<StatefulWidget> createState() => _LicensesPageState();
 }
@@ -13,13 +12,12 @@ class LicensesPage extends StatefulWidget {
 class _LicensesPageState extends State<LicensesPage> {
   int _nowIndex = 0;
   Widget _mainLicensesList(BuildContext context) => ListView(
-        shrinkWrap: widget.shrinkWrap,
-        padding: widget.shrinkWrap ? EdgeInsets.only(top: 0) : null,
+        padding: null,
         key: UniqueKey(),
         children: <Widget>[
           ListTile(
-            title: Text('GPL v3'),
-            subtitle: Text('GNU GENERAL PUBLIC LICENSE'),
+            title: Text(S.of(context).gplV3),
+            subtitle: Text(S.of(context).gnuGeneralPublicLicense),
             onTap: () {
               setState(() {
                 _nowIndex = 1;

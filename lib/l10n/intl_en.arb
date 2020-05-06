@@ -50,5 +50,12 @@
   "lightMode": "Light Mode",
   "closeAutoDarkMode": "Close Auto Dark Mode",
   "view": "View",
-  "uploadFile": "upload file"
+  "uploadFile": "upload file",
+  "others": "Others",
+  "fastStartup": "Fast Startup",
+  "gplV3": "GPL v3",
+  "gnuGeneralPublicLicense": "GNU GENERAL PUBLIC LICENSE",
+  "confirmUpper": "CONFIRM",
+  "cancelUpper": "CANCEL",
+  "requestPermission": "Request Permission"
 }

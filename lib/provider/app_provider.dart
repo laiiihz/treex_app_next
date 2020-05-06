@@ -4,6 +4,17 @@ import 'package:treex_app_next/static/static_values.dart';
 
 ///App Provider
 class AP extends ChangeNotifier {
+  //fast startup
+  bool _fastStartup = false;
+  bool get fastStartup => _fastStartup;
+  changeFastStartUp(bool state, {bool init = false}) {
+    _fastStartup = state;
+    if (!init) {
+      SPU.shared.setBool('fastStartup', state);
+    }
+    notifyListeners();
+  }
+
   TargetPlatform _targetPlatform = TargetPlatform.android;
 
   ///获取应用平台

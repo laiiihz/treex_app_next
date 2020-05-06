@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
 import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
@@ -67,37 +67,55 @@ class _SettingsState extends State<SettingsViewAndroid> {
                     ap.changeAutoDarkMode(true);
                 },
               ),
-              SwitchListTile(
+              ListTile(
+                leading: Icon(MaterialCommunityIcons.theme_light_dark),
                 title: Text(S.of(context).darkMode),
-                value: ap.autoDarkMode
-                    ? Theme.of(context).brightness == Brightness.dark
-                    : ap.darkMode,
-                onChanged: ap.autoDarkMode
-                    ? null
-                    : (value) {
-                        ap.changeDarkMode(value);
-                        showTN(
-                          context,
-                          title: value
-                              ? S.of(context).darkMode
-                              : S.of(context).lightMode,
-                          icon: value ? Icons.brightness_3 : Icons.brightness_7,
-                        );
-                      },
+                trailing: Switch(
+                  value: ap.autoDarkMode
+                      ? Theme.of(context).brightness == Brightness.dark
+                      : ap.darkMode,
+                  onChanged: ap.autoDarkMode
+                      ? null
+                      : (value) {
+                          ap.changeDarkMode(value);
+                          showTN(
+                            context,
+                            title: value
+                                ? S.of(context).darkMode
+                                : S.of(context).lightMode,
+                            icon:
+                                value ? Icons.brightness_3 : Icons.brightness_7,
+                          );
+                        },
+                ),
               ),
-              SwitchListTile(
+              ListTile(
+                leading: Icon(Icons.brightness_auto),
                 title: Text(S.of(context).autoDarkMode),
-                value: ap.autoDarkMode,
-                onChanged: (value) {
-                  ap.changeAutoDarkMode(value);
-                  showTN(
-                    context,
-                    title: value
-                        ? S.of(context).autoDarkMode
-                        : S.of(context).closeAutoDarkMode,
-                    icon: value ? Icons.brightness_auto : Icons.brightness_7,
-                  );
-                },
+                trailing: Switch(
+                  value: ap.autoDarkMode,
+                  onChanged: (value) {
+                    ap.changeAutoDarkMode(value);
+                    showTN(
+                      context,
+                      title: value
+                          ? S.of(context).autoDarkMode
+                          : S.of(context).closeAutoDarkMode,
+                      icon: value ? Icons.brightness_auto : Icons.brightness_7,
+                    );
+                  },
+                ),
+              ),
+              SettingGroup(title: S.of(context).others),
+              ListTile(
+                leading: Icon(MaterialCommunityIcons.clock_fast),
+                title: Text(S.of(context).fastStartup),
+                trailing: Switch(
+                  value: ap.fastStartup,
+                  onChanged: (value) {
+                    ap.changeFastStartUp(value);
+                  },
+                ),
               ),
             ]),
           ),

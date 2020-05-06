@@ -5,6 +5,7 @@ import 'package:treex_app_next/UI/auth/license/licenses_page.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
+import 'package:treex_app_next/static/color_palettes.dart';
 
 class SignUpLicenseIOS extends StatefulWidget {
   @override
@@ -15,18 +16,19 @@ class _SignUpState extends State<SignUpLicenseIOS> {
   @override
   Widget build(BuildContext context) => Stack(
         children: <Widget>[
-          CustomScrollView(
-            slivers: <Widget>[
-              CupertinoSliverNavigationBar(
-                largeTitle:
-                    buildCupertinoTitle(context, S.of(context).userAgreement),
-              ),
-              SliverToBoxAdapter(
-                child: LicensesPage(
-                  shrinkWrap: true,
+          CupertinoPageScaffold(
+            navigationBar: CupertinoNavigationBar(
+              backgroundColor:
+                  isDark(context) ? CP.cupertinoBGDark : CP.cupertinoBGLight,
+              middle: buildCupertinoTitle(context, S.of(context).userAgreement),
+            ),
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: LicensesPage(),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Positioned(
             child: ClipRect(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as md;
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/page/views/widget/cupertino_setting_more_item.dart';
@@ -48,6 +49,23 @@ class _SettingsView extends State<SettingsViewIOS> {
                   title: Text(S.of(context).autoDarkMode),
                   leading: Icon(md.Icons.brightness_auto),
                   trailing: CupertinoSwitch(value: true, onChanged: null),
+                ),
+              ),
+              md.Material(
+                child: SettingGroup(title: S.of(context).others),
+              ),
+              md.Material(
+                color: md.Colors.transparent,
+                child: md.ListTile(
+                  enabled: false,
+                  title: Text(S.of(context).fastStartup),
+                  leading: Icon(MaterialCommunityIcons.clock_fast),
+                  trailing: CupertinoSwitch(
+                    value: ap.fastStartup,
+                    onChanged: (value) {
+                      ap.changeFastStartUp(value);
+                    },
+                  ),
                 ),
               ),
             ]),

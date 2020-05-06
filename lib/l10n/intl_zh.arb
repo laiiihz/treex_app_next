@@ -50,5 +50,12 @@
   "lightMode": "亮色模式",
   "closeAutoDarkMode": "关闭自动暗黑模式",
   "view": "视图",
-  "uploadFile": "上传"
+  "uploadFile": "上传",
+  "others": "Others",
+  "fastStartup": "Fast Startup",
+  "gplV3": "GPL v3",
+  "gnuGeneralPublicLicense": "GNU GENERAL PUBLIC LICENSE",
+  "confirmUpper": "确认",
+  "cancelUpper": "取消",
+  "requestPermission": "Request Permission"
 }

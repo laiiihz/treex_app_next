@@ -485,6 +485,69 @@ class S {
       args: [],
     );
   }
+
+  String get others {
+    return Intl.message(
+      'Others',
+      name: 'others',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get fastStartup {
+    return Intl.message(
+      'Fast Startup',
+      name: 'fastStartup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get gplV3 {
+    return Intl.message(
+      'GPL v3',
+      name: 'gplV3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get gnuGeneralPublicLicense {
+    return Intl.message(
+      'GNU GENERAL PUBLIC LICENSE',
+      name: 'gnuGeneralPublicLicense',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get confirmUpper {
+    return Intl.message(
+      'CONFIRM',
+      name: 'confirmUpper',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get cancelUpper {
+    return Intl.message(
+      'CANCEL',
+      name: 'cancelUpper',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get requestPermission {
+    return Intl.message(
+      'Request Permission',
+      name: 'requestPermission',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

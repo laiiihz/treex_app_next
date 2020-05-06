@@ -1,10 +1,15 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
+import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/UI/page/views/settings_views.dart';
+import 'package:treex_app_next/Utils/network_test.dart';
+import 'package:treex_app_next/Utils/network_util.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
@@ -31,6 +36,12 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
   TextEditingController _ipPortTextEdit = TextEditingController();
   FocusNode _ipAddrFocusNode = FocusNode();
   FocusNode _ipPortFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    NU(https: true, port: '443', baseUrl: 'baidu.com');
+  }
 
   @override
   void dispose() {
@@ -170,9 +181,40 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
             ),
             child: Row(
               children: <Widget>[
-                IconButton(
+                MaterialButton(
                   onPressed: () {},
-                  icon: Icon(MaterialCommunityIcons.refresh),
+                  onLongPress: () {
+                    showLoading(context);
+                    NetworkTest(
+                      https: true,
+                      baseUrl: 'google.com',
+                      port: '443',
+                      context: context,
+                      onErr: () {
+                        showTN(
+                          context,
+                          title: '连接失败',
+                          icon: MaterialCommunityIcons.timer_off,
+                          type: StatusType.FAIL,
+                        );
+                      },
+                    ).check().then((value) {
+                      Future.delayed(Duration(milliseconds: 0), () {
+                        closeLoading();
+                        if (value)
+                          showTN(
+                            context,
+                            title: '连接成功',
+                            icon: MaterialCommunityIcons.check,
+                            type: StatusType.SUCCESS,
+                          );
+                      });
+                    });
+                  },
+                  child: Icon(MaterialCommunityIcons.refresh),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: UU.widgetBorderRadius(),
+                  ),
                 ),
                 Expanded(
                   child: RaisedButton(
