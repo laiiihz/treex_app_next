@@ -80,6 +80,11 @@ class AP extends ChangeNotifier {
   get urlPrefix => _urlPrefix;
   get networkPort => _networkPort;
   get fullUrl => _fullUrl;
+  netHttps(bool state) {
+    _https = state;
+    notifyListeners();
+  }
+
   setBaseUrl({
     bool secure = true,
     String port,

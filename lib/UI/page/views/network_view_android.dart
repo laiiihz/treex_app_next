@@ -1,17 +1,19 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/UI/page/views/settings_views.dart';
+import 'package:treex_app_next/UI/page/views/widget/extra_network_settings.dart';
 import 'package:treex_app_next/Utils/network_test.dart';
 import 'package:treex_app_next/Utils/network_util.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
+import 'package:treex_app_next/provider/app_provider.dart';
 
 class NetworkViewAndroid extends StatefulWidget {
   NetworkViewAndroid({
@@ -36,6 +38,7 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
   TextEditingController _ipPortTextEdit = TextEditingController();
   FocusNode _ipAddrFocusNode = FocusNode();
   FocusNode _ipPortFocusNode = FocusNode();
+  bool _extraOpen = false;
 
   @override
   void initState() {
@@ -52,6 +55,7 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
 
   @override
   Widget build(BuildContext context) {
+    final ap = Provider.of<AP>(context);
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -148,37 +152,31 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
                     ),
                     ListTile(
                       leading: Icon(MaterialCommunityIcons.security_network),
-                      title: Text(
-                        S.of(context).https,
+                      title: AnimatedDefaultTextStyle(
+                        child: Text(S.of(context).https),
                         style: TextStyle(
-                          color: _httpsIsOn ? Colors.green : Colors.red,
-                        ),
+                            fontSize: 18,
+                            color: ap.https ? Colors.green : Colors.red),
+                        duration: Duration(milliseconds: 500),
                       ),
                       onTap: () {
-                        setState(() {
-                          _httpsIsOn = !_httpsIsOn;
-                        });
+                        ap.netHttps(!ap.https);
                       },
                       trailing: Switch(
-                        value: _httpsIsOn,
+                        value: ap.https,
                         onChanged: (value) {
-                          setState(() {
-                            _httpsIsOn = value;
-                          });
+                          ap.netHttps(value);
                         },
                       ),
                     ),
+                    ExtraNetworkSettings(),
                   ]),
                 ),
               ],
             ),
           ),
           Container(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).padding.top,
-              left: 10,
-              right: 10,
-            ),
+            padding: EdgeInsets.all(10),
             child: Row(
               children: <Widget>[
                 MaterialButton(

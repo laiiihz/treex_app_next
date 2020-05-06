@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "disagree" : MessageLookupByLibrary.simpleMessage("disagree"),
     "display" : MessageLookupByLibrary.simpleMessage("Display"),
     "enter_account" : MessageLookupByLibrary.simpleMessage("enter your account name"),
+    "extraNetworkSettings" : MessageLookupByLibrary.simpleMessage("Extra Network Settings"),
     "fastStartup" : MessageLookupByLibrary.simpleMessage("Fast Startup"),
     "fuchsia" : MessageLookupByLibrary.simpleMessage("Fuchsia"),
     "gnuGeneralPublicLicense" : MessageLookupByLibrary.simpleMessage("GNU GENERAL PUBLIC LICENSE"),

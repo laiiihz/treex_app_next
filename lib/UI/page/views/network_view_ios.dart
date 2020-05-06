@@ -2,11 +2,14 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter/material.dart' as md;
+import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_filed.dart';
 import 'package:treex_app_next/UI/page/views/settings_views.dart';
 import 'package:treex_app_next/UI/page/views/widget/cupertino_network_info.dart';
+import 'package:treex_app_next/UI/page/views/widget/extra_network_settings.dart';
 import 'package:treex_app_next/generated/l10n.dart';
+import 'package:treex_app_next/provider/app_provider.dart';
 
 class NetworkViewIOS extends StatefulWidget {
   NetworkViewIOS({
@@ -41,6 +44,7 @@ class _NetworkViewIOSState extends State<NetworkViewIOS> {
 
   @override
   Widget build(BuildContext context) {
+    final ap = Provider.of<AP>(context);
     return CupertinoPageScaffold(
       child: Stack(
         children: <Widget>[
@@ -98,17 +102,18 @@ class _NetworkViewIOSState extends State<NetworkViewIOS> {
                         Text(S.of(context).https),
                         Spacer(),
                         CupertinoSwitch(
-                          value: _httpsIsOn,
+                          value: ap.https,
                           onChanged: (value) {
-                            setState(() {
-                              _httpsIsOn = value;
-                            });
+                            ap.netHttps(value);
                           },
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      ap.netHttps(!ap.https);
+                    },
                   ),
+                  ExtraNetworkSettings(),
                 ]),
               ),
               SliverToBoxAdapter(
@@ -121,11 +126,7 @@ class _NetworkViewIOSState extends State<NetworkViewIOS> {
             left: 0,
             right: 0,
             child: Padding(
-              padding: EdgeInsets.only(
-                left: 10,
-                right: 10,
-                bottom: MediaQuery.of(context).padding.top,
-              ),
+              padding: EdgeInsets.all(10),
               child: Row(
                 children: <Widget>[
                   CupertinoButton(

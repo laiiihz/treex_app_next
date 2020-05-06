@@ -548,6 +548,15 @@ class S {
       args: [],
     );
   }
+
+  String get extraNetworkSettings {
+    return Intl.message(
+      'Extra Network Settings',
+      name: 'extraNetworkSettings',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

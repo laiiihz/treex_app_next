@@ -57,5 +57,6 @@
   "gnuGeneralPublicLicense": "GNU GENERAL PUBLIC LICENSE",
   "confirmUpper": "确认",
   "cancelUpper": "取消",
-  "requestPermission": "Request Permission"
+  "requestPermission": "Request Permission",
+  "extraNetworkSettings": "Extra Network Settings"
 }
