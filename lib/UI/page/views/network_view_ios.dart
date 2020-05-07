@@ -5,11 +5,14 @@ import 'package:flutter/material.dart' as md;
 import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_filed.dart';
+import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/UI/page/views/settings_views.dart';
 import 'package:treex_app_next/UI/page/views/widget/cupertino_network_info.dart';
 import 'package:treex_app_next/UI/page/views/widget/extra_network_settings.dart';
+import 'package:treex_app_next/Utils/network/network_test.dart';
+import 'package:treex_app_next/Utils/network/network_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
-import 'package:treex_app_next/provider/app_provider.dart';
+import 'package:treex_app_next/provider/network_provider.dart';
 
 class NetworkViewIOS extends StatefulWidget {
   NetworkViewIOS({
@@ -30,6 +33,7 @@ class _NetworkViewIOSState extends State<NetworkViewIOS> {
   bool _httpsIsOn = true;
   String _ipAddr = '';
   String _ipPort = '';
+  String _fullPath = '';
   TextEditingController _ipAddrTextEdit = TextEditingController();
   TextEditingController _ipPortTextEdit = TextEditingController();
   FocusNode _ipAddrFocusNode = FocusNode();
@@ -43,8 +47,14 @@ class _NetworkViewIOSState extends State<NetworkViewIOS> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final ap = Provider.of<AP>(context);
+    final np = Provider.of<NP>(context);
     return CupertinoPageScaffold(
       child: Stack(
         children: <Widget>[
@@ -70,6 +80,10 @@ class _NetworkViewIOSState extends State<NetworkViewIOS> {
                         )
                       : SizedBox(),
                   md.Divider(),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(_fullPath),
+                  ),
                   Padding(
                     padding: EdgeInsets.all(10),
                     child: TreexCupertinoTextFiledIOS(
@@ -102,15 +116,15 @@ class _NetworkViewIOSState extends State<NetworkViewIOS> {
                         Text(S.of(context).https),
                         Spacer(),
                         CupertinoSwitch(
-                          value: ap.https,
+                          value: np.https,
                           onChanged: (value) {
-                            ap.netHttps(value);
+                            np.netHttps(value);
                           },
                         ),
                       ],
                     ),
                     onPressed: () {
-                      ap.netHttps(!ap.https);
+                      np.netHttps(!np.https);
                     },
                   ),
                   ExtraNetworkSettings(),
@@ -146,5 +160,125 @@ class _NetworkViewIOSState extends State<NetworkViewIOS> {
         ],
       ),
     );
+  }
+
+  _buildFullPath() {
+    _fullPath = buildUrl(
+      https: _httpsIsOn,
+      baseUrl: _ipAddr,
+      port: _ipPort,
+    );
+    setState(() {});
+  }
+
+  _checkRealNetwork() {
+    showLoading(context);
+    NetworkTest.networkCheck(
+      path: 'https://baidu.com',
+      onErr: () => showTN(
+        context,
+        title: S.of(context).connectionFail,
+        icon: MaterialCommunityIcons.timer_off,
+        type: StatusType.FAIL,
+      ),
+    ).then((value) {
+      closeLoading();
+      if (value)
+        showTN(
+          context,
+          title: S.of(context).connectionSuccess,
+          icon: MaterialCommunityIcons.check,
+          type: StatusType.SUCCESS,
+        );
+    });
+  }
+
+  _checkTreexNetwork() {
+    showLoading(context);
+    NetworkTest(
+      https: _httpsIsOn,
+      baseUrl: _ipAddr,
+      port: _ipPort,
+      onErr: () => showTN(
+        context,
+        title: S.of(context).connectionFail,
+        icon: MaterialCommunityIcons.timer_off,
+        type: StatusType.FAIL,
+      ),
+      context: context,
+    ).check().then((value) {
+      closeLoading();
+      if (value)
+        showTN(
+          context,
+          title: S.of(context).connectionSuccess,
+          icon: MaterialCommunityIcons.check,
+          type: StatusType.SUCCESS,
+        );
+    });
+  }
+
+  saveData() async {
+    saveDataFunc().then((_) {
+      closeLoading();
+    });
+  }
+
+  Future saveDataFunc() async {
+    final np = Provider.of<NP>(context, listen: false);
+
+    showLoading(context);
+    bool realNetwork = await NetworkTest.networkCheck(
+      path: 'https://baidu.com',
+      onErr: () => showTN(
+        context,
+        title: S.of(context).connectionSuccess,
+        icon: MaterialCommunityIcons.timer_off,
+      ),
+    );
+    bool treexNetwork = await NetworkTest(
+      port: _ipPort,
+      baseUrl: _ipAddr,
+      https: _httpsIsOn,
+      onErr: () => showTN(
+        context,
+        title: S.of(context).connectionFail,
+        icon: MaterialCommunityIcons.timer_off,
+      ),
+    ).check();
+    if (!realNetwork)
+      showTN(
+        context,
+        title: S.of(context).connectionFail,
+        icon: MaterialCommunityIcons.timer_off,
+      );
+    if (!treexNetwork) {
+      showTN(
+        context,
+        title: S.of(context).connectionFail,
+        icon: MaterialCommunityIcons.timer_off,
+      );
+    }
+    if (realNetwork && treexNetwork) {
+      np.setBaseUrl(
+        secure: _httpsIsOn,
+        url: _ipAddr,
+        port: _ipPort,
+      );
+      showTN(
+        context,
+        title: '保存成功',
+        icon: MaterialCommunityIcons.check,
+        type: StatusType.SUCCESS,
+      );
+    } else {
+      showTN(
+        context,
+        title: '保存失败',
+        icon: MaterialCommunityIcons.timer_off,
+        type: StatusType.FAIL,
+      );
+    }
+    closeLoading();
   }
 }

@@ -9,11 +9,11 @@ import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/UI/page/views/settings_views.dart';
 import 'package:treex_app_next/UI/page/views/widget/extra_network_settings.dart';
-import 'package:treex_app_next/Utils/network_test.dart';
-import 'package:treex_app_next/Utils/network_util.dart';
+import 'package:treex_app_next/Utils/network/network_test.dart';
+import 'package:treex_app_next/Utils/network/network_util.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
-import 'package:treex_app_next/provider/app_provider.dart';
+import 'package:treex_app_next/provider/network_provider.dart';
 
 class NetworkViewAndroid extends StatefulWidget {
   NetworkViewAndroid({
@@ -30,10 +30,12 @@ class NetworkViewAndroid extends StatefulWidget {
 }
 
 class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
-  //ip settings
+  //temp ip settings
   bool _httpsIsOn = true;
   String _ipAddr = '';
   String _ipPort = '';
+  String _fullPath = '';
+
   TextEditingController _ipAddrTextEdit = TextEditingController();
   TextEditingController _ipPortTextEdit = TextEditingController();
   FocusNode _ipAddrFocusNode = FocusNode();
@@ -43,7 +45,20 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
   @override
   void initState() {
     super.initState();
-    NU(https: true, port: '443', baseUrl: 'baidu.com');
+    Future.delayed(Duration.zero, () {
+      final np = Provider.of<NP>(context, listen: false);
+      _ipAddr = np.urlPrefix;
+      _ipPort = np.networkPort;
+      _httpsIsOn = np.https;
+      _ipAddrTextEdit.text = np.urlPrefix;
+      _ipPortTextEdit.text = np.networkPort;
+      _fullPath = buildUrl(
+        https: _httpsIsOn,
+        baseUrl: _ipAddr,
+        port: _ipPort,
+      );
+      setState(() {});
+    });
   }
 
   @override
@@ -55,7 +70,7 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
 
   @override
   Widget build(BuildContext context) {
-    final ap = Provider.of<AP>(context);
+    final np = Provider.of<NP>(context);
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -114,7 +129,7 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        '${_httpsIsOn ? 'https' : 'http'}://${_ipAddrTextEdit.text}:${_ipPortTextEdit.text}',
+                        _fullPath,
                         style: TextStyle(
                             color: isDark(context)
                                 ? Colors.white30
@@ -126,6 +141,10 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
                       child: TextField(
                         controller: _ipAddrTextEdit,
                         focusNode: _ipAddrFocusNode,
+                        onChanged: (value) {
+                          _ipAddr = value;
+                          _buildFullPath();
+                        },
                         decoration: InputDecoration(
                           labelText: S.of(context).ipAddress,
                           border: TF.border(),
@@ -140,6 +159,10 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
                       child: TextField(
                         controller: _ipPortTextEdit,
                         focusNode: _ipPortFocusNode,
+                        onChanged: (value) {
+                          _ipPort = value;
+                          _buildFullPath();
+                        },
                         decoration: InputDecoration(
                           labelText: S.of(context).port,
                           border: TF.border(),
@@ -156,16 +179,18 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
                         child: Text(S.of(context).https),
                         style: TextStyle(
                             fontSize: 18,
-                            color: ap.https ? Colors.green : Colors.red),
+                            color: _httpsIsOn ? Colors.green : Colors.red),
                         duration: Duration(milliseconds: 500),
                       ),
                       onTap: () {
-                        ap.netHttps(!ap.https);
+                        _httpsIsOn = !_httpsIsOn;
+                        _buildFullPath();
                       },
                       trailing: Switch(
-                        value: ap.https,
+                        value: _httpsIsOn,
                         onChanged: (value) {
-                          ap.netHttps(value);
+                          _httpsIsOn = !_httpsIsOn;
+                          _buildFullPath();
                         },
                       ),
                     ),
@@ -180,35 +205,8 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
             child: Row(
               children: <Widget>[
                 MaterialButton(
-                  onPressed: () {},
-                  onLongPress: () {
-                    showLoading(context);
-                    NetworkTest(
-                      https: true,
-                      baseUrl: 'google.com',
-                      port: '443',
-                      context: context,
-                      onErr: () {
-                        showTN(
-                          context,
-                          title: '连接失败',
-                          icon: MaterialCommunityIcons.timer_off,
-                          type: StatusType.FAIL,
-                        );
-                      },
-                    ).check().then((value) {
-                      Future.delayed(Duration(milliseconds: 0), () {
-                        closeLoading();
-                        if (value)
-                          showTN(
-                            context,
-                            title: '连接成功',
-                            icon: MaterialCommunityIcons.check,
-                            type: StatusType.SUCCESS,
-                          );
-                      });
-                    });
-                  },
+                  onPressed: _checkTreexNetwork,
+                  onLongPress: _checkRealNetwork,
                   child: Icon(MaterialCommunityIcons.refresh),
                   shape: RoundedRectangleBorder(
                     borderRadius: UU.widgetBorderRadius(),
@@ -216,7 +214,7 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
                 ),
                 Expanded(
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: saveData,
                     shape: RoundedRectangleBorder(
                       borderRadius: UU.widgetBorderRadius(),
                     ),
@@ -229,5 +227,125 @@ class _NetworkViewAndroidState extends State<NetworkViewAndroid> {
         ],
       ),
     );
+  }
+
+  _buildFullPath() {
+    _fullPath = buildUrl(
+      https: _httpsIsOn,
+      baseUrl: _ipAddr,
+      port: _ipPort,
+    );
+    setState(() {});
+  }
+
+  _checkRealNetwork() {
+    showLoading(context);
+    NetworkTest.networkCheck(
+      path: 'https://baidu.com',
+      onErr: () => showTN(
+        context,
+        title: S.of(context).connectionFail,
+        icon: MaterialCommunityIcons.timer_off,
+        type: StatusType.FAIL,
+      ),
+    ).then((value) {
+      closeLoading();
+      if (value)
+        showTN(
+          context,
+          title: S.of(context).connectionSuccess,
+          icon: MaterialCommunityIcons.check,
+          type: StatusType.SUCCESS,
+        );
+    });
+  }
+
+  _checkTreexNetwork() {
+    showLoading(context);
+    NetworkTest(
+      https: _httpsIsOn,
+      baseUrl: _ipAddr,
+      port: _ipPort,
+      onErr: () => showTN(
+        context,
+        title: S.of(context).connectionFail,
+        icon: MaterialCommunityIcons.timer_off,
+        type: StatusType.FAIL,
+      ),
+      context: context,
+    ).check().then((value) {
+      closeLoading();
+      if (value)
+        showTN(
+          context,
+          title: S.of(context).connectionSuccess,
+          icon: MaterialCommunityIcons.check,
+          type: StatusType.SUCCESS,
+        );
+    });
+  }
+
+  saveData() async {
+    saveDataFunc().then((_) {
+      closeLoading();
+    });
+  }
+
+  Future saveDataFunc() async {
+    final np = Provider.of<NP>(context, listen: false);
+
+    showLoading(context);
+    bool realNetwork = await NetworkTest.networkCheck(
+      path: 'https://baidu.com',
+      onErr: () => showTN(
+        context,
+        title: S.of(context).connectionSuccess,
+        icon: MaterialCommunityIcons.timer_off,
+      ),
+    );
+    bool treexNetwork = await NetworkTest(
+      port: _ipPort,
+      baseUrl: _ipAddr,
+      https: _httpsIsOn,
+      onErr: () => showTN(
+        context,
+        title: S.of(context).connectionFail,
+        icon: MaterialCommunityIcons.timer_off,
+      ),
+    ).check();
+    if (!realNetwork)
+      showTN(
+        context,
+        title: S.of(context).connectionFail,
+        icon: MaterialCommunityIcons.timer_off,
+      );
+    if (!treexNetwork) {
+      showTN(
+        context,
+        title: S.of(context).connectionFail,
+        icon: MaterialCommunityIcons.timer_off,
+      );
+    }
+    if (realNetwork && treexNetwork) {
+      np.setBaseUrl(
+        secure: _httpsIsOn,
+        url: _ipAddr,
+        port: _ipPort,
+      );
+      showTN(
+        context,
+        title: '保存成功',
+        icon: MaterialCommunityIcons.check,
+        type: StatusType.SUCCESS,
+      );
+    } else {
+      showTN(
+        context,
+        title: '保存失败',
+        icon: MaterialCommunityIcons.timer_off,
+        type: StatusType.FAIL,
+      );
+    }
+    closeLoading();
   }
 }

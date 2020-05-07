@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "closeAutoDarkMode" : MessageLookupByLibrary.simpleMessage("Close Auto Dark Mode"),
     "cloudView" : MessageLookupByLibrary.simpleMessage("Cloud"),
     "confirmUpper" : MessageLookupByLibrary.simpleMessage("CONFIRM"),
+    "connectionFail" : MessageLookupByLibrary.simpleMessage("连接失败"),
+    "connectionSuccess" : MessageLookupByLibrary.simpleMessage("连接成功"),
     "cupertino" : MessageLookupByLibrary.simpleMessage("Cupertino"),
     "dangerZone" : MessageLookupByLibrary.simpleMessage("Danger Zone"),
     "darkMode" : MessageLookupByLibrary.simpleMessage("Dark Mode"),

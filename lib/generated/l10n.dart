@@ -557,6 +557,24 @@ class S {
       args: [],
     );
   }
+
+  String get connectionSuccess {
+    return Intl.message(
+      '连接成功',
+      name: 'connectionSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get connectionFail {
+    return Intl.message(
+      '连接失败',
+      name: 'connectionFail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

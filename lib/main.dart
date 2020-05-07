@@ -13,17 +13,19 @@ import 'package:treex_app_next/UI/startup/splash.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/provider/app_provider.dart';
-import 'package:treex_app_next/static/theme.dart'; 
+import 'package:treex_app_next/provider/network_provider.dart';
+import 'package:treex_app_next/static/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SPU.init();
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => AP(),
-      child: MyApp(),
-    ),
-  );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => AP()),
+      ChangeNotifierProvider(create: (_) => NP()),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -47,21 +49,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final ap = Provider.of<AP>(context);
     return MaterialApp(
-        title: 'treex',
-        initialRoute: '/',
-        builder: BotToastInit(),
-        navigatorObservers: [BotToastNavigatorObserver()],
-        theme: ap.darkMode
-            ? AppTheme(context).themeDataDark()
-            : AppTheme(context).themeDataLight(),
-        darkTheme: ap.autoDarkMode ? AppTheme(context).themeDataDark() : null,
-        routes: routes,
-        localizationsDelegates: [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-      );
+      title: 'treex',
+      initialRoute: '/',
+      builder: BotToastInit(),
+      navigatorObservers: [BotToastNavigatorObserver()],
+      theme: ap.darkMode
+          ? AppTheme(context).themeDataDark()
+          : AppTheme(context).themeDataLight(),
+      darkTheme: ap.autoDarkMode ? AppTheme(context).themeDataDark() : null,
+      routes: routes,
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+    );
   }
 }

@@ -58,5 +58,7 @@
   "confirmUpper": "CONFIRM",
   "cancelUpper": "CANCEL",
   "requestPermission": "Request Permission",
-  "extraNetworkSettings": "Extra Network Settings"
+  "extraNetworkSettings": "Extra Network Settings",
+  "connectionSuccess": "连接成功",
+  "connectionFail": "连接失败"
 }

@@ -70,37 +70,4 @@ class AP extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  ///network providers
-  bool _https = true;
-  String _urlPrefix = '';
-  String _networkPort = '443';
-  String _fullUrl = '';
-  get https => _https;
-  get urlPrefix => _urlPrefix;
-  get networkPort => _networkPort;
-  get fullUrl => _fullUrl;
-  netHttps(bool state) {
-    _https = state;
-    notifyListeners();
-  }
-
-  setBaseUrl({
-    bool secure = true,
-    String port,
-    String url,
-    bool init = false,
-  }) {
-    _https = secure;
-    _urlPrefix = url;
-    _networkPort = port == null ? '443' : port;
-    _fullUrl = '${secure ? 'https' : 'http'}://$url:$_networkPort';
-    if (!init) {
-      SPU.shared.setBool('https', _https);
-      SPU.shared.setString('port', _networkPort);
-      SPU.shared.setString('url', _urlPrefix);
-      SPU.shared.setString('baseUrl', _fullUrl);
-    }
-    notifyListeners();
-  }
 }

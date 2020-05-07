@@ -1,3 +1,4 @@
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ class NU {
     String baseUrl,
     String port,
     bool https,
+    bool http2 = false,
   }) {
     context = context;
     dio = Dio()
@@ -21,6 +23,16 @@ class NU {
         port: port,
         https: https,
       );
+    //https check
+    if (https) {
+      (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (client) {
+        client.badCertificateCallback = (cert, host, port) {
+          return true;
+          //todo:Self sign file check here
+        };
+      };
+    }
   }
 }
 
