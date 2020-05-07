@@ -7,6 +7,7 @@ import 'package:treex_app_next/UI/auth/login_view.dart';
 import 'package:treex_app_next/UI/auth/sign_up_view.dart';
 import 'package:treex_app_next/UI/page/cloud/cloud_subviews.dart';
 import 'package:treex_app_next/UI/page/views/dev.dart';
+import 'package:treex_app_next/UI/page/views/network_view.dart';
 import 'package:treex_app_next/UI/page/views/settings_views.dart';
 import 'package:treex_app_next/UI/startup/first_startup.dart';
 import 'package:treex_app_next/UI/startup/splash.dart';

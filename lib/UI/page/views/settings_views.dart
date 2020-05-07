@@ -1,12 +1,7 @@
-import 'dart:async';
-
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:treex_app_next/UI/page/views/about_view_android.dart';
 import 'package:treex_app_next/UI/page/views/about_view_ios.dart';
-import 'package:treex_app_next/UI/page/views/network_view_android.dart';
-import 'package:treex_app_next/UI/page/views/network_view_ios.dart';
 import 'package:treex_app_next/UI/page/views/safety_view_android.dart';
 import 'package:treex_app_next/UI/page/views/safety_view_ios.dart';
 import 'package:treex_app_next/UI/page/views/settings_view_android.dart';
@@ -49,66 +44,6 @@ class _AboutViewState extends State<AboutView> {
   @override
   Widget build(BuildContext context) {
     return isIOS(context) ? AboutViewIOS() : AboutViewAndroid();
-  }
-}
-
-class NetworkView extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _NetworkViewState();
-}
-
-class _NetworkViewState extends State<NetworkView> {
-  String _wifiAddr = '';
-  ConnectivityResult _result = ConnectivityResult.none;
-  StreamSubscription<ConnectivityResult> _subscription;
-  IconData _connectIconData = MaterialCommunityIcons.null_;
-  @override
-  void initState() {
-    super.initState();
-    getIpAddress() async {
-      _wifiAddr = await Connectivity().getWifiIP() ?? '';
-      setState(() {});
-    }
-
-    getIpAddress();
-
-    _subscription = Connectivity().onConnectivityChanged.listen((status) {
-      _result = status;
-      switch (status) {
-        case ConnectivityResult.none:
-          _connectIconData = MaterialCommunityIcons.null_;
-          break;
-        case ConnectivityResult.mobile:
-          _connectIconData = MaterialCommunityIcons.cellphone_android;
-          break;
-        case ConnectivityResult.wifi:
-          _connectIconData = MaterialCommunityIcons.wifi;
-          getIpAddress();
-          break;
-      }
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _subscription.cancel();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return isIOS(context)
-        ? NetworkViewIOS(
-            result: _result,
-            wifiAddr: _wifiAddr,
-            icon: _connectIconData,
-          )
-        : NetworkViewAndroid(
-            result: _result,
-            wifiAddr: _wifiAddr,
-            icon: _connectIconData,
-          );
   }
 }
 
