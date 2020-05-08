@@ -575,6 +575,24 @@ class S {
       args: [],
     );
   }
+
+  String get forgetPassword {
+    return Intl.message(
+      'Forget Password ?',
+      name: 'forgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get forgetPasswordConfirm {
+    return Intl.message(
+      'Forget Password',
+      name: 'forgetPasswordConfirm',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

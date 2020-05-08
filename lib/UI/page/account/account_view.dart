@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
 import 'package:treex_app_next/UI/page/account/widget/used_space_box.dart';
-import 'package:treex_app_next/UI/page/views/settings_views.dart';
+import 'package:treex_app_next/UI/page/views/account_detail_view.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
 class AccountView extends StatefulWidget {

@@ -37,6 +37,7 @@ dependencies:
   qr_flutter:
   intl:
   folding_cell:
+  crypto:
   flutter_localizations:
     sdk: flutter
 dev_dependencies:

@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_account" : MessageLookupByLibrary.simpleMessage("输入您的账户名"),
     "extraNetworkSettings" : MessageLookupByLibrary.simpleMessage("Extra Network Settings"),
     "fastStartup" : MessageLookupByLibrary.simpleMessage("Fast Startup"),
+    "forgetPassword" : MessageLookupByLibrary.simpleMessage("Forget Password ?"),
+    "forgetPasswordConfirm" : MessageLookupByLibrary.simpleMessage("Forget Password"),
     "fuchsia" : MessageLookupByLibrary.simpleMessage("Fuchsia"),
     "gnuGeneralPublicLicense" : MessageLookupByLibrary.simpleMessage("GNU GENERAL PUBLIC LICENSE"),
     "gplV3" : MessageLookupByLibrary.simpleMessage("GPL v3"),

@@ -1,23 +1,26 @@
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
-import 'package:treex_app_next/provider/app_provider.dart';
 
 class NU {
   //app provider
   Dio dio;
-  BuildContext context;
+  String baseUrl;
+  String port;
+  bool https;
+  bool http2;
+  int timeOut;
   NU({
-    BuildContext context,
-    String baseUrl,
-    String port,
-    bool https,
-    bool http2 = false,
-  }) {
-    context = context;
+    this.baseUrl = '',
+    this.port = '443',
+    this.https = true,
+    this.http2 = false,
+    this.timeOut = 3000,
+  });
+
+  init() {
     dio = Dio()
-      ..options.connectTimeout = 3000
+      ..options.connectTimeout = timeOut
       ..options.baseUrl = buildUrl(
         baseUrl: baseUrl,
         port: port,
@@ -34,6 +37,16 @@ class NU {
       };
     }
   }
+
+  @override
+  String toString() {
+    return '''
+    https:$https
+    baseUrl:$baseUrl
+    port:$port
+    timeOut:$timeOut
+    ''';
+  }
 }
 
 String buildUrl({
@@ -41,5 +54,5 @@ String buildUrl({
   String port,
   bool https,
 }) {
-  return '${https ? 'https' : 'http'}://$baseUrl:$port';
+  return '${https ? 'https' : 'http'}://$baseUrl:$port/api';
 }

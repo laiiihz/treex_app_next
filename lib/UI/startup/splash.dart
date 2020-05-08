@@ -5,6 +5,7 @@ import 'package:treex_app_next/Utils/shared_preferences_util.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/provider/app_provider.dart';
 import 'package:flutter/cupertino.dart' as cup;
+import 'package:treex_app_next/provider/network_provider.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _SplashState extends State<Splash> {
     //first startup app
     Future.delayed(Duration.zero, () {
       final ap = Provider.of<AP>(context, listen: false);
+      final np = Provider.of<NP>(context, listen: false);
       init() async {
         //init darkMode
         await ap.changeDarkMode(SPU.shared.getBool('darkMode') ?? false,
@@ -40,7 +42,13 @@ class _SplashState extends State<Splash> {
         if (!ap.fastStartup)
           await Future.delayed(Duration(milliseconds: 2000), () {});
 
-        //TODO:init baseUrl
+        //init base url
+        np.setBaseUrl(
+          port: SPU.shared.getString('port')??'443',
+          url: SPU.shared.getString('url')??'',
+          init: false,
+          secure: SPU.shared.getBool('https')??true,
+        );
       }
 
       init().then((_) {
@@ -70,9 +78,7 @@ class _SplashState extends State<Splash> {
         Padding(
           padding: EdgeInsets.only(bottom: 50),
           child: isIOS(context)
-              ? cup.CupertinoActivityIndicator(
-                  radius: 25,
-                )
+              ? cup.CupertinoActivityIndicator(radius: 25)
               : CircularProgressIndicator(),
         ),
       ],

@@ -12,6 +12,8 @@ import 'package:treex_app_next/UI/global_widget/logo.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_filed.dart';
 import 'package:treex_app_next/UI/page/home_structure.dart';
 import 'package:treex_app_next/UI/painter/circle_painter.dart';
+import 'package:treex_app_next/Utils/CryptoUtil.dart';
+import 'package:treex_app_next/Utils/network/network_auth.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
@@ -30,6 +32,11 @@ class _LoginState extends State<LoginView> {
   bool _showPassword = false;
   bool _canLogin = false;
   double test = 0;
+
+  ///forget password
+  ///
+  /// if password wrong 3 times,then show a forget password dialog
+  int _forgetPassword = 0;
 
   @override
   void dispose() {
@@ -256,6 +263,19 @@ class _LoginState extends State<LoginView> {
                     },
                     child: Text('dev'),
                   ),
+                  RaisedButton(
+                    onPressed: () {
+                      String password = CryptoUtil.password(
+                        raw: _passwordController.text,
+                        name: _accountController.text,
+                      );
+                      NetworkAuth(context).auth(
+                        account: _accountController.text,
+                        password: password,
+                      );
+                    },
+                    child: Text('check'),
+                  ),
                 ],
               ),
             ),
@@ -270,5 +290,19 @@ class _LoginState extends State<LoginView> {
       _canLogin = _passwordController.text.length != 0 &&
           _accountController.text.length != 0;
     });
+  }
+
+  _onForgetPassword() {
+    _forgetPassword++;
+    if (_forgetPassword == 3) {
+      _forgetPassword = 0;
+      showMIUIConfirmDialog(
+        context: context,
+        child: SizedBox(),
+        title: S.of(context).forgetPassword,
+        confirm: () {},
+        confirmString: S.of(context).forgetPasswordConfirm,
+      );
+    }
   }
 }

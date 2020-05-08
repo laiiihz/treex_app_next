@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart' as cup;
-import 'package:flutter/widgets.dart';
-import 'package:treex_app_next/UI/auth/sign_up_view_ios.dart';
-import 'package:treex_app_next/UI/auth/sign_up_view_android.dart';
+import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart';
+import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
+import 'package:treex_app_next/generated/l10n.dart';
 
 class SignUpView extends StatefulWidget {
   @override
@@ -13,9 +13,18 @@ class _SignUpState extends State<SignUpView> {
   @override
   Widget build(BuildContext context) {
     return isIOS(context)
-        ? cup.CupertinoPageScaffold(
-            child: SignUpViewIOS(),
+        ? c.CupertinoPageScaffold(
+            child: CustomScrollView(
+              slivers: <Widget>[
+                c.CupertinoSliverNavigationBar(
+                  largeTitle:
+                      buildCupertinoTitle(context, S.of(context).sign_up),
+                ),
+              ],
+            ),
           )
-        : SignUpViewAndroid();
+        : Scaffold(
+            appBar: AppBar(),
+          );
   }
 }

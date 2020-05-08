@@ -1,15 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_miui/flutter_miui.dart';
+import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
+import 'package:treex_app_next/Utils/ui_util.dart';
+import 'package:flutter/cupertino.dart' as c;
+import 'package:treex_app_next/generated/l10n.dart';
 
-class AccountDetailViewAndroid extends StatefulWidget {
+class AccountDetailView extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _AccountDetailViewAndroidState();
+  State<StatefulWidget> createState() =>_AccountDetailViewState();
 }
 
-class _AccountDetailViewAndroidState extends State<AccountDetailViewAndroid> {
+class _AccountDetailViewState extends State<AccountDetailView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isIOS(context)?c.CupertinoPageScaffold(
+      child: c.CustomScrollView(
+        slivers: <Widget>[
+          c.CupertinoSliverNavigationBar(
+            largeTitle: buildCupertinoTitle(context, 'User'),
+            previousPageTitle: S.of(context).accountView,
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Container(
+                height: 100,
+                child: Placeholder(
+                  color: c.CupertinoColors.systemBlue,
+                ),
+              ),
+            ]),
+          ),
+        ],
+      ),
+    ):Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(

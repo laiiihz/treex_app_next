@@ -14,11 +14,12 @@ class NetworkTest extends NU {
           https: https,
           port: port,
           baseUrl: baseUrl,
-          context: context,
-        );
+        ) {
+    this.init();
+  }
   Future<bool> check() async {
-    Response response = await dio.get('/api/test').catchError((err) {
-      debugPrint('@@@Network Error');
+    Response response = await dio.get('/test').catchError((err) {
+      debugPrint('@@@netowrk test:Network Error');
       debugPrint(err.toString());
       onErr();
     });

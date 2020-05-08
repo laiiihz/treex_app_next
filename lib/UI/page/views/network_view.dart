@@ -400,6 +400,7 @@ class _NetworkViewState extends State<NetworkView> {
     setState(() {});
   }
 
+  ///测试互联网连通性
   _checkRealNetwork() {
     showLoading(context);
     NetworkTest.networkCheck(
@@ -422,6 +423,7 @@ class _NetworkViewState extends State<NetworkView> {
     });
   }
 
+  ///测试Treex网络连通性
   _checkTreexNetwork() {
     showLoading(context);
     NetworkTest(
@@ -447,6 +449,7 @@ class _NetworkViewState extends State<NetworkView> {
     });
   }
 
+  ///保存数据
   _saveData() async {
     _saveDataFunc().then((_) {
       closeLoading();

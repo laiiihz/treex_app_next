@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
+import 'package:treex_app_next/static/color_palettes.dart';
 import 'package:treex_app_next/static/static_values.dart';
 
 ///App Provider
@@ -69,5 +72,24 @@ class AP extends ChangeNotifier {
       SPU.shared.setBool('autoDarkMode', state);
     }
     notifyListeners();
+  }
+
+  SystemUiOverlayStyle _systemUiOverlayStyle = SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.transparent,
+  );
+
+  bool _transparentStatusBar = false;
+  bool get transparentStatusBar => _transparentStatusBar;
+  setStatusBarTransparent(bool state) {
+    _transparentStatusBar = state;
+    _systemUiOverlayStyle = _systemUiOverlayStyle.copyWith(
+      statusBarColor: state ? Colors.transparent : Colors.black26,
+    );
+    updateSystemOverlay();
+    notifyListeners();
+  }
+
+  updateSystemOverlay() {
+    SystemChrome.setSystemUIOverlayStyle(_systemUiOverlayStyle);
   }
 }

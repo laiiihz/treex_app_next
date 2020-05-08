@@ -1,7 +1,11 @@
-import 'package:flutter/cupertino.dart' as cup;
+import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart';
-import 'package:treex_app_next/UI/auth/license/sign_up_license_ios.dart';
-import 'package:treex_app_next/UI/auth/license/sign_up_licenses_android.dart';
+import 'package:treex_app_next/UI/auth/license/licenses_page.dart';
+import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
+import 'package:treex_app_next/UI/global_widget/treex_cupertino_bottom_bar.dart';
+import 'package:treex_app_next/Utils/ui_util.dart';
+import 'package:treex_app_next/generated/l10n.dart';
+import 'package:treex_app_next/static/color_palettes.dart';
 
 class SignUpLicense extends StatefulWidget {
   @override
@@ -10,10 +14,100 @@ class SignUpLicense extends StatefulWidget {
 
 class _SignUpState extends State<SignUpLicense> {
   @override
-  Widget build(BuildContext context) =>
-      Theme.of(context).platform == TargetPlatform.iOS
-          ? cup.CupertinoPageScaffold(
-              child: SignUpLicenseIOS(),
-            )
-          : SignUpLicenseAndroid();
+  Widget build(BuildContext context) => Theme.of(context).platform ==
+          TargetPlatform.iOS
+      ? Stack(
+          children: <Widget>[
+            c.CupertinoPageScaffold(
+              navigationBar: c.CupertinoNavigationBar(
+                backgroundColor:
+                    isDark(context) ? CP.cupertinoBGDark : CP.cupertinoBGLight,
+                middle:
+                    buildCupertinoTitle(context, S.of(context).userAgreement),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: LicensesPage(),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              child: TreexCupertinoBottomBar(
+                children: <Widget>[
+                  c.CupertinoButton(
+                    child: Text(S.of(context).disagree),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  Expanded(
+                    child: c.CupertinoButton.filled(
+                      child: Text(S.of(context).agree),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.of(context, rootNavigator: true)
+                            .pushNamed('signup');
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              bottom: 0,
+              left: 0,
+              right: 0,
+            ),
+          ],
+        )
+      : Scaffold(
+          appBar: AppBar(
+            title: Text(S.of(context).userAgreement),
+          ),
+          body: Column(
+            children: <Widget>[
+              Expanded(
+                child: LicensesPage(),
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).padding.top,
+                  left: 10,
+                  right: 10,
+                  top: 10,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        S.of(context).disagree,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: UU.widgetBorderRadius(),
+                      ),
+                    ),
+                    Expanded(
+                      child: RaisedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context, rootNavigator: true)
+                              .pushNamed('signup');
+                        },
+                        shape: RoundedRectangleBorder(
+                          borderRadius: UU.widgetBorderRadius(),
+                        ),
+                        color: Theme.of(context).primaryColor,
+                        child: Text(S.of(context).agree),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
 }
