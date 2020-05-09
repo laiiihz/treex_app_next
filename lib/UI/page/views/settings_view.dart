@@ -25,50 +25,44 @@ class _SettingsViewState extends State<SettingsView> {
     final ap = Provider.of<AP>(context);
     return isIOS(context)
         ? c.CupertinoPageScaffold(
-            child: CustomScrollView(
-              slivers: <Widget>[
-                c.CupertinoSliverNavigationBar(
-                  largeTitle:
-                      buildCupertinoTitle(context, S.of(context).settings),
-                ),
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    Material(
-                      child: SettingGroup(title: S.of(context).display),
-                    ),
-                    CupertinoSettingMoreItem(
-                      title: S.of(context).appTheme,
-                      leading: Icon(Icons.all_inclusive),
-                      trailing: Material(
-                        child: Chip(
-                          label: Text(ap.platformString),
+            child: Material(
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  c.CupertinoSliverNavigationBar(
+                    largeTitle:
+                        buildCupertinoTitle(context, S.of(context).settings),
+                  ),
+                  SliverList(
+                    delegate: SliverChildListDelegate([
+                      SettingGroup(title: S.of(context).display),
+                      CupertinoSettingMoreItem(
+                        title: S.of(context).appTheme,
+                        leading: Icon(Icons.all_inclusive),
+                        trailing: Material(
+                          child: Chip(
+                            label: Text(ap.platformString),
+                          ),
                         ),
+                        actions: <Widget>[
+                          cupertinoPlatformAction(
+                              context, TargetPlatform.android),
+                          cupertinoPlatformAction(context, TargetPlatform.iOS),
+                          cupertinoPlatformAction(
+                              context, TargetPlatform.fuchsia),
+                        ],
                       ),
-                      actions: <Widget>[
-                        cupertinoPlatformAction(
-                            context, TargetPlatform.android),
-                        cupertinoPlatformAction(context, TargetPlatform.iOS),
-                        cupertinoPlatformAction(
-                            context, TargetPlatform.fuchsia),
-                      ],
-                    ),
-                    Material(
-                      color: Colors.transparent,
-                      child: ListTile(
+                      ListTile(
                         enabled: false,
                         title: Text(S.of(context).autoDarkMode),
                         leading: Icon(Icons.brightness_auto),
                         trailing:
                             c.CupertinoSwitch(value: true, onChanged: null),
                       ),
-                    ),
-                    Material(
-                      child: SettingGroup(title: S.of(context).others),
-                    ),
-                    Material(
-                      color: Colors.transparent,
-                      child: ListTile(
-                        enabled: false,
+                      SettingGroup(title: S.of(context).others),
+                      ListTile(
+                        onTap: () {
+                          ap.changeFastStartUp(!ap.fastStartup);
+                        },
                         title: Text(S.of(context).fastStartup),
                         leading: Icon(MaterialCommunityIcons.clock_fast),
                         trailing: c.CupertinoSwitch(
@@ -78,10 +72,22 @@ class _SettingsViewState extends State<SettingsView> {
                           },
                         ),
                       ),
-                    ),
-                  ]),
-                ),
-              ],
+                      ListTile(
+                        leading: Icon(MaterialCommunityIcons.auto_fix),
+                        title: Text('沉浸状态栏'),
+                        onTap: () {
+                          ap.setStatusBarTransparent(!ap.transparentStatusBar);
+                        },
+                        trailing: c.CupertinoSwitch(
+                            value: ap.transparentStatusBar,
+                            onChanged: (value) {
+                              ap.setStatusBarTransparent(value);
+                            }),
+                      ),
+                    ]),
+                  ),
+                ],
+              ),
             ),
           )
         : Scaffold(

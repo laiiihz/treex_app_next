@@ -272,13 +272,6 @@ class _LoginState extends State<LoginView> {
                             borderRadius: UU.widgetBorderRadius(),
                           ),
                         ),
-                  //TODO:dev button
-                  RaisedButton(
-                    onPressed: () {
-                      setState(() {});
-                    },
-                    child: Text('dev'),
-                  ),
                 ],
               ),
             ),
@@ -367,7 +360,6 @@ class _LoginState extends State<LoginView> {
             type: StatusType.SUCCESS,
           );
           showLoading(context);
-          //todo:init profile
           initProfile() async {
             await Future.delayed(Duration(milliseconds: 2000), () {});
           }

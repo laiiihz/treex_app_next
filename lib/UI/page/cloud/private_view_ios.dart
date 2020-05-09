@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
+import 'package:treex_app_next/UI/page/cloud/tool/bottom_tools_ios.dart';
 import 'package:treex_app_next/UI/page/cloud/tool/more_tools_ios.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
@@ -22,8 +23,7 @@ class _PrivateViewIOSState extends State<PrivateViewIOS> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        backgroundColor:
-            CP.cupertinoBG(context),
+        backgroundColor: CP.cupertinoBG(context),
         middle: buildCupertinoTitle(context, S.of(context).privateFiles),
         previousPageTitle: S.of(context).cloudView,
       ),
@@ -93,6 +93,14 @@ class _PrivateViewIOSState extends State<PrivateViewIOS> {
                     });
                   },
                 ),
+              ),
+              AnimatedPositioned(
+                child: BottomToolsIOS(),
+                bottom: _showTool ? 50 : -10,
+                left: 0,
+                right: 0,
+                duration: Duration(milliseconds: 500),
+                curve: Curves.easeInOutCirc,
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_miui/flutter_miui.dart';
 import 'package:treex_app_next/UI/global_widget/icon_with_text.dart';
 import 'package:treex_app_next/UI/tools/app_search_tool.dart';
+import 'package:treex_app_next/Utils/network/network_list.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
 class CloudView extends StatefulWidget {
@@ -10,6 +11,12 @@ class CloudView extends StatefulWidget {
 }
 
 class _CloudViewState extends State<CloudView> {
+  List<NTLEntity> _files = [];
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -18,7 +25,7 @@ class _CloudViewState extends State<CloudView> {
       slivers: <Widget>[
         SliverAppBar(
           expandedHeight: 200,
-          title: Text('title'),
+          title: Text(S.of(context).cloudView),
           flexibleSpace: FlexibleSpaceBar(
             background: Padding(
               padding: EdgeInsets.all(10),
@@ -69,6 +76,12 @@ class _CloudViewState extends State<CloudView> {
           ),
           actions: <Widget>[
             IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                NetworkList(context: context).getFile('file');
+              },
+            ),
+            IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
                 Navigator.of(context).push(
@@ -89,4 +102,6 @@ class _CloudViewState extends State<CloudView> {
       ],
     );
   }
+
+
 }

@@ -1,7 +1,10 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_miui/flutter_miui.dart';
 import 'package:treex_app_next/UI/page/cloud/tool/more_tools.dart';
+import 'package:treex_app_next/UI/page/cloud/widget/file_widget.dart';
+import 'package:treex_app_next/Utils/network/network_list.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
 class ShareViewAndroid extends StatefulWidget {
@@ -11,6 +14,14 @@ class ShareViewAndroid extends StatefulWidget {
 
 class _ShareViewAndroidState extends State<ShareViewAndroid> {
   bool _showList = true;
+  List<NTLEntity> _files = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _updateFile();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +53,15 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
       ),
       appBar: AppBar(
         title: Text(S.of(context).shareFiles),
-        actions: <Widget>[],
+        actions: <Widget>[
+          Hero(
+            tag: 'share_store',
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Icon(MaterialCommunityIcons.inbox),
+            ),
+          ),
+        ],
       ),
       body: PageTransitionSwitcher(
         reverse: _showList,
@@ -57,18 +76,33 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
         },
         child: _showList
             ? ListView.builder(
+                physics: MIUIScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
-                  return Text('test');
+                  return FileWidget(entity: _files[index]);
                 },
+                itemCount: _files.length,
               )
             : GridView.builder(
+                physics: MIUIScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3),
                 itemBuilder: (BuildContext context, int index) {
-                  return Text(index.toString());
+                  return FileWidget(
+                    entity: _files[index],
+                    isGrid: true,
+                  );
                 },
+                itemCount: _files.length,
               ),
       ),
     );
+  }
+
+  _updateFile() {
+    NetworkList(context: context).getFile('share').then((list) {
+      setState(() {
+        _files = list;
+      });
+    });
   }
 }

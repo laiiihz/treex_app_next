@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as md;
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
+import 'package:treex_app_next/UI/page/cloud/tool/bottom_tools_ios.dart';
 import 'package:treex_app_next/UI/page/cloud/tool/more_tools_ios.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
@@ -92,6 +93,14 @@ class _ShareViewIOSState extends State<ShareViewIOS> {
                     });
                   },
                 ),
+              ),
+              AnimatedPositioned(
+                child: BottomToolsIOS(),
+                bottom: _showTool ? 50 : -10,
+                left: 0,
+                right: 0,
+                duration: Duration(milliseconds: 500),
+                curve: Curves.easeInOutCirc,
               ),
             ],
           ),

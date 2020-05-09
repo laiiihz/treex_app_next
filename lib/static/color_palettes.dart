@@ -32,8 +32,10 @@ class CP {
 
   static Color _cupertinoBGLight = Color(0xFFF9F9F9);
   static Color _cupertinoBGDark = Color(0xFF1D1D1D);
-  static Color cupertinoBG(BuildContext context) =>
-      isDark(context) ? _cupertinoBGDark : _cupertinoBGLight;
+  static Color cupertinoBG(BuildContext context, {bool reverse = false}) =>
+      (reverse ? !isDark(context) : isDark(context))
+          ? _cupertinoBGDark
+          : _cupertinoBGLight;
 
   static warn(BuildContext context) => isDark(context) ? _warnDark : _warn;
   static success(BuildContext context) =>
