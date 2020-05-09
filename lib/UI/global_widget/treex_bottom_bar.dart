@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
-class TreexBottomBar extends StatefulWidget {
-  TreexBottomBar({
+class TreexBottomBarN extends StatefulWidget {
+  TreexBottomBarN({
     Key key,
     this.onCancel,
     this.onConfirm,
@@ -18,10 +18,10 @@ class TreexBottomBar extends StatefulWidget {
   final String cancelString;
   final bool single;
   @override
-  State<StatefulWidget> createState() => __TreexBottomBarState();
+  State<StatefulWidget> createState() => __TreexBottomBarNState();
 }
 
-class __TreexBottomBarState extends State<TreexBottomBar> {
+class __TreexBottomBarNState extends State<TreexBottomBarN> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,6 +57,22 @@ class __TreexBottomBarState extends State<TreexBottomBar> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class TreexBottomBar extends StatelessWidget {
+  TreexBottomBar({Key key, @required this.children}) : super(key: key);
+  final List<Widget> children;
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          children: this.children,
+        ),
       ),
     );
   }

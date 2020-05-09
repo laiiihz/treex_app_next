@@ -26,7 +26,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginState extends State<LoginView> {
-  static int _seed = DateTime.now().millisecondsSinceEpoch;
+  int _seed = DateTime.now().millisecondsSinceEpoch;
   ScrollController _scrollController = ScrollController();
   FocusNode _accountFocusNode = FocusNode();
   FocusNode _passwordFocusNode = FocusNode();
@@ -175,9 +175,6 @@ class _LoginState extends State<LoginView> {
                           });
                         },
                       );
-                      VoidCallback onEditingComplete = () {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                      };
                       return Theme.of(context).platform == TargetPlatform.iOS
                           ? TreexCupertinoTextFiledIOS(
                               context: context,
@@ -187,7 +184,7 @@ class _LoginState extends State<LoginView> {
                               focusNode: _passwordFocusNode,
                               prefix: clear,
                               suffix: eye,
-                              onEditingComplete: onEditingComplete,
+                              onEditingComplete: _lostFocus,
                               onChanged: _onChange,
                             )
                           : TextField(
@@ -202,7 +199,7 @@ class _LoginState extends State<LoginView> {
                                 fillColor: TF.fillColor(context),
                                 filled: true,
                               ),
-                              onEditingComplete: onEditingComplete,
+                              onEditingComplete: _lostFocus,
                               onChanged: _onChange,
                             );
                     },
@@ -278,11 +275,7 @@ class _LoginState extends State<LoginView> {
                   //TODO:dev button
                   RaisedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => HomeStructure(),
-                        ),
-                      );
+                      setState(() {});
                     },
                     child: Text('dev'),
                   ),
@@ -296,14 +289,21 @@ class _LoginState extends State<LoginView> {
   }
 
   _onChange(text) {
+    _painterKey = UniqueKey();
     setState(() {
       _canLogin = _passwordController.text.length != 0 &&
           _accountController.text.length != 0;
     });
   }
 
+  //丢失焦点
+  _lostFocus() {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+
   _auth() {
     showLoading(context);
+    _lostFocus();
     NetworkAuth(context)
         .auth(
       account: _accountController.text,
@@ -320,6 +320,44 @@ class _LoginState extends State<LoginView> {
             icon: MaterialCommunityIcons.account_alert,
             type: StatusType.INFO,
           );
+          switch (Theme.of(context).platform) {
+            case TargetPlatform.android:
+            case TargetPlatform.fuchsia:
+              showMIUIConfirmDialog(
+                context: context,
+                child: SizedBox(),
+                title: S.of(context).signupNewQuestion,
+                confirm: _gotoSignupLicenses,
+              );
+              break;
+            case TargetPlatform.iOS:
+              showCupertinoModalPopup(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CupertinoActionSheet(
+                      title: Text(S.of(context).signupNewQuestion),
+                      actions: [
+                        CupertinoActionSheetAction(
+                          onPressed: () => _gotoSignupLicenses(goBack: true),
+                          child: Text(S.of(context).signUp),
+                        ),
+                      ],
+                      cancelButton: CupertinoButton(
+                        child: Text(S.of(context).cancel),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    );
+                  });
+              break;
+            case TargetPlatform.linux:
+              break;
+            case TargetPlatform.macOS:
+              break;
+            case TargetPlatform.windows:
+              break;
+          }
           break;
         case loginResult.SUCCESS:
           showTN(
@@ -328,6 +366,15 @@ class _LoginState extends State<LoginView> {
             icon: MaterialCommunityIcons.check,
             type: StatusType.SUCCESS,
           );
+          showLoading(context);
+          //todo:init profile
+          initProfile() async {
+            await Future.delayed(Duration(milliseconds: 2000), () {});
+          }
+          initProfile().then((value) {
+            closeLoading();
+            Navigator.of(context).pushReplacementNamed('home');
+          });
           break;
         case loginResult.PASSWORD_WRONG:
           showTN(
@@ -364,5 +411,10 @@ class _LoginState extends State<LoginView> {
     setState(() {
       _seed = DateTime.now().millisecondsSinceEpoch;
     });
+  }
+
+  _gotoSignupLicenses({bool goBack = false}) {
+    if (goBack) Navigator.pop(context);
+    Navigator.of(context).pushNamed('licenses');
   }
 }

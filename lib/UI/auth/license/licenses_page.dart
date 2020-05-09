@@ -12,24 +12,29 @@ class LicensesPage extends StatefulWidget {
 class _LicensesPageState extends State<LicensesPage> {
   int _nowIndex = 0;
   Widget _mainLicensesList(BuildContext context) => ListView(
-        padding: null,
         key: UniqueKey(),
         children: <Widget>[
-          ListTile(
-            title: Text(S.of(context).gplV3),
-            subtitle: Text(S.of(context).gnuGeneralPublicLicense),
-            onTap: () {
-              setState(() {
-                _nowIndex = 1;
-              });
-            },
+          Material(
+            color: Colors.transparent,
+            child: ListTile(
+              title: Text(S.of(context).gplV3),
+              subtitle: Text(S.of(context).gnuGeneralPublicLicense),
+              onTap: () {
+                setState(() {
+                  _nowIndex = 1;
+                });
+              },
+            ),
           ),
         ],
       );
   Widget _gplLicense(BuildContext context) => SingleChildScrollView(
         padding: EdgeInsets.only(bottom: 100),
         key: UniqueKey(),
-        child: Text(StaticLicenses.getGPL(context)),
+        child: Material(
+          color: Colors.transparent,
+          child: Text(StaticLicenses.getGPL(context)),
+        ),
       );
   List<Widget> _widgets = [SizedBox()];
   @override

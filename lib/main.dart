@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:treex_app_next/UI/auth/license/sign_up_license.dart';
 import 'package:treex_app_next/UI/auth/login_view.dart';
 import 'package:treex_app_next/UI/auth/sign_up_view.dart';
 import 'package:treex_app_next/UI/page/cloud/cloud_subviews.dart';
+import 'package:treex_app_next/UI/page/home_structure.dart';
 import 'package:treex_app_next/UI/page/views/about_view.dart';
 import 'package:treex_app_next/UI/page/views/dev.dart';
 import 'package:treex_app_next/UI/page/views/network_view.dart';
@@ -36,6 +38,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   final routes = {
     '/': (context) => Splash(),
+    'home': (context) => HomeStructure(),
     'startup': (context) => FirstStartUpPage(),
     'login': (context) => LoginView(),
     'settings': (context) => SettingsView(),
@@ -48,6 +51,7 @@ class MyApp extends StatelessWidget {
     'signup': (context) => SignUpView(),
     'dev': (context) => DevView(),
     'transfer/download': (context) => TransferDownloadView(),
+    'licenses': (context) => SignUpLicense(),
   };
 
   @override

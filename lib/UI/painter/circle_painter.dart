@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 
 class CirclePainter extends CustomPainter {
   int seed;
-  CirclePainter({this.seed});
+  CirclePainter({this.seed}) : super();
   @override
   void paint(Canvas canvas, Size size) {
-    if (seed == null) seed = DateTime.now().millisecondsSinceEpoch;
+    if (seed == null) {
+      seed = DateTime.now().millisecond;
+    }
     for (int i = 0; i < 20; i++) {
       var circlePainterTool = Paint()
         ..color = Color(Random(seed - i).nextInt(0xffffffff))

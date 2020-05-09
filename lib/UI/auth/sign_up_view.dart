@@ -3,7 +3,10 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_miui/flutter_miui.dart';
+import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
+import 'package:treex_app_next/UI/global_widget/treex_bottom_bar.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_bottom_bar.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_filed.dart';
 import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
@@ -74,11 +77,7 @@ class _SignUpState extends State<SignUpView> {
                                     : c.CrossFadeState.showSecond,
                                 duration: Duration(milliseconds: 500),
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  _showPassword = !_showPassword;
-                                });
-                              },
+                              onPressed: _showPasswordFunc,
                             ),
                           ),
                         ),
@@ -105,20 +104,98 @@ class _SignUpState extends State<SignUpView> {
             ),
           )
         : Scaffold(
-            appBar: AppBar(
-              title: c.Text(S.of(context).signUp),
+            body: Column(
+              children: <Widget>[
+                Expanded(
+                  child: CustomScrollView(
+                    physics: MIUIScrollPhysics(),
+                    slivers: <Widget>[
+                      SliverAppBar(
+                        pinned: true,
+                        floating: true,
+                        stretch: true,
+                        expandedHeight: 200,
+                        flexibleSpace: FlexibleSpaceBar(
+                          title: Text(S.of(context).signUp),
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: TextField(
+                            controller: _accountController,
+                            decoration: InputDecoration(
+                              prefixIcon: IconButton(
+                                icon: Icon(MaterialCommunityIcons.account),
+                                onPressed: _clearAccount,
+                              ),
+                              labelText: S.of(context).account,
+                              border: TF.border(),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: TextField(
+                            controller: _passwordController,
+                            obscureText: !_showPassword,
+                            decoration: InputDecoration(
+                              prefixIcon: IconButton(
+                                icon: Icon(MaterialCommunityIcons.lock),
+                                onPressed: _clearPassword,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: c.AnimatedCrossFade(
+                                  firstChild: Icon(Icons.visibility_off),
+                                  secondChild: Icon(Icons.visibility),
+                                  crossFadeState: _showPassword
+                                      ? c.CrossFadeState.showFirst
+                                      : c.CrossFadeState.showSecond,
+                                  duration: Duration(milliseconds: 500),
+                                ),
+                                onPressed: _showPasswordFunc,
+                              ),
+                              labelText: S.of(context).password,
+                              border: TF.border(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                TreexBottomBar(
+                  children: <Widget>[
+                    Expanded(
+                      child: RaisedButton(
+                        onPressed: _signup,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: UU.widgetBorderRadius(),
+                        ),
+                        color: Theme.of(context).primaryColor,
+                        child: Text(S.of(context).agree),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           );
   }
 
+  ///清空用户名框
   _clearAccount() {
     _accountController.clear();
   }
 
+  ///清空密码框
   _clearPassword() {
     _passwordController.clear();
   }
 
+  ///注册
   _signup() {
     showLoading(context);
     NetworkAuth(context)
@@ -164,6 +241,25 @@ class _SignUpState extends State<SignUpView> {
           // TODO: Handle this case.
           break;
       }
+    });
+  }
+
+  _showPasswordFunc() {
+    _showPassword
+        ? showTN(
+            context,
+            title: S.of(context).notShowPassword,
+            icon: Icons.visibility_off,
+            type: StatusType.NULL,
+          )
+        : showTN(
+            context,
+            title: S.of(context).showPassword,
+            icon: Icons.visibility,
+            type: StatusType.SUCCESS,
+          );
+    setState(() {
+      _showPassword = !_showPassword;
     });
   }
 }

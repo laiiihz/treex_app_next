@@ -65,5 +65,8 @@
   "forgetPasswordConfirm": "Forget Password",
   "unknownFault": "Unknown Fault",
   "accountSignuped": "This Account Have Been Signuped",
-  "SignupSuccess": "Signup Success"
+  "SignupSuccess": "Signup Success",
+  "signupNewQuestion": "注册新用户？",
+  "notShowPassword": "不显示密码",
+  "showPassword": "显示密码"
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:treex_app_next/UI/auth/license/licenses_page.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
+import 'package:treex_app_next/UI/global_widget/treex_bottom_bar.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_bottom_bar.dart';
+import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/static/color_palettes.dart';
@@ -38,18 +41,12 @@ class _SignUpState extends State<SignUpLicense> {
                 children: <Widget>[
                   c.CupertinoButton(
                     child: Text(S.of(context).disagree),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
+                    onPressed: _disagree,
                   ),
                   Expanded(
                     child: c.CupertinoButton.filled(
                       child: Text(S.of(context).agree),
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.of(context, rootNavigator: true)
-                            .pushNamed('signup');
-                      },
+                      onPressed: _agree,
                     ),
                   ),
                 ],
@@ -69,45 +66,41 @@ class _SignUpState extends State<SignUpLicense> {
               Expanded(
                 child: LicensesPage(),
               ),
-              Container(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.top,
-                  left: 10,
-                  right: 10,
-                  top: 10,
-                ),
-                child: Row(
-                  children: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(
-                        S.of(context).disagree,
-                        style: TextStyle(color: Theme.of(context).primaryColor),
-                      ),
+              TreexBottomBar(
+                children: <Widget>[
+                  FlatButton(
+                    onPressed: _disagree,
+                    child: Text(
+                      S.of(context).disagree,
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: UU.widgetBorderRadius(),
+                    ),
+                  ),
+                  Expanded(
+                    child: RaisedButton(
+                      onPressed: _agree,
                       shape: RoundedRectangleBorder(
                         borderRadius: UU.widgetBorderRadius(),
                       ),
+                      color: Theme.of(context).primaryColor,
+                      child: Text(S.of(context).agree),
                     ),
-                    Expanded(
-                      child: RaisedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context, rootNavigator: true)
-                              .pushNamed('signup');
-                        },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: UU.widgetBorderRadius(),
-                        ),
-                        color: Theme.of(context).primaryColor,
-                        child: Text(S.of(context).agree),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
         );
+
+  _disagree() {
+    showTN(context, title: '取消注册', icon: MaterialCommunityIcons.cancel);
+    Navigator.of(context).pop();
+  }
+
+  _agree() {
+    Navigator.of(context).pop();
+    Navigator.of(context, rootNavigator: true).pushNamed('signup');
+  }
 }

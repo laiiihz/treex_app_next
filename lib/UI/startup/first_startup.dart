@@ -22,7 +22,7 @@ class _FirstStartUpState extends State<FirstStartUpPage> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: TreexBottomBar(
+            child: TreexBottomBarN(
               single: true,
               onCancel: () {
                 SystemNavigator.pop(animated: true);

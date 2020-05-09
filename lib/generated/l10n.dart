@@ -620,6 +620,33 @@ class S {
       args: [],
     );
   }
+
+  String get signupNewQuestion {
+    return Intl.message(
+      '注册新用户？',
+      name: 'signupNewQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get notShowPassword {
+    return Intl.message(
+      '不显示密码',
+      name: 'notShowPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get showPassword {
+    return Intl.message(
+      '显示密码',
+      name: 'showPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
