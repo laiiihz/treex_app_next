@@ -22,8 +22,7 @@ class _ShareViewIOSState extends State<ShareViewIOS> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        backgroundColor:
-            isDark(context) ? CP.cupertinoBGDark : CP.cupertinoBGLight,
+        backgroundColor: CP.cupertinoBG(context),
         middle: buildCupertinoTitle(context, S.of(context).shareFiles),
         previousPageTitle: S.of(context).shareFiles,
       ),

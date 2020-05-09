@@ -14,21 +14,13 @@ enum StatusType {
   NULL,
 }
 
-Map<StatusType, Color> statusColor = {
-  StatusType.SUCCESS: CP.success,
-  StatusType.FAIL: CP.fail,
-  StatusType.INFO: CP.info,
-  StatusType.WARN: CP.warn,
-  StatusType.NULL: Colors.black26,
-};
-
-Map<StatusType, Color> statusColorDark = {
-  StatusType.SUCCESS: CP.successDark,
-  StatusType.FAIL: CP.failDark,
-  StatusType.INFO: CP.infoDark,
-  StatusType.WARN: CP.warnDark,
-  StatusType.NULL: Colors.white24,
-};
+Map<StatusType, Color> statusColor(BuildContext context) => {
+      StatusType.SUCCESS: CP.success(context),
+      StatusType.FAIL: CP.fail(context),
+      StatusType.INFO: CP.info(context),
+      StatusType.WARN: CP.warn(context),
+      StatusType.NULL: Colors.black26,
+    };
 
 ///showToastNotification
 showTN(
@@ -59,9 +51,7 @@ showTN(
                   Container(
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: isDark(context)
-                          ? statusColorDark[type]
-                          : statusColor[type],
+                      color: statusColor(context)[type],
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Icon(

@@ -623,7 +623,7 @@ class S {
 
   String get signupNewQuestion {
     return Intl.message(
-      '注册新用户？',
+      'Create New Account？',
       name: 'signupNewQuestion',
       desc: '',
       args: [],
@@ -632,7 +632,7 @@ class S {
 
   String get notShowPassword {
     return Intl.message(
-      '不显示密码',
+      'Not Show Password',
       name: 'notShowPassword',
       desc: '',
       args: [],
@@ -641,8 +641,26 @@ class S {
 
   String get showPassword {
     return Intl.message(
-      '显示密码',
+      'Show Password',
       name: 'showPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get welcomeBack {
+    return Intl.message(
+      'Welcome Back，',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get updateAvatar {
+    return Intl.message(
+      'Update Avatar',
+      name: 'updateAvatar',
       desc: '',
       args: [],
     );

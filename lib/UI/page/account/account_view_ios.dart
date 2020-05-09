@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as md;
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/page/account/widget/used_space_box.dart';
 import 'package:treex_app_next/UI/page/views/account_detail_view.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
+import 'package:treex_app_next/provider/network_provider.dart';
 
 class AccountViewIOS extends StatefulWidget {
   @override
@@ -15,6 +17,7 @@ class AccountViewIOS extends StatefulWidget {
 class _AccountView extends State<AccountViewIOS> {
   @override
   Widget build(BuildContext context) {
+    final np = Provider.of<NP>(context);
     return CustomScrollView(
       slivers: <Widget>[
         CupertinoSliverNavigationBar(
@@ -30,11 +33,16 @@ class _AccountView extends State<AccountViewIOS> {
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(10),
-                        child: md.CircleAvatar(
-                          child: Text('t'),
+                        child: Hero(
+                          tag: 'avatar',
+                          child: md.CircleAvatar(
+                            backgroundColor:
+                                Color(0xff000000 + np.profile.backgroundColor),
+                            child: Text(np.profile.name[0]),
+                          ),
                         ),
                       ),
-                      Text('user'),
+                      Text(np.profile.name),
                       Spacer(),
                       Text('已使用1G/5G'),
                     ],

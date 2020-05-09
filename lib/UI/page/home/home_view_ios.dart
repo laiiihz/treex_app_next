@@ -15,7 +15,12 @@ class _HomeViewState extends State<HomeViewIOS> {
       slivers: <Widget>[
         CupertinoSliverNavigationBar(
           largeTitle: buildCupertinoTitle(context, S.of(context).homeView),
-          trailing: CupertinoToolsButton(),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              CupertinoToolsButton(),
+            ],
+          ),
         ),
       ],
     );

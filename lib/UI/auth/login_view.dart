@@ -311,7 +311,6 @@ class _LoginState extends State<LoginView> {
     )
         .then((value) {
       closeLoading();
-
       switch (value) {
         case loginResult.NO_USER:
           showTN(
@@ -332,24 +331,25 @@ class _LoginState extends State<LoginView> {
               break;
             case TargetPlatform.iOS:
               showCupertinoModalPopup(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return CupertinoActionSheet(
-                      title: Text(S.of(context).signupNewQuestion),
-                      actions: [
-                        CupertinoActionSheetAction(
-                          onPressed: () => _gotoSignupLicenses(goBack: true),
-                          child: Text(S.of(context).signUp),
-                        ),
-                      ],
-                      cancelButton: CupertinoButton(
-                        child: Text(S.of(context).cancel),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
+                context: context,
+                builder: (BuildContext context) {
+                  return CupertinoActionSheet(
+                    title: Text(S.of(context).signupNewQuestion),
+                    actions: [
+                      CupertinoActionSheetAction(
+                        onPressed: () => _gotoSignupLicenses(goBack: true),
+                        child: Text(S.of(context).signUp),
                       ),
-                    );
-                  });
+                    ],
+                    cancelButton: CupertinoButton(
+                      child: Text(S.of(context).cancel),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  );
+                },
+              );
               break;
             case TargetPlatform.linux:
               break;

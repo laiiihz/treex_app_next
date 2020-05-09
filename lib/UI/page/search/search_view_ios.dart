@@ -12,8 +12,7 @@ class SearchViewIOSParent extends StatelessWidget {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: buildCupertinoTitle(context, S.of(context).search),
-        backgroundColor:
-            isDark(context) ? CP.cupertinoBGDark : CP.cupertinoBGLight,
+        backgroundColor: CP.cupertinoBG(context),
       ),
       child: SearchViewIOS(),
     );

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:treex_app_next/Utils/CryptoUtil.dart';
 import 'package:treex_app_next/Utils/network/network_util.dart';
@@ -41,16 +42,18 @@ class NetworkAuth extends NU {
       raw: password,
       name: account,
     );
-    Response result = await dio.get('/login', queryParameters: {
+    Response response = await dio.get('/login', queryParameters: {
       'name': account,
       'password': hmacPassword,
     }).catchError((err) {
       return Future.value(loginResult.ERR);
     });
-    switch (result?.data['loginResult']['code']) {
+    switch (response?.data['loginResult']['code']) {
       case 0:
         return loginResult.NO_USER;
       case 1:
+        np.setToken(response.data['token']);
+        np.setProfile(response.data['user']);
         return loginResult.SUCCESS;
       case 2:
         return loginResult.PASSWORD_WRONG;
@@ -70,7 +73,6 @@ class NetworkAuth extends NU {
     }).catchError((err) {});
     switch (response?.data['signupResult']['code']) {
       case 0:
-
         return signUpResult.SUCCESS;
       case 1:
         return signUpResult.PASSWORD_NULL;

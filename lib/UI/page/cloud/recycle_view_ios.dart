@@ -22,8 +22,7 @@ class _RecycleViewIOSState extends State<RecycleViewIOS> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        backgroundColor:
-            isDark(context) ? CP.cupertinoBGDark : CP.cupertinoBGLight,
+        backgroundColor: CP.cupertinoBG(context),
         middle: buildCupertinoTitle(context, S.of(context).recycleBin),
         previousPageTitle: S.of(context).cloudView,
       ),

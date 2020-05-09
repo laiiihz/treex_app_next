@@ -23,8 +23,7 @@ class _SignUpState extends State<SignUpLicense> {
           children: <Widget>[
             c.CupertinoPageScaffold(
               navigationBar: c.CupertinoNavigationBar(
-                backgroundColor:
-                    isDark(context) ? CP.cupertinoBGDark : CP.cupertinoBGLight,
+                backgroundColor: CP.cupertinoBG(context),
                 middle:
                     buildCupertinoTitle(context, S.of(context).userAgreement),
               ),

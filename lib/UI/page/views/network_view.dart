@@ -21,6 +21,7 @@ import 'package:treex_app_next/Utils/network/network_util.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/provider/network_provider.dart';
+import 'package:treex_app_next/static/color_palettes.dart';
 
 class NetworkView extends StatefulWidget {
   @override
@@ -175,13 +176,16 @@ class _NetworkViewState extends State<NetworkView> {
                               AnimatedDefaultTextStyle(
                                 child: Text(S.of(context).https),
                                 style: TextStyle(
-                                    fontSize: 18,
-                                    color:
-                                        _httpsIsOn ? Colors.green : Colors.red),
+                                  fontSize: 18,
+                                  color: _httpsIsOn
+                                      ? CP.success(context)
+                                      : CP.warn(context),
+                                ),
                                 duration: Duration(milliseconds: 500),
                               ),
                               Spacer(),
                               CupertinoSwitch(
+                                trackColor: CP.warn(context),
                                 value: _httpsIsOn,
                                 onChanged: (value) {
                                   _httpsIsOn = value;

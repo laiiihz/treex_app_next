@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:treex_app_next/Utils/network/network_util.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
 
@@ -82,14 +83,15 @@ class NP extends ChangeNotifier {
   ///use dynamic value
   setProfile(dynamic userProfile) {
     _profile = UserProfile.fromDynamic(userProfile);
+    print(userProfile);
     notifyListeners();
   }
 
   String _token = '';
   String get token => _token;
-  setToken(String token,{bool init = false}) {
+  setToken(String token, {bool init = false}) {
     _token = token;
-    if(!init){
+    if (!init) {
       SPU.shared.setString('token', token);
     }
     notifyListeners();

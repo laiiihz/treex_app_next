@@ -35,15 +35,19 @@ class _SafetyViewState extends State<SafetyView> {
                       ),
                     ),
                     CupertinoSettingMoreItem(
+                      color: CP.warn(context),
                       title: S.of(context).deleteAllData,
-                      leading: Icon(MaterialCommunityIcons.radioactive),
+                      leading: Icon(
+                        MaterialCommunityIcons.radioactive,
+                        color: CP.warn(context),
+                      ),
                       trailing: c.SizedBox(),
                       actions: <Widget>[
                         c.CupertinoActionSheetAction(
                           onPressed: () {},
                           child: c.Text(
                             S.of(context).deleteAllData,
-                            style: TextStyle(color: CP.warn),
+                            style: TextStyle(color: CP.warn(context)),
                           ),
                         ),
                       ],

@@ -29,7 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "agree" : MessageLookupByLibrary.simpleMessage("同意"),
     "appTheme" : MessageLookupByLibrary.simpleMessage("应用主题"),
     "autoDarkMode" : MessageLookupByLibrary.simpleMessage("自动暗黑模式"),
-    "cancel" : MessageLookupByLibrary.simpleMessage("CANCEL"),
+    "cancel" : MessageLookupByLibrary.simpleMessage("取消"),
     "cancelUpper" : MessageLookupByLibrary.simpleMessage("取消"),
     "closeAutoDarkMode" : MessageLookupByLibrary.simpleMessage("关闭自动暗黑模式"),
     "cloudView" : MessageLookupByLibrary.simpleMessage("云服务"),
@@ -40,7 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dangerZone" : MessageLookupByLibrary.simpleMessage("危险区"),
     "darkMode" : MessageLookupByLibrary.simpleMessage("深色模式"),
     "deleteAllData" : MessageLookupByLibrary.simpleMessage("删除所有数据"),
-    "dev" : MessageLookupByLibrary.simpleMessage("dev"),
+    "dev" : MessageLookupByLibrary.simpleMessage("开发模式"),
     "disagree" : MessageLookupByLibrary.simpleMessage("拒绝"),
     "display" : MessageLookupByLibrary.simpleMessage("显示"),
     "enterAccount" : MessageLookupByLibrary.simpleMessage("输入您的账户名"),
@@ -86,9 +86,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "startScan" : MessageLookupByLibrary.simpleMessage("开始扫码"),
     "title" : MessageLookupByLibrary.simpleMessage("treex"),
     "unknownFault" : MessageLookupByLibrary.simpleMessage("未知错误"),
+    "updateAvatar" : MessageLookupByLibrary.simpleMessage("修改头像"),
     "uploadFile" : MessageLookupByLibrary.simpleMessage("上传"),
     "userAgreement" : MessageLookupByLibrary.simpleMessage("用户使用协议"),
     "view" : MessageLookupByLibrary.simpleMessage("视图"),
-    "wifi" : MessageLookupByLibrary.simpleMessage("WiFi")
+    "welcomeBack" : MessageLookupByLibrary.simpleMessage("欢迎回来，"),
+    "wifi" : MessageLookupByLibrary.simpleMessage("无线网络")
   };
 }

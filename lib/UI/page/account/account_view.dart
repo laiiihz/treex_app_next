@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
+import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/page/account/widget/used_space_box.dart';
 import 'package:treex_app_next/UI/page/views/account_detail_view.dart';
 import 'package:treex_app_next/generated/l10n.dart';
+import 'package:treex_app_next/provider/network_provider.dart';
 
 class AccountView extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class _AccountViewState extends State<AccountView>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final np = Provider.of<NP>(context);
     return Scaffold(
       body: CustomScrollView(
         physics: MIUIScrollPhysics(),
@@ -27,7 +30,7 @@ class _AccountViewState extends State<AccountView>
             stretch: true,
             expandedHeight: 200,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text('User'),
+              title: Text(np.profile.name),
               background: Stack(
                 children: <Widget>[
                   Hero(

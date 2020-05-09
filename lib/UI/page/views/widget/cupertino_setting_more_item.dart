@@ -11,10 +11,12 @@ class CupertinoSettingMoreItem extends StatefulWidget {
     @required this.leading,
     @required this.trailing,
     this.actions,
+    this.color,
   }) : super(key: key);
   final String title;
   final Widget leading;
   final Widget trailing;
+  final Color color;
 
   ///cupertino actions
   final List<Widget> actions;
@@ -30,7 +32,10 @@ class _SettingMoreItemState extends State<CupertinoSettingMoreItem> {
         children: <Widget>[
           widget.leading,
           SizedBox(width: 30),
-          Text(widget.title),
+          Text(
+            widget.title,
+            style: TextStyle(color: widget.color),
+          ),
           Spacer(),
           widget.trailing,
         ],

@@ -63,7 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "networkSettings" : MessageLookupByLibrary.simpleMessage("Network Settings"),
     "networkStatus" : MessageLookupByLibrary.simpleMessage("Network Status"),
     "noNetwork" : MessageLookupByLibrary.simpleMessage("No Network"),
-    "notShowPassword" : MessageLookupByLibrary.simpleMessage("不显示密码"),
+    "notShowPassword" : MessageLookupByLibrary.simpleMessage("Not Show Password"),
     "others" : MessageLookupByLibrary.simpleMessage("Others"),
     "password" : MessageLookupByLibrary.simpleMessage("Password"),
     "port" : MessageLookupByLibrary.simpleMessage("Port"),
@@ -80,15 +80,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "share" : MessageLookupByLibrary.simpleMessage("Share"),
     "shareFiles" : MessageLookupByLibrary.simpleMessage("Share Store"),
     "shareNetworkSettings" : MessageLookupByLibrary.simpleMessage("Share Network Settings"),
-    "showPassword" : MessageLookupByLibrary.simpleMessage("显示密码"),
+    "showPassword" : MessageLookupByLibrary.simpleMessage("Show Password"),
     "signUp" : MessageLookupByLibrary.simpleMessage("SIGN UP"),
-    "signupNewQuestion" : MessageLookupByLibrary.simpleMessage("注册新用户？"),
+    "signupNewQuestion" : MessageLookupByLibrary.simpleMessage("Create New Account？"),
     "startScan" : MessageLookupByLibrary.simpleMessage("Start Scan"),
     "title" : MessageLookupByLibrary.simpleMessage("treex"),
     "unknownFault" : MessageLookupByLibrary.simpleMessage("Unknown Fault"),
+    "updateAvatar" : MessageLookupByLibrary.simpleMessage("Update Avatar"),
     "uploadFile" : MessageLookupByLibrary.simpleMessage("upload file"),
     "userAgreement" : MessageLookupByLibrary.simpleMessage("User Agreement"),
     "view" : MessageLookupByLibrary.simpleMessage("View"),
+    "welcomeBack" : MessageLookupByLibrary.simpleMessage("Welcome Back，"),
     "wifi" : MessageLookupByLibrary.simpleMessage("WiFi")
   };
 }

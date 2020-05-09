@@ -1,0 +1,1 @@
+C:\Apps\cloc.exe --include-lang=Dart ../lib/

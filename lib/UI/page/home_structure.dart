@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart' as cupertino;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/widgets.dart' as wd;
+import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/UI/page/account/account_view.dart';
 import 'package:treex_app_next/UI/page/account/account_view_ios.dart';
 import 'package:treex_app_next/UI/page/cloud/cloud_view.dart';
@@ -11,7 +12,9 @@ import 'package:treex_app_next/UI/page/home/home_view.dart';
 import 'package:treex_app_next/UI/page/home/home_view_ios.dart';
 import 'package:treex_app_next/UI/page/search/search_view_ios.dart';
 import 'package:treex_app_next/UI/tools/tools_page.dart';
+import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/provider/app_provider.dart';
+import 'package:treex_app_next/provider/network_provider.dart';
 import 'package:treex_app_next/static/static_values.dart';
 import 'package:treex_app_next/static/theme.dart';
 
@@ -25,6 +28,20 @@ class _HomeStructureState extends wd.State<HomeStructure> {
   int _nowIndex = 0;
   bool _reverse = false;
   double _onPointerDownDx = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      final np = Provider.of<NP>(context, listen: false);
+      showTN(
+        context,
+        title: '${S.of(context).welcomeBack}${np.profile.name}',
+        icon: Icons.account_circle,
+        type: StatusType.SUCCESS,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
