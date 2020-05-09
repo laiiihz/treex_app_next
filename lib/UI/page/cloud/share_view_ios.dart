@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as md;
@@ -26,8 +24,8 @@ class _ShareViewIOSState extends State<ShareViewIOS> {
       navigationBar: CupertinoNavigationBar(
         backgroundColor:
             isDark(context) ? CP.cupertinoBGDark : CP.cupertinoBGLight,
-        middle: buildCupertinoTitle(context, S.of(context).share_files),
-        previousPageTitle: S.of(context).share_files,
+        middle: buildCupertinoTitle(context, S.of(context).shareFiles),
+        previousPageTitle: S.of(context).shareFiles,
       ),
       child: Listener(
         onPointerDown: (event) {

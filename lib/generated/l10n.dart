@@ -45,19 +45,19 @@ class S {
     );
   }
 
-  String get sign_up {
+  String get signUp {
     return Intl.message(
       'SIGN UP',
-      name: 'sign_up',
+      name: 'signUp',
       desc: '',
       args: [],
     );
   }
 
-  String get enter_account {
+  String get enterAccount {
     return Intl.message(
       'enter your account name',
-      name: 'enter_account',
+      name: 'enterAccount',
       desc: '',
       args: [],
     );
@@ -162,28 +162,28 @@ class S {
     );
   }
 
-  String get share_files {
+  String get shareFiles {
     return Intl.message(
       'Share Store',
-      name: 'share_files',
+      name: 'shareFiles',
       desc: '',
       args: [],
     );
   }
 
-  String get private_files {
+  String get privateFiles {
     return Intl.message(
       'Private Store',
-      name: 'private_files',
+      name: 'privateFiles',
       desc: '',
       args: [],
     );
   }
 
-  String get recycle_bin {
+  String get recycleBin {
     return Intl.message(
       'Recycle Bin',
-      name: 'recycle_bin',
+      name: 'recycleBin',
       desc: '',
       args: [],
     );
@@ -560,7 +560,7 @@ class S {
 
   String get connectionSuccess {
     return Intl.message(
-      '连接成功',
+      'Connection Success',
       name: 'connectionSuccess',
       desc: '',
       args: [],
@@ -569,7 +569,7 @@ class S {
 
   String get connectionFail {
     return Intl.message(
-      '连接失败',
+      'Connection Fail',
       name: 'connectionFail',
       desc: '',
       args: [],
@@ -578,7 +578,7 @@ class S {
 
   String get forgetPassword {
     return Intl.message(
-      'Forget Password ?',
+      'Forget Password?',
       name: 'forgetPassword',
       desc: '',
       args: [],

@@ -24,7 +24,7 @@ class _PrivateViewIOSState extends State<PrivateViewIOS> {
       navigationBar: CupertinoNavigationBar(
         backgroundColor:
             isDark(context) ? CP.cupertinoBGDark : CP.cupertinoBGLight,
-        middle: buildCupertinoTitle(context, S.of(context).private_files),
+        middle: buildCupertinoTitle(context, S.of(context).privateFiles),
         previousPageTitle: S.of(context).cloudView,
       ),
       child: Listener(

@@ -22,17 +22,17 @@ class _CloudViewState extends State<CloudViewIOS> {
         SliverList(
           delegate: SliverChildListDelegate([
             _buildFileButton(
-              text: S.of(context).share_files,
+              text: S.of(context).shareFiles,
               view: ShareView(),
               icon: Icons.inbox,
             ),
             _buildFileButton(
-              text: S.of(context).private_files,
+              text: S.of(context).privateFiles,
               view: PrivateView(),
               icon: Icons.dns,
             ),
             _buildFileButton(
-              text: S.of(context).recycle_bin,
+              text: S.of(context).recycleBin,
               view: RecycleView(),
               icon: Icons.delete_outline,
             ),

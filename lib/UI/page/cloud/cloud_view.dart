@@ -35,7 +35,7 @@ class _CloudViewState extends State<CloudView> {
                             tag: 'share_store',
                             child: Icon(Icons.inbox),
                           ),
-                          text: S.of(context).share_files,
+                          text: S.of(context).shareFiles,
                           onTap: () {
                             Navigator.of(context).pushNamed('cloud/share');
                           },
@@ -45,7 +45,7 @@ class _CloudViewState extends State<CloudView> {
                             tag: 'private_store',
                             child: Icon(Icons.dns),
                           ),
-                          text: S.of(context).private_files,
+                          text: S.of(context).privateFiles,
                           onTap: () {
                             Navigator.of(context).pushNamed('cloud/private');
                           },
@@ -58,7 +58,7 @@ class _CloudViewState extends State<CloudView> {
                           onTap: () {
                             Navigator.of(context).pushNamed('cloud/recycle');
                           },
-                          text: S.of(context).recycle_bin,
+                          text: S.of(context).recycleBin,
                         ),
                       ],
                     ),

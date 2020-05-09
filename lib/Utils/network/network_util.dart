@@ -1,6 +1,5 @@
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/widgets.dart';
 
 class NU {
   //app provider

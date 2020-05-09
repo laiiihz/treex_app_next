@@ -1,11 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_miui/flutter_miui.dart';
-import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:treex_app_next/UI/page/cloud/tool/more_tools.dart';
 import 'package:treex_app_next/generated/l10n.dart';
-import 'package:treex_app_next/UI/global_widget/app_bar_big_icon.dart';
 
 class PrivateViewAndroid extends StatefulWidget {
   @override
@@ -44,7 +41,7 @@ class _PrivateViewAndroidState extends State<PrivateViewAndroid> {
         },
       ),
       appBar: AppBar(
-        title: Text(S.of(context).private_files),
+        title: Text(S.of(context).privateFiles),
         actions: <Widget>[
           Hero(
             tag: 'private_store',

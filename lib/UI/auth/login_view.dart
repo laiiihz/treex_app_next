@@ -110,7 +110,7 @@ class _LoginState extends State<LoginView> {
                               focusNode: _accountFocusNode,
                               decoration: InputDecoration(
                                 labelText: S.of(context).account,
-                                hintText: S.of(context).enter_account,
+                                hintText: S.of(context).enterAccount,
                                 prefixIcon: clear,
                                 border: TF.border(),
                                 fillColor: TF.fillColor(context),
@@ -222,12 +222,12 @@ class _LoginState extends State<LoginView> {
                                 return Theme.of(context).platform ==
                                         TargetPlatform.iOS
                                     ? CupertinoButton(
-                                        child: Text(S.of(context).sign_up),
+                                        child: Text(S.of(context).signUp),
                                         onPressed: action,
                                       )
                                     : OutlineButton(
                                         onPressed: action,
-                                        child: Text(S.of(context).sign_up),
+                                        child: Text(S.of(context).signUp),
                                         shape: RoundedRectangleBorder(
                                           borderRadius: UU.widgetBorderRadius(),
                                         ),

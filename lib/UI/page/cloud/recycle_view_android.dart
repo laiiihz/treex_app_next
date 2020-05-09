@@ -1,10 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_miui/flutter_miui.dart';
 import 'package:treex_app_next/UI/page/cloud/tool/more_tools.dart';
 import 'package:treex_app_next/generated/l10n.dart';
-import 'package:treex_app_next/UI/global_widget/app_bar_big_icon.dart';
 
 class RecycleViewAndroid extends StatefulWidget {
   @override
@@ -43,7 +41,7 @@ class _RecycleViewAndroidState extends State<RecycleViewAndroid> {
         },
       ),
       appBar: AppBar(
-        title: Text(S.of(context).recycle_bin),
+        title: Text(S.of(context).recycleBin),
         actions: <Widget>[
           Hero(
             tag: 'recycle_bin',

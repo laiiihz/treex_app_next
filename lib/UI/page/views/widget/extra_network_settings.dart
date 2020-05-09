@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:folding_cell/folding_cell/widget.dart';
-import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
 class ExtraNetworkSettings extends StatefulWidget {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
-import 'package:treex_app_next/static/color_palettes.dart';
 import 'package:treex_app_next/static/static_values.dart';
 
 ///App Provider

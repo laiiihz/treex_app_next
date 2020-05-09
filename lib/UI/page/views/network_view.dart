@@ -14,7 +14,6 @@ import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_bottom_bar.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_filed.dart';
 import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
-import 'package:treex_app_next/UI/page/views/settings_views.dart';
 import 'package:treex_app_next/UI/page/views/widget/cupertino_network_info.dart';
 import 'package:treex_app_next/UI/page/views/widget/extra_network_settings.dart';
 import 'package:treex_app_next/Utils/network/network_test.dart';
@@ -512,5 +511,19 @@ class _NetworkViewState extends State<NetworkView> {
       );
     }
     closeLoading();
+  }
+}
+
+String buildConnectivityResultString(
+    BuildContext context, ConnectivityResult result) {
+  switch (result) {
+    case ConnectivityResult.none:
+      return S.of(context).noNetwork;
+    case ConnectivityResult.mobile:
+      return S.of(context).mobile;
+    case ConnectivityResult.wifi:
+      return S.of(context).wifi;
+    default:
+      return S.of(context).noNetwork;
   }
 }

@@ -41,7 +41,7 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
         },
       ),
       appBar: AppBar(
-        title: Text(S.of(context).share_files),
+        title: Text(S.of(context).shareFiles),
         actions: <Widget>[],
       ),
       body: PageTransitionSwitcher(

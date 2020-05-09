@@ -18,7 +18,7 @@ class _SignUpState extends State<SignUpView> {
               slivers: <Widget>[
                 c.CupertinoSliverNavigationBar(
                   largeTitle:
-                      buildCupertinoTitle(context, S.of(context).sign_up),
+                      buildCupertinoTitle(context, S.of(context).signUp),
                 ),
               ],
             ),

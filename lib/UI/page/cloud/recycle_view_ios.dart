@@ -24,7 +24,7 @@ class _RecycleViewIOSState extends State<RecycleViewIOS> {
       navigationBar: CupertinoNavigationBar(
         backgroundColor:
             isDark(context) ? CP.cupertinoBGDark : CP.cupertinoBGLight,
-        middle: buildCupertinoTitle(context, S.of(context).recycle_bin),
+        middle: buildCupertinoTitle(context, S.of(context).recycleBin),
         previousPageTitle: S.of(context).cloudView,
       ),
       child: Listener(
