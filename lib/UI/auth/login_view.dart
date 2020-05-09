@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:animations/animations.dart';
@@ -39,10 +40,26 @@ class _LoginState extends State<LoginView> {
   ///
   /// if password wrong 3 times,then show a forget password dialog
   int _forgetPassword = 0;
+  Timer _timer;
+  Key _painterKey = UniqueKey();
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(
+      Duration(milliseconds: 3000),
+      (timer) {
+        _painterKey = UniqueKey();
+        setState(() {
+          _seed = _getNowSeed();
+        });
+      },
+    );
+  }
 
   @override
   void dispose() {
     super.dispose();
+    _timer.cancel();
     _accountController.dispose();
     _passwordController.dispose();
     _scrollController.dispose();
@@ -54,9 +71,13 @@ class _LoginState extends State<LoginView> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          CustomPaint(
-            size: MediaQuery.of(context).size,
-            painter: CirclePainter(seed: _seed),
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 3000),
+            child: CustomPaint(
+              key: _painterKey,
+              size: MediaQuery.of(context).size,
+              painter: CirclePainter(seed: _seed),
+            ),
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
@@ -337,5 +358,11 @@ class _LoginState extends State<LoginView> {
         confirmString: S.of(context).forgetPasswordConfirm,
       );
     }
+  }
+
+  _getNowSeed() {
+    setState(() {
+      _seed = DateTime.now().millisecondsSinceEpoch;
+    });
   }
 }
