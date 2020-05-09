@@ -62,5 +62,8 @@
   "connectionSuccess": "连接成功",
   "connectionFail": "连接失败",
   "forgetPassword": "忘记密码?",
-  "forgetPasswordConfirm": "忘记密码"
+  "forgetPasswordConfirm": "忘记密码",
+  "unknownFault": "未知错误",
+  "accountSignuped": "该用户已被注册",
+  "SignupSuccess": "注册成功"
 }

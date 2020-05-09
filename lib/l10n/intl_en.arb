@@ -62,5 +62,8 @@
   "connectionSuccess": "Connection Success",
   "connectionFail": "Connection Fail",
   "forgetPassword": "Forget Password?",
-  "forgetPasswordConfirm": "Forget Password"
+  "forgetPasswordConfirm": "Forget Password",
+  "unknownFault": "Unknown Fault",
+  "accountSignuped": "This Account Have Been Signuped",
+  "SignupSuccess": "Signup Success"
 }

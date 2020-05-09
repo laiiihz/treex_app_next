@@ -16,6 +16,7 @@ class TreexCupertinoTextFiledIOS extends CupertinoTextField {
     FocusNode focusNode,
     bool obscureText = false,
     bool light = false,
+    bool whiteBG = false,
   }) : super(
           style: TextStyle(
             color:
@@ -34,7 +35,9 @@ class TreexCupertinoTextFiledIOS extends CupertinoTextField {
                 ? CupertinoColors.black.withAlpha(100)
                 : light
                     ? CupertinoColors.black.withAlpha(25)
-                    : CupertinoColors.white.withAlpha(100),
+                    : whiteBG
+                        ? CupertinoColors.black.withAlpha(20)
+                        : CupertinoColors.white.withAlpha(100),
           ),
           focusNode: focusNode,
           onChanged: onChanged,

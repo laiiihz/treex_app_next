@@ -4,12 +4,14 @@ import 'package:animations/animations.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
 import 'package:treex_app_next/UI/auth/license/sign_up_license.dart';
 import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_icon_button.dart';
 import 'package:treex_app_next/UI/global_widget/logo.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_filed.dart';
+import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/UI/page/home_structure.dart';
 import 'package:treex_app_next/UI/painter/circle_painter.dart';
 import 'package:treex_app_next/Utils/CryptoUtil.dart';
@@ -242,11 +244,11 @@ class _LoginState extends State<LoginView> {
                   Theme.of(context).platform == TargetPlatform.iOS
                       ? CupertinoButton.filled(
                           child: Text(S.of(context).login),
-                          onPressed: _canLogin ? () {} : null,
+                          onPressed: _canLogin ? _auth : null,
                           borderRadius: UU.widgetBorderRadius(),
                         )
                       : RaisedButton(
-                          onPressed: _canLogin ? () {} : null,
+                          onPressed: _canLogin ? _auth : null,
                           child: Text(S.of(context).login),
                           shape: RoundedRectangleBorder(
                             borderRadius: UU.widgetBorderRadius(),
@@ -263,19 +265,6 @@ class _LoginState extends State<LoginView> {
                     },
                     child: Text('dev'),
                   ),
-                  RaisedButton(
-                    onPressed: () {
-                      String password = CryptoUtil.password(
-                        raw: _passwordController.text,
-                        name: _accountController.text,
-                      );
-                      NetworkAuth(context).auth(
-                        account: _accountController.text,
-                        password: password,
-                      );
-                    },
-                    child: Text('check'),
-                  ),
                 ],
               ),
             ),
@@ -289,6 +278,50 @@ class _LoginState extends State<LoginView> {
     setState(() {
       _canLogin = _passwordController.text.length != 0 &&
           _accountController.text.length != 0;
+    });
+  }
+
+  _auth() {
+    showLoading(context);
+    NetworkAuth(context)
+        .auth(
+      account: _accountController.text,
+      password: _passwordController.text,
+    )
+        .then((value) {
+      closeLoading();
+
+      switch (value) {
+        case loginResult.NO_USER:
+          showTN(
+            context,
+            title: '没有该用户',
+            icon: MaterialCommunityIcons.account_alert,
+            type: StatusType.INFO,
+          );
+          break;
+        case loginResult.SUCCESS:
+          showTN(
+            context,
+            title: '登录成功',
+            icon: MaterialCommunityIcons.check,
+            type: StatusType.SUCCESS,
+          );
+          break;
+        case loginResult.PASSWORD_WRONG:
+          showTN(
+            context,
+            title: '密码错误',
+            icon: MaterialCommunityIcons.onepassword,
+            type: StatusType.WARN,
+          );
+          _onForgetPassword();
+          break;
+        case loginResult.UNKNOWN:
+          break;
+        case loginResult.ERR:
+          break;
+      }
     });
   }
 

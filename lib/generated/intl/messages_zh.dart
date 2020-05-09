@@ -21,8 +21,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "SignupSuccess" : MessageLookupByLibrary.simpleMessage("注册成功"),
     "about" : MessageLookupByLibrary.simpleMessage("关于"),
     "account" : MessageLookupByLibrary.simpleMessage("账户名"),
+    "accountSignuped" : MessageLookupByLibrary.simpleMessage("该用户已被注册"),
     "accountView" : MessageLookupByLibrary.simpleMessage("账户"),
     "agree" : MessageLookupByLibrary.simpleMessage("同意"),
     "appTheme" : MessageLookupByLibrary.simpleMessage("应用主题"),
@@ -80,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUp" : MessageLookupByLibrary.simpleMessage("注册"),
     "startScan" : MessageLookupByLibrary.simpleMessage("开始扫码"),
     "title" : MessageLookupByLibrary.simpleMessage("treex"),
+    "unknownFault" : MessageLookupByLibrary.simpleMessage("未知错误"),
     "uploadFile" : MessageLookupByLibrary.simpleMessage("上传"),
     "userAgreement" : MessageLookupByLibrary.simpleMessage("用户使用协议"),
     "view" : MessageLookupByLibrary.simpleMessage("视图"),

@@ -21,8 +21,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "SignupSuccess" : MessageLookupByLibrary.simpleMessage("Signup Success"),
     "about" : MessageLookupByLibrary.simpleMessage("About"),
     "account" : MessageLookupByLibrary.simpleMessage("Account"),
+    "accountSignuped" : MessageLookupByLibrary.simpleMessage("This Account Have Been Signuped"),
     "accountView" : MessageLookupByLibrary.simpleMessage("Account"),
     "agree" : MessageLookupByLibrary.simpleMessage("agree"),
     "appTheme" : MessageLookupByLibrary.simpleMessage("App Theme"),
@@ -80,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUp" : MessageLookupByLibrary.simpleMessage("SIGN UP"),
     "startScan" : MessageLookupByLibrary.simpleMessage("Start Scan"),
     "title" : MessageLookupByLibrary.simpleMessage("treex"),
+    "unknownFault" : MessageLookupByLibrary.simpleMessage("Unknown Fault"),
     "uploadFile" : MessageLookupByLibrary.simpleMessage("upload file"),
     "userAgreement" : MessageLookupByLibrary.simpleMessage("User Agreement"),
     "view" : MessageLookupByLibrary.simpleMessage("View"),

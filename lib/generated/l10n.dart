@@ -593,6 +593,33 @@ class S {
       args: [],
     );
   }
+
+  String get unknownFault {
+    return Intl.message(
+      'Unknown Fault',
+      name: 'unknownFault',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get accountSignuped {
+    return Intl.message(
+      'This Account Have Been Signuped',
+      name: 'accountSignuped',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get SignupSuccess {
+    return Intl.message(
+      'Signup Success',
+      name: 'SignupSuccess',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

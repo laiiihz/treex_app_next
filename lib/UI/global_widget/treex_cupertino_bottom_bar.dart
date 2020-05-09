@@ -11,9 +11,12 @@ class TreexCupertinoBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
           decoration: BoxDecoration(
+            color: isDark(context)
+                ? CupertinoColors.black.withAlpha(100)
+                : CupertinoColors.white.withAlpha(100),
             border: Border(
               top: BorderSide(
                 color: isDark(context)

@@ -11,6 +11,7 @@ import 'package:treex_app_next/UI/page/views/dev.dart';
 import 'package:treex_app_next/UI/page/views/network_view.dart';
 import 'package:treex_app_next/UI/page/views/safety_view.dart';
 import 'package:treex_app_next/UI/page/views/settings_view.dart';
+import 'package:treex_app_next/UI/page/views/transfer/transfer_download_view.dart';
 import 'package:treex_app_next/UI/startup/first_startup.dart';
 import 'package:treex_app_next/UI/startup/splash.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
     'cloud/recycle': (context) => RecycleView(),
     'signup': (context) => SignUpView(),
     'dev': (context) => DevView(),
+    'transfer/download': (context) => TransferDownloadView(),
   };
 
   @override

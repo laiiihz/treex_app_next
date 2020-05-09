@@ -55,3 +55,10 @@ String buildUrl({
 }) {
   return '${https ? 'https' : 'http'}://$baseUrl:$port/api';
 }
+
+String buildUrlHostOnly({
+  String baseUrl,
+  String port,
+  bool https,
+}) =>
+    '${https ? 'https' : 'http'}://$baseUrl:$port';

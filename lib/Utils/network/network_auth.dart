@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:treex_app_next/Utils/CryptoUtil.dart';
 import 'package:treex_app_next/Utils/network/network_util.dart';
 import 'package:treex_app_next/provider/network_provider.dart';
 
@@ -8,6 +9,15 @@ enum loginResult {
   NO_USER,
   SUCCESS,
   PASSWORD_WRONG,
+  UNKNOWN,
+  ERR,
+}
+
+enum signUpResult {
+  SUCCESS,
+  PASSWORD_NULL,
+  FAIL,
+  HAVE_USER,
   UNKNOWN,
   ERR,
 }
@@ -27,9 +37,14 @@ class NetworkAuth extends NU {
     String account,
     String password,
   }) async {
-    Response result = await dio
-        .get('/login?name=$account&password=$password')
-        .catchError((err) {
+    String hmacPassword = CryptoUtil.password(
+      raw: password,
+      name: account,
+    );
+    Response result = await dio.get('/login', queryParameters: {
+      'name': account,
+      'password': hmacPassword,
+    }).catchError((err) {
       return Future.value(loginResult.ERR);
     });
     switch (result?.data['loginResult']['code']) {
@@ -41,6 +56,30 @@ class NetworkAuth extends NU {
         return loginResult.PASSWORD_WRONG;
       default:
         return loginResult.UNKNOWN;
+    }
+  }
+
+  Future<signUpResult> signup({String name, String password}) async {
+    String hmacPassword = CryptoUtil.password(
+      raw: password,
+      name: name,
+    );
+    Response response = await dio.put('/signup', queryParameters: {
+      'name': name,
+      'password': hmacPassword,
+    }).catchError((err) {});
+    switch (response?.data['signupResult']['code']) {
+      case 0:
+
+        return signUpResult.SUCCESS;
+      case 1:
+        return signUpResult.PASSWORD_NULL;
+      case 2:
+        return signUpResult.FAIL;
+      case 3:
+        return signUpResult.HAVE_USER;
+      default:
+        return signUpResult.UNKNOWN;
     }
   }
 }

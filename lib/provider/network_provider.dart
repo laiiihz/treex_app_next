@@ -75,4 +75,48 @@ class NP extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  UserProfile _profile = UserProfile();
+  UserProfile get profile => _profile;
+
+  ///use dynamic value
+  setProfile(dynamic userProfile) {
+    _profile = UserProfile.fromDynamic(userProfile);
+    notifyListeners();
+  }
+
+  String _token = '';
+  String get token => _token;
+  setToken(String token,{bool init = false}) {
+    _token = token;
+    if(!init){
+      SPU.shared.setString('token', token);
+    }
+    notifyListeners();
+  }
+}
+
+class UserProfile {
+  int backgroundColor = 0xffffff;
+  String phone = '';
+  String background = '';
+  String name = '';
+  String avatar = '';
+  String email = '';
+  UserProfile({
+    this.backgroundColor,
+    this.phone,
+    this.background,
+    this.name,
+    this.avatar,
+    this.email,
+  });
+  UserProfile.fromDynamic(dynamic profile) {
+    this.backgroundColor = profile['backgroundColor'];
+    this.phone = profile['phone'];
+    this.background = profile['background'];
+    this.name = profile['name'];
+    this.avatar = profile['avatar'];
+    this.email = profile['email'];
+  }
 }

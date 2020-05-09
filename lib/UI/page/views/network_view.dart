@@ -78,7 +78,7 @@ class _NetworkViewState extends State<NetworkView> {
       _httpsIsOn = np.https;
       _ipAddrTextEdit.text = np.urlPrefix;
       _ipPortTextEdit.text = np.networkPort;
-      _fullPath = buildUrl(
+      _fullPath = buildUrlHostOnly(
         https: _httpsIsOn,
         baseUrl: _ipAddr,
         port: _ipPort,
@@ -97,7 +97,6 @@ class _NetworkViewState extends State<NetworkView> {
 
   @override
   Widget build(BuildContext context) {
-    final np = Provider.of<NP>(context);
     return isIOS(context)
         ? c.CupertinoPageScaffold(
             child: Stack(
@@ -391,7 +390,7 @@ class _NetworkViewState extends State<NetworkView> {
   }
 
   _buildFullPath() {
-    _fullPath = buildUrl(
+    _fullPath = buildUrlHostOnly(
       https: _httpsIsOn,
       baseUrl: _ipAddr,
       port: _ipPort,
