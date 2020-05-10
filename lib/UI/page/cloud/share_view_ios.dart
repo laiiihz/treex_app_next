@@ -4,6 +4,8 @@ import 'package:flutter/material.dart' as md;
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/page/cloud/tool/bottom_tools_ios.dart';
 import 'package:treex_app_next/UI/page/cloud/tool/more_tools_ios.dart';
+import 'package:treex_app_next/UI/page/cloud/widget/file_widget.dart';
+import 'package:treex_app_next/Utils/network/network_list.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/static/color_palettes.dart';
@@ -17,8 +19,17 @@ class _ShareViewIOSState extends State<ShareViewIOS> {
   int _nowIndex = 0;
   bool _showTool = true;
   double _startY = 0;
-  final _listKey = UniqueKey();
-  final _gridKey = UniqueKey();
+  Key _listKey = UniqueKey();
+  Key _gridKey = UniqueKey();
+
+  List<NTLEntity> _files = [];
+  bool _loading = false;
+  @override
+  void initState() {
+    super.initState();
+    _updateFile('.');
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -60,8 +71,9 @@ class _ShareViewIOSState extends State<ShareViewIOS> {
                         child: ListView.builder(
                           padding: EdgeInsets.only(top: 50),
                           itemBuilder: (BuildContext context, int index) {
-                            return Text('test');
+                            return FileWidget(entity: _files[index]);
                           },
+                          itemCount: _files.length,
                         ),
                       )
                     : Container(
@@ -73,10 +85,12 @@ class _ShareViewIOSState extends State<ShareViewIOS> {
                           ),
                           padding: EdgeInsets.only(top: 50),
                           itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              child: Text('test'),
+                            return FileWidget(
+                              entity: _files[index],
+                              isGrid: true,
                             );
                           },
+                          itemCount: _files.length,
                         ),
                       ),
               ),
@@ -107,5 +121,19 @@ class _ShareViewIOSState extends State<ShareViewIOS> {
         ),
       ),
     );
+  }
+
+  _updateFile(String path) async {
+    setState(() => _loading = true);
+    await NetworkList(context: context)
+        .getFile('share', path: path)
+        .then((list) {
+      setState(() {
+        _gridKey = UniqueKey();
+        _listKey = UniqueKey();
+        _loading = false;
+        _files = list;
+      });
+    });
   }
 }

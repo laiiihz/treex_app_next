@@ -665,6 +665,69 @@ class S {
       args: [],
     );
   }
+
+  String get secondsAgo {
+    return Intl.message(
+      'seconds ago',
+      name: 'secondsAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get minutesAgo {
+    return Intl.message(
+      'minutes ago',
+      name: 'minutesAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get hoursAgo {
+    return Intl.message(
+      'hours ago',
+      name: 'hoursAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get yesterday {
+    return Intl.message(
+      'yesterday',
+      name: 'yesterday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get daysAgo {
+    return Intl.message(
+      'days ago',
+      name: 'daysAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get fileDisplay {
+    return Intl.message(
+      '文件显示',
+      name: 'fileDisplay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get detail_date {
+    return Intl.message(
+      '显示详细时间',
+      name: 'detail_date',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

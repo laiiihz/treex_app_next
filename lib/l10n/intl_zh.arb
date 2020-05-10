@@ -51,7 +51,7 @@
   "closeAutoDarkMode": "关闭自动暗黑模式",
   "view": "视图",
   "uploadFile": "上传",
-  "others": "Others",
+  "others": "其他设置",
   "fastStartup": "快速启动",
   "gplV3": "GPL v3",
   "gnuGeneralPublicLicense": "GNU GENERAL PUBLIC LICENSE",
@@ -70,5 +70,12 @@
   "notShowPassword": "不显示密码",
   "showPassword": "显示密码",
   "welcomeBack": "欢迎回来，",
-  "updateAvatar": "修改头像"
+  "updateAvatar": "修改头像",
+  "secondsAgo": "秒前",
+  "minutesAgo": "分钟前",
+  "hoursAgo": "小时前",
+  "yesterday": "昨天",
+  "daysAgo": "天前",
+  "fileDisplay": "文件显示",
+  "detail_date": "智能显示时间"
 }

@@ -70,5 +70,12 @@
   "notShowPassword": "Not Show Password",
   "showPassword": "Show Password",
   "welcomeBack": "Welcome Back，",
-  "updateAvatar": "Update Avatar"
+  "updateAvatar": "Update Avatar",
+  "secondsAgo": "seconds ago",
+  "minutesAgo": "minutes ago",
+  "hoursAgo": "hours ago",
+  "yesterday": "yesterday",
+  "daysAgo": "days ago",
+  "fileDisplay": "文件显示",
+  "detail_date": "显示详细时间"
 }

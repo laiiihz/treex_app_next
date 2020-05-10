@@ -15,7 +15,7 @@ import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_filed.dart'
 import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/UI/page/home_structure.dart';
 import 'package:treex_app_next/UI/painter/circle_painter.dart';
-import 'package:treex_app_next/Utils/CryptoUtil.dart';
+import 'package:treex_app_next/Utils/crypto_util.dart';
 import 'package:treex_app_next/Utils/network/network_auth.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';

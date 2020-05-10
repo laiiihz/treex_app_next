@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:treex_app_next/Utils/CryptoUtil.dart';
+import 'package:treex_app_next/Utils/crypto_util.dart';
 import 'package:treex_app_next/Utils/network/network_util.dart';
 import 'package:treex_app_next/provider/network_provider.dart';
 

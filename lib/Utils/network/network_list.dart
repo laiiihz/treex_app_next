@@ -4,10 +4,13 @@ import 'package:treex_app_next/Utils/network/network_with_token.dart';
 
 class NetworkList extends NUT {
   NetworkList({@required BuildContext context}) : super(context: context);
-  Future<List<NTLEntity>> getFile(String suffix) async {
+  Future<List<NTLEntity>> getFile(
+    String suffix, {
+    @required String path,
+  }) async {
     Response response = await dio.get(
       '/treex/$suffix',
-      queryParameters: {'path': '.'},
+      queryParameters: {'path': path},
     );
     List<dynamic> filesRaw = response.data['files'];
     List<NTLEntity> files = [];

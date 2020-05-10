@@ -44,6 +44,8 @@ class AP extends ChangeNotifier {
 
   bool _showFAB = true;
   bool get showFAB => _showFAB;
+
+  //修改FAB显示
   changeShowFAB(bool state) {
     _showFAB = state;
     notifyListeners();
@@ -53,6 +55,7 @@ class AP extends ChangeNotifier {
   bool _autoDarkMode = true;
   get darkMode => _darkMode;
   get autoDarkMode => _autoDarkMode;
+  //修改深色模式
   changeDarkMode(bool state, {bool init = false}) {
     _darkMode = state;
     if (!init) {
@@ -63,6 +66,7 @@ class AP extends ChangeNotifier {
     notifyListeners();
   }
 
+//修改自动深色模式
   changeAutoDarkMode(bool state, {bool init = false}) {
     _autoDarkMode = state;
     if (!init) {
@@ -79,16 +83,28 @@ class AP extends ChangeNotifier {
 
   bool _transparentStatusBar = false;
   bool get transparentStatusBar => _transparentStatusBar;
+  //修改沉浸状态栏
   setStatusBarTransparent(bool state) {
     _transparentStatusBar = state;
     _systemUiOverlayStyle = _systemUiOverlayStyle.copyWith(
       statusBarColor: state ? Colors.transparent : Colors.black26,
     );
-    updateSystemOverlay();
+    _updateSystemOverlay();
     notifyListeners();
   }
 
-  updateSystemOverlay() {
+  _updateSystemOverlay() {
     SystemChrome.setSystemUIOverlayStyle(_systemUiOverlayStyle);
+  }
+
+  //change file detail date
+  bool _fileDetail = false;
+  bool get fileDetail => _fileDetail;
+  setFileDetail(bool state, {bool init = false}) {
+    _fileDetail = state;
+    if (!init) {
+      SPU.shared.setBool('fileDetail', state);
+    }
+    notifyListeners();
   }
 }

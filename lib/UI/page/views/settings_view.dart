@@ -32,8 +32,8 @@ class _SettingsViewState extends State<SettingsView> {
                     largeTitle:
                         buildCupertinoTitle(context, S.of(context).settings),
                   ),
-                  SliverList(
-                    delegate: SliverChildListDelegate([
+                  c.SliverList(
+                    delegate: c.SliverChildListDelegate([
                       SettingGroup(title: S.of(context).display),
                       CupertinoSettingMoreItem(
                         title: S.of(context).appTheme,
@@ -57,6 +57,20 @@ class _SettingsViewState extends State<SettingsView> {
                         leading: Icon(Icons.brightness_auto),
                         trailing:
                             c.CupertinoSwitch(value: true, onChanged: null),
+                      ),
+                      SettingGroup(title: S.of(context).fileDisplay),
+                      ListTile(
+                        onTap: () {
+                          ap.setFileDetail(!ap.fileDetail);
+                        },
+                        leading: c.Icon(MaterialCommunityIcons.file_table),
+                        title: Text(S.of(context).detail_date),
+                        trailing: c.CupertinoSwitch(
+                          value: !ap.fileDetail,
+                          onChanged: (value) {
+                            ap.setFileDetail(!value);
+                          },
+                        ),
                       ),
                       SettingGroup(title: S.of(context).others),
                       ListTile(
@@ -178,6 +192,20 @@ class _SettingsViewState extends State<SettingsView> {
                                 ? Icons.brightness_auto
                                 : Icons.brightness_7,
                           );
+                        },
+                      ),
+                    ),
+                    SettingGroup(title: S.of(context).fileDisplay),
+                    ListTile(
+                      onTap: () {
+                        ap.setFileDetail(!ap.fileDetail);
+                      },
+                      leading: c.Icon(MaterialCommunityIcons.file_table),
+                      title: Text(S.of(context).detail_date),
+                      trailing: Switch(
+                        value: !ap.fileDetail,
+                        onChanged: (value) {
+                          ap.setFileDetail(!value);
                         },
                       ),
                     ),
