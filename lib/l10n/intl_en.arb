@@ -77,5 +77,6 @@
   "yesterday": "yesterday",
   "daysAgo": "days ago",
   "fileDisplay": "文件显示",
-  "detail_date": "显示详细时间"
+  "detail_date": "显示详细时间",
+  "newFolder": "新建文件夹"
 }

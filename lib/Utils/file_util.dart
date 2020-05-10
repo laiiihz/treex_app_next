@@ -70,6 +70,11 @@ class FileUtil {
     TimeMill.DAY: 1000 * 60 * 60 * 24,
     TimeMill.MONTH: 1000 * 60 * 60 * 24 * 30,
   };
+
+  static getNetworkPathParent(String path) {
+    print(path.substring(0, path.lastIndexOf('/')));
+    return '.';
+  }
 }
 
 enum TimeMill {

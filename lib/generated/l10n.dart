@@ -728,6 +728,15 @@ class S {
       args: [],
     );
   }
+
+  String get newFolder {
+    return Intl.message(
+      '新建文件夹',
+      name: 'newFolder',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

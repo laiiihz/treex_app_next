@@ -67,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mobile" : MessageLookupByLibrary.simpleMessage("移动网络"),
     "networkSettings" : MessageLookupByLibrary.simpleMessage("网络设置"),
     "networkStatus" : MessageLookupByLibrary.simpleMessage("网络状态"),
+    "newFolder" : MessageLookupByLibrary.simpleMessage("新建文件夹"),
     "noNetwork" : MessageLookupByLibrary.simpleMessage("无网络"),
     "notShowPassword" : MessageLookupByLibrary.simpleMessage("不显示密码"),
     "others" : MessageLookupByLibrary.simpleMessage("其他设置"),

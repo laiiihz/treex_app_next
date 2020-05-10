@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
+import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
@@ -10,63 +11,27 @@ class MoreTools extends StatefulWidget {
     @required this.heroTag,
     this.onChanged,
     @required this.initValue,
+    @required this.path,
   }) : super(key: key);
   final bool initValue;
   final String heroTag;
   final ValueChanged onChanged;
+  final String path;
   @override
   State<StatefulWidget> createState() => _MoreToolsState();
 }
 
 class _MoreToolsState extends State<MoreTools> {
   bool _showFirst = true;
-  Widget _child = SizedBox();
+  bool _init = true;
 
   @override
   void initState() {
     super.initState();
     _showFirst = widget.initValue;
-    Future.delayed(Duration.zero, () {
+    Future.delayed(Duration(milliseconds: 100), () {
       setState(() {
-        _child = Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(MaterialCommunityIcons.folder_plus),
-              onPressed: () {
-                Navigator.of(context).pop();
-                showMIUIConfirmDialog(
-                  context: context,
-                  child: TextField(),
-                  title: '新建文件夹',
-                  confirm: () {},
-                );
-              },
-            ),
-            IconButton(
-              tooltip: S.of(context).uploadFile,
-              icon: Icon(MaterialCommunityIcons.upload),
-              onPressed: () {},
-            ),
-            IconButton(
-              tooltip: S.of(context).view,
-              icon: AnimatedCrossFade(
-                duration: Duration(milliseconds: 500),
-                firstChild: Icon(MaterialCommunityIcons.view_list),
-                secondChild: Icon(MaterialCommunityIcons.view_grid),
-                crossFadeState: _showFirst
-                    ? CrossFadeState.showFirst
-                    : CrossFadeState.showSecond,
-              ),
-              onPressed: () {
-                setState(() {
-                  _showFirst = !_showFirst;
-                });
-                widget.onChanged(_showFirst);
-              },
-            ),
-          ],
-        );
+        _init = false;
       });
     });
   }
@@ -98,7 +63,59 @@ class _MoreToolsState extends State<MoreTools> {
                       switchInCurve: Curves.easeInCubic,
                       switchOutCurve: Curves.easeOutCubic,
                       duration: Duration(milliseconds: 500),
-                      child: _child,
+                      child: _init
+                          ? SizedBox()
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                IconButton(
+                                  tooltip: S.of(context).newFolder,
+                                  icon:
+                                      Icon(MaterialCommunityIcons.folder_plus),
+                                  onPressed: () {
+                                    showMIUIConfirmDialog(
+                                      context: context,
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                          border: TF.border(),
+                                          prefixIcon: Icon(
+                                              MaterialCommunityIcons
+                                                  .folder_plus),
+                                        ),
+                                      ),
+                                      title: S.of(context).newFolder,
+                                      confirm: () {
+                                        //TODO new folder
+                                      },
+                                    );
+                                  },
+                                ),
+                                IconButton(
+                                  tooltip: S.of(context).uploadFile,
+                                  icon: Icon(MaterialCommunityIcons.upload),
+                                  onPressed: () {},
+                                ),
+                                IconButton(
+                                  tooltip: S.of(context).view,
+                                  icon: AnimatedCrossFade(
+                                    duration: Duration(milliseconds: 500),
+                                    firstChild:
+                                        Icon(MaterialCommunityIcons.view_list),
+                                    secondChild:
+                                        Icon(MaterialCommunityIcons.view_grid),
+                                    crossFadeState: _showFirst
+                                        ? CrossFadeState.showFirst
+                                        : CrossFadeState.showSecond,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _showFirst = !_showFirst;
+                                    });
+                                    widget.onChanged(_showFirst);
+                                  },
+                                ),
+                              ],
+                            ),
                     ),
                   ),
                   decoration: BoxDecoration(

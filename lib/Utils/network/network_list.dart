@@ -37,3 +37,10 @@ class NTLEntity {
     this.child = entity['child'];
   }
 }
+
+class PathEntity {
+  String name;
+  String parent;
+  String path;
+  PathEntity({this.name, this.parent, this.path});
+}
