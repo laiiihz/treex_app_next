@@ -69,7 +69,7 @@ class _ShareViewIOSState extends State<ShareViewIOS> {
                     ? Container(
                         key: _listKey,
                         child: ListView.builder(
-                          padding: EdgeInsets.only(top: 50),
+                          padding: EdgeInsets.only(top: _showTool ? 50 : 0),
                           itemBuilder: (BuildContext context, int index) {
                             return FileWidget(entity: _files[index]);
                           },

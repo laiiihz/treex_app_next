@@ -3,8 +3,8 @@ import 'package:treex_app_next/Utils/ui_util.dart';
 
 typedef EditCallBack = Function(String value);
 
-class TreexCupertinoTextFiledIOS extends CupertinoTextField {
-  TreexCupertinoTextFiledIOS({
+class TreexCupertinoTextFieldIOS extends CupertinoTextField {
+  TreexCupertinoTextFieldIOS({
     BuildContext context,
     String placeholder,
     TextStyle textStyle,

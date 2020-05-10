@@ -11,7 +11,7 @@ import 'package:treex_app_next/UI/auth/license/sign_up_license.dart';
 import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_icon_button.dart';
 import 'package:treex_app_next/UI/global_widget/logo.dart';
-import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_filed.dart';
+import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/UI/page/home_structure.dart';
 import 'package:treex_app_next/UI/painter/circle_painter.dart';
@@ -119,7 +119,7 @@ class _LoginState extends State<LoginView> {
                         _passwordFocusNode.requestFocus();
                       };
                       return Theme.of(context).platform == TargetPlatform.iOS
-                          ? TreexCupertinoTextFiledIOS(
+                          ? TreexCupertinoTextFieldIOS(
                               context: context,
                               placeholder: S.of(context).account,
                               controller: _accountController,
@@ -176,7 +176,7 @@ class _LoginState extends State<LoginView> {
                         },
                       );
                       return Theme.of(context).platform == TargetPlatform.iOS
-                          ? TreexCupertinoTextFiledIOS(
+                          ? TreexCupertinoTextFieldIOS(
                               context: context,
                               placeholder: S.of(context).password,
                               obscureText: !_showPassword,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_miui/flutter_miui.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
@@ -30,6 +31,18 @@ class _MoreToolsState extends State<MoreTools> {
         _child = Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
+            IconButton(
+              icon: Icon(MaterialCommunityIcons.folder_plus),
+              onPressed: () {
+                Navigator.of(context).pop();
+                showMIUIConfirmDialog(
+                  context: context,
+                  child: TextField(),
+                  title: '新建文件夹',
+                  confirm: () {},
+                );
+              },
+            ),
             IconButton(
               tooltip: S.of(context).uploadFile,
               icon: Icon(MaterialCommunityIcons.upload),

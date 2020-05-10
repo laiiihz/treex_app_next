@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +13,11 @@ class FileWidget extends StatefulWidget {
     Key key,
     @required this.entity,
     this.isGrid = false,
+    @required this.onPressed,
   }) : super(key: key);
   final NTLEntity entity;
   final bool isGrid;
+  final VoidCallback onPressed;
   @override
   State<StatefulWidget> createState() => _FileWidgetState();
 }
@@ -72,7 +72,7 @@ class _FileWidgetState extends State<FileWidget> {
                           ),
                         ),
                         borderRadius: UU.widgetBorderRadius(),
-                        onTap: () {},
+                        onTap: widget.onPressed,
                       ),
                     ),
                   ),
@@ -106,7 +106,7 @@ class _FileWidgetState extends State<FileWidget> {
                       ],
                     ),
                     borderRadius: UU.widgetBorderRadius(),
-                    onTap: () {},
+                    onTap: widget.onPressed,
                     onLongPress: () {
                       _onLongPress(context);
                     },
@@ -123,7 +123,7 @@ class _FileWidgetState extends State<FileWidget> {
   _buildListTile() {
     final ap = Provider.of<AP>(context);
     return ListTile(
-      onTap: () {},
+      onTap: widget.onPressed,
       onLongPress: () {
         _onLongPress(context);
       },

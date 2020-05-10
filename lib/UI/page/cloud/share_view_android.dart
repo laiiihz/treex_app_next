@@ -18,11 +18,12 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
   List<NTLEntity> _files = [];
   bool _loading = false;
   Key _key = UniqueKey();
+  String _nowPath = '.';
 
   @override
   void initState() {
     super.initState();
-    _updateFile('.');
+    _updateFile();
   }
 
   @override
@@ -93,7 +94,13 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
                   ? ListView.builder(
                       physics: MIUIScrollPhysics(),
                       itemBuilder: (BuildContext context, int index) {
-                        return FileWidget(entity: _files[index]);
+                        return FileWidget(
+                          entity: _files[index],
+                          onPressed: () {
+                            _nowPath = _files[index].path;
+                            _updateFile();
+                          },
+                        );
                       },
                       itemCount: _files.length,
                     )
@@ -112,7 +119,7 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
             },
           ),
         ),
-        onRefresh: () async => await _updateFile('.'),
+        onRefresh: () async => await _updateFile(),
         springAnimationDurationInMilliseconds: 300,
         showChildOpacityTransition: false,
         color: Theme.of(context).primaryColor,
@@ -120,10 +127,10 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
     );
   }
 
-  _updateFile(String path) async {
+  _updateFile() async {
     setState(() => _loading = true);
     await NetworkList(context: context)
-        .getFile('share', path: path)
+        .getFile('share', path: _nowPath)
         .then((list) {
       setState(() {
         _key = UniqueKey();

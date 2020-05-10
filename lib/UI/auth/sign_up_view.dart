@@ -8,7 +8,7 @@ import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/global_widget/treex_bottom_bar.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_bottom_bar.dart';
-import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_filed.dart';
+import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/Utils/network/network_auth.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
@@ -40,7 +40,7 @@ class _SignUpState extends State<SignUpView> {
                         padding: c.EdgeInsets.all(10),
                         child: Material(
                           color: Colors.transparent,
-                          child: TreexCupertinoTextFiledIOS(
+                          child: TreexCupertinoTextFieldIOS(
                             context: context,
                             controller: _accountController,
                             whiteBG: true,
@@ -58,7 +58,7 @@ class _SignUpState extends State<SignUpView> {
                         padding: c.EdgeInsets.all(10),
                         child: Material(
                           color: Colors.transparent,
-                          child: TreexCupertinoTextFiledIOS(
+                          child: TreexCupertinoTextFieldIOS(
                             context: context,
                             whiteBG: true,
                             obscureText: !_showPassword,

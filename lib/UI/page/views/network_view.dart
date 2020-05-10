@@ -12,7 +12,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_bottom_bar.dart';
-import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_filed.dart';
+import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/UI/page/views/widget/cupertino_network_info.dart';
 import 'package:treex_app_next/UI/page/views/widget/extra_network_settings.dart';
@@ -138,7 +138,7 @@ class _NetworkViewState extends State<NetworkView> {
                         ),
                         Padding(
                           padding: EdgeInsets.all(10),
-                          child: TreexCupertinoTextFiledIOS(
+                          child: TreexCupertinoTextFieldIOS(
                             context: context,
                             light: true,
                             controller: _ipAddrTextEdit,
@@ -153,7 +153,7 @@ class _NetworkViewState extends State<NetworkView> {
                         ),
                         Padding(
                           padding: EdgeInsets.all(10),
-                          child: TreexCupertinoTextFiledIOS(
+                          child: TreexCupertinoTextFieldIOS(
                             context: context,
                             light: true,
                             controller: _ipPortTextEdit,
