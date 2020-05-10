@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dev" : MessageLookupByLibrary.simpleMessage("开发模式"),
     "disagree" : MessageLookupByLibrary.simpleMessage("拒绝"),
     "display" : MessageLookupByLibrary.simpleMessage("显示"),
+    "emptyFolder" : MessageLookupByLibrary.simpleMessage("空文件夹"),
     "enterAccount" : MessageLookupByLibrary.simpleMessage("输入您的账户名"),
     "extraNetworkSettings" : MessageLookupByLibrary.simpleMessage("额外网络设置"),
     "fastStartup" : MessageLookupByLibrary.simpleMessage("快速启动"),

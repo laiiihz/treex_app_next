@@ -78,5 +78,6 @@
   "daysAgo": "天前",
   "fileDisplay": "文件显示",
   "detail_date": "智能显示时间",
-  "newFolder": "新建文件夹"
+  "newFolder": "新建文件夹",
+  "emptyFolder": "空文件夹"
 }

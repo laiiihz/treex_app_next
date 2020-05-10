@@ -19,6 +19,8 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
   List<NTLEntity> _files = [];
   bool _loading = false;
   Key _key = UniqueKey();
+  ScrollController _scrollController = ScrollController();
+
   List<PathEntity> _pathStack = [
     PathEntity(name: 'root', parent: '.', path: '.'),
   ];
@@ -67,10 +69,12 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
             height: 40,
             child: ListView.builder(
               physics: MIUIScrollPhysics(),
+              controller: _scrollController,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return FlatButton(
                   onPressed: () {
+                    _updatePath();
                     for (int i = 0; i < index; i++) {
                       _pathStack.removeAt(0);
                     }
@@ -117,34 +121,49 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
             child: Builder(
               key: _key,
               builder: (BuildContext context) {
-                return _showList
-                    ? ListView.builder(
-                        physics: MIUIScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          return FileWidget(
-                            entity: _files[index],
-                            onPressed: () {
-                              _onTap(index);
-                            },
-                          );
-                        },
-                        itemCount: _files.length,
+                return _files.length == 0
+                    ? Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Icon(
+                              MaterialCommunityIcons.inbox,
+                              size: 50,
+                            ),
+                            SizedBox(height: 20),
+                            Text(S.of(context).emptyFolder),
+                          ],
+                        ),
                       )
-                    : GridView.builder(
-                        physics: MIUIScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3),
-                        itemBuilder: (BuildContext context, int index) {
-                          return FileWidget(
-                            entity: _files[index],
-                            isGrid: true,
-                            onPressed: () {
-                              _onTap(index);
+                    : _showList
+                        ? ListView.builder(
+                            physics: MIUIScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                              return FileWidget(
+                                entity: _files[index],
+                                onPressed: () {
+                                  _onTap(index);
+                                },
+                              );
                             },
+                            itemCount: _files.length,
+                          )
+                        : GridView.builder(
+                            physics: MIUIScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3),
+                            itemBuilder: (BuildContext context, int index) {
+                              return FileWidget(
+                                entity: _files[index],
+                                isGrid: true,
+                                onPressed: () {
+                                  _onTap(index);
+                                },
+                              );
+                            },
+                            itemCount: _files.length,
                           );
-                        },
-                        itemCount: _files.length,
-                      );
               },
             ),
           ),
@@ -180,6 +199,7 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
   }
 
   _onTap(int index) {
+    _updatePath();
     if (_files[index].isDir) {
       _pathStack.insert(
           0,
@@ -190,5 +210,13 @@ class _ShareViewAndroidState extends State<ShareViewAndroid> {
           ));
       _updateFile();
     }
+  }
+
+  _updatePath() {
+    _scrollController.animateTo(
+      -20,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOutCubic,
+    );
   }
 }

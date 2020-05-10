@@ -737,6 +737,15 @@ class S {
       args: [],
     );
   }
+
+  String get emptyFolder {
+    return Intl.message(
+      '空文件夹',
+      name: 'emptyFolder',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

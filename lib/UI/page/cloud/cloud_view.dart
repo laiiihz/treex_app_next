@@ -76,12 +76,6 @@ class _CloudViewState extends State<CloudView> {
           ),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                NetworkList(context: context).getFile('file');
-              },
-            ),
-            IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
                 Navigator.of(context).push(
@@ -102,6 +96,4 @@ class _CloudViewState extends State<CloudView> {
       ],
     );
   }
-
-
 }
