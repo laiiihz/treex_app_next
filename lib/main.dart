@@ -45,8 +45,6 @@ class MyApp extends StatelessWidget {
     'network': (context) => NetworkView(),
     'safety': (context) => SafetyView(),
     'about': (context) => AboutView(),
-    'cloud/private': (context) => PrivateView(),
-    'cloud/share': (context) => ShareView(),
     'cloud/recycle': (context) => RecycleView(),
     'signup': (context) => SignUpView(),
     'dev': (context) => DevView(),

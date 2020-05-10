@@ -13,9 +13,14 @@ class CloudStorageView extends StatefulWidget {
   CloudStorageView({
     Key key,
     @required this.heroTag,
+    @required this.icon,
+    @required this.name,
+    @required this.type,
   }) : super(key: key);
-
+  final String name;
+  final String type;
   final String heroTag;
+  final IconData icon;
   @override
   State<StatefulWidget> createState() => _CloudStorageViewState();
 }
@@ -69,7 +74,7 @@ class _CloudStorageViewState extends State<CloudStorageView> {
         },
       ),
       appBar: AppBar(
-        title: Text(S.of(context).shareFiles),
+        title: Text(widget.name),
         bottom: PreferredSize(
           child: Container(
             height: 40,
@@ -96,10 +101,10 @@ class _CloudStorageViewState extends State<CloudStorageView> {
         ),
         actions: <Widget>[
           Hero(
-            tag: widget.heroTag ,
+            tag: widget.heroTag,
             child: Center(
               child: AnimatedCrossFade(
-                firstChild: Icon(MaterialCommunityIcons.inbox),
+                firstChild: Icon(widget.icon),
                 secondChild: CircularProgressIndicator(),
                 crossFadeState: _loading
                     ? CrossFadeState.showSecond
@@ -194,7 +199,7 @@ class _CloudStorageViewState extends State<CloudStorageView> {
   _updateFile() async {
     setState(() => _loading = true);
     await NetworkList(context: context)
-        .getFile('share', path: _pathStack[0].path)
+        .getFile(widget.type, path: _pathStack[0].path)
         .then((list) {
       setState(() {
         _key = UniqueKey();

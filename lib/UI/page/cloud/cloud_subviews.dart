@@ -1,9 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:treex_app_next/UI/page/cloud/private_view_android.dart';
 import 'package:treex_app_next/UI/page/cloud/private_view_ios.dart';
 import 'package:treex_app_next/UI/page/cloud/recycle_view_android.dart';
 import 'package:treex_app_next/UI/page/cloud/recycle_view_ios.dart';
-import 'package:treex_app_next/UI/page/cloud/share_view_android.dart';
 import 'package:treex_app_next/UI/page/cloud/share_view_ios.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 
@@ -15,7 +13,7 @@ class PrivateView extends StatefulWidget {
 class _PrivateViewState extends State<PrivateView> {
   @override
   Widget build(BuildContext context) {
-    return isIOS(context) ? PrivateViewIOS() : PrivateViewAndroid();
+    return PrivateViewIOS();
   }
 }
 
@@ -27,7 +25,7 @@ class ShareView extends StatefulWidget {
 class _ShareViewState extends State<ShareView> {
   @override
   Widget build(BuildContext context) {
-    return isIOS(context) ? ShareViewIOS() : ShareViewAndroid();
+    return ShareViewIOS();
   }
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_miui/flutter_miui.dart';
 import 'package:treex_app_next/UI/global_widget/icon_with_text.dart';
+import 'package:treex_app_next/UI/page/cloud/cloud_storage_view.dart';
 import 'package:treex_app_next/UI/tools/app_search_tool.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
@@ -22,6 +23,9 @@ class _CloudViewState extends State<CloudView> {
       key: UniqueKey(),
       slivers: <Widget>[
         SliverAppBar(
+          floating: true,
+          stretch: true,
+          pinned: true,
           expandedHeight: 200,
           title: Text(S.of(context).cloudView),
           flexibleSpace: FlexibleSpaceBar(
@@ -42,7 +46,15 @@ class _CloudViewState extends State<CloudView> {
                           ),
                           text: S.of(context).shareFiles,
                           onTap: () {
-                            Navigator.of(context).pushNamed('cloud/share');
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  CloudStorageView(
+                                heroTag: 'share_store',
+                                icon: Icons.inbox,
+                                name: S.of(context).shareFiles,
+                                type: 'share',
+                              ),
+                            ));
                           },
                         ),
                         IconWithText(
@@ -52,7 +64,14 @@ class _CloudViewState extends State<CloudView> {
                           ),
                           text: S.of(context).privateFiles,
                           onTap: () {
-                            Navigator.of(context).pushNamed('cloud/private');
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => CloudStorageView(
+                                heroTag: 'private_store',
+                                icon: Icons.dns,
+                                name: S.of(context).privateFiles,
+                                type: 'file',
+                              ),
+                            ));
                           },
                         ),
                         IconWithText(
