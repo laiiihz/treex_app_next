@@ -65,7 +65,7 @@
   "forgetPasswordConfirm": "Forget Password",
   "unknownFault": "Unknown Fault",
   "accountSignuped": "This Account Have Been Signuped",
-  "SignupSuccess": "Signup Success",
+  "signupSuccess": "Signup Success",
   "signupNewQuestion": "Create New Account？",
   "notShowPassword": "Not Show Password",
   "showPassword": "Show Password",
@@ -76,8 +76,8 @@
   "hoursAgo": "hours ago",
   "yesterday": "yesterday",
   "daysAgo": "days ago",
-  "fileDisplay": "文件显示",
-  "detail_date": "显示详细时间",
-  "newFolder": "新建文件夹",
-  "emptyFolder": "空文件夹"
+  "fileDisplay": "File Display",
+  "detailDate": "Smart Date Time",
+  "newFolder": "New Folder",
+  "emptyFolder": "Empty Folder"
 }

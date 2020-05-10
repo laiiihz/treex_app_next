@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_miui/flutter_miui.dart';
 import 'package:treex_app_next/UI/global_widget/icon_with_text.dart';
 import 'package:treex_app_next/UI/tools/app_search_tool.dart';
-import 'package:treex_app_next/Utils/network/network_list.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
 class CloudView extends StatefulWidget {
@@ -11,7 +10,6 @@ class CloudView extends StatefulWidget {
 }
 
 class _CloudViewState extends State<CloudView> {
-  List<NTLEntity> _files = [];
   @override
   void initState() {
     super.initState();

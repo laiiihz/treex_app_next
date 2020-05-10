@@ -64,7 +64,7 @@ class _SettingsViewState extends State<SettingsView> {
                           ap.setFileDetail(!ap.fileDetail);
                         },
                         leading: c.Icon(MaterialCommunityIcons.file_table),
-                        title: Text(S.of(context).detail_date),
+                        title: Text(S.of(context).detailDate),
                         trailing: c.CupertinoSwitch(
                           value: !ap.fileDetail,
                           onChanged: (value) {
@@ -201,7 +201,7 @@ class _SettingsViewState extends State<SettingsView> {
                         ap.setFileDetail(!ap.fileDetail);
                       },
                       leading: c.Icon(MaterialCommunityIcons.file_table),
-                      title: Text(S.of(context).detail_date),
+                      title: Text(S.of(context).detailDate),
                       trailing: Switch(
                         value: !ap.fileDetail,
                         onChanged: (value) {

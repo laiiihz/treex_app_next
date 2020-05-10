@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "SignupSuccess" : MessageLookupByLibrary.simpleMessage("注册成功"),
     "about" : MessageLookupByLibrary.simpleMessage("关于"),
     "account" : MessageLookupByLibrary.simpleMessage("账户名"),
     "accountSignuped" : MessageLookupByLibrary.simpleMessage("该用户已被注册"),
@@ -41,7 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "darkMode" : MessageLookupByLibrary.simpleMessage("深色模式"),
     "daysAgo" : MessageLookupByLibrary.simpleMessage("天前"),
     "deleteAllData" : MessageLookupByLibrary.simpleMessage("删除所有数据"),
-    "detail_date" : MessageLookupByLibrary.simpleMessage("智能显示时间"),
+    "detailDate" : MessageLookupByLibrary.simpleMessage("智能显示时间"),
     "dev" : MessageLookupByLibrary.simpleMessage("开发模式"),
     "disagree" : MessageLookupByLibrary.simpleMessage("拒绝"),
     "display" : MessageLookupByLibrary.simpleMessage("显示"),
@@ -91,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "showPassword" : MessageLookupByLibrary.simpleMessage("显示密码"),
     "signUp" : MessageLookupByLibrary.simpleMessage("注册"),
     "signupNewQuestion" : MessageLookupByLibrary.simpleMessage("注册新用户？"),
+    "signupSuccess" : MessageLookupByLibrary.simpleMessage("注册成功"),
     "startScan" : MessageLookupByLibrary.simpleMessage("开始扫码"),
     "title" : MessageLookupByLibrary.simpleMessage("treex"),
     "unknownFault" : MessageLookupByLibrary.simpleMessage("未知错误"),

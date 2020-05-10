@@ -81,7 +81,7 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                   stretch: true,
                   expandedHeight: 200,
                   flexibleSpace: FlexibleSpaceBar(
-                    title: Text('User'),
+                    title: Text(np.profile.name),
                     background: Stack(
                       children: <Widget>[
                         Positioned(
@@ -94,7 +94,8 @@ class _AccountDetailViewState extends State<AccountDetailView> {
                               width: 100,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
-                                color: Colors.red,
+                                color: Color(
+                                    0xff000000 + np.profile.backgroundColor),
                               ),
                             ),
                           ),

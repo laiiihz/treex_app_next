@@ -612,10 +612,10 @@ class S {
     );
   }
 
-  String get SignupSuccess {
+  String get signupSuccess {
     return Intl.message(
       'Signup Success',
-      name: 'SignupSuccess',
+      name: 'signupSuccess',
       desc: '',
       args: [],
     );
@@ -713,17 +713,17 @@ class S {
 
   String get fileDisplay {
     return Intl.message(
-      '文件显示',
+      'File Display',
       name: 'fileDisplay',
       desc: '',
       args: [],
     );
   }
 
-  String get detail_date {
+  String get detailDate {
     return Intl.message(
-      '显示详细时间',
-      name: 'detail_date',
+      'Smart Date Time',
+      name: 'detailDate',
       desc: '',
       args: [],
     );
@@ -731,7 +731,7 @@ class S {
 
   String get newFolder {
     return Intl.message(
-      '新建文件夹',
+      'New Folder',
       name: 'newFolder',
       desc: '',
       args: [],
@@ -740,7 +740,7 @@ class S {
 
   String get emptyFolder {
     return Intl.message(
-      '空文件夹',
+      'Empty Folder',
       name: 'emptyFolder',
       desc: '',
       args: [],

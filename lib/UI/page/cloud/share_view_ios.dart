@@ -6,7 +6,6 @@ import 'package:treex_app_next/UI/page/cloud/tool/bottom_tools_ios.dart';
 import 'package:treex_app_next/UI/page/cloud/tool/more_tools_ios.dart';
 import 'package:treex_app_next/UI/page/cloud/widget/file_widget.dart';
 import 'package:treex_app_next/Utils/network/network_list.dart';
-import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/static/color_palettes.dart';
 
@@ -71,7 +70,10 @@ class _ShareViewIOSState extends State<ShareViewIOS> {
                         child: ListView.builder(
                           padding: EdgeInsets.only(top: _showTool ? 50 : 0),
                           itemBuilder: (BuildContext context, int index) {
-                            return FileWidget(entity: _files[index]);
+                            return FileWidget(
+                              entity: _files[index],
+                              onPressed: () {},
+                            );
                           },
                           itemCount: _files.length,
                         ),
@@ -88,6 +90,7 @@ class _ShareViewIOSState extends State<ShareViewIOS> {
                             return FileWidget(
                               entity: _files[index],
                               isGrid: true,
+                              onPressed: () {},
                             );
                           },
                           itemCount: _files.length,

@@ -209,7 +209,7 @@ class _SignUpState extends State<SignUpView> {
         case signUpResult.SUCCESS:
           showTN(
             context,
-            title: S.of(context).SignupSuccess,
+            title: S.of(context).signupSuccess,
             icon: Icons.check,
             type: StatusType.SUCCESS,
           );

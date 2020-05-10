@@ -36,7 +36,7 @@ class _AccountViewState extends State<AccountView>
                   Hero(
                     tag: 'account',
                     child: Container(
-                      color: Colors.red,
+                      color: Color(0xff000000 + np.profile.backgroundColor),
                     ),
                   ),
                   Material(

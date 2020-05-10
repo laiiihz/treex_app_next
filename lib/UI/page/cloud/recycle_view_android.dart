@@ -33,6 +33,7 @@ class _RecycleViewAndroidState extends State<RecycleViewAndroid> {
                       });
                     },
                     initValue: _showList,
+                    path: '.',
                   ),
                 );
               },

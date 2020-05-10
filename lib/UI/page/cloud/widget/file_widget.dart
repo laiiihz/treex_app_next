@@ -25,7 +25,6 @@ class FileWidget extends StatefulWidget {
 class _FileWidgetState extends State<FileWidget> {
   @override
   Widget build(BuildContext context) {
-    final ap = Provider.of<AP>(context);
     return Material(
       color: Colors.transparent,
       child: widget.isGrid

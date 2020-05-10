@@ -32,7 +32,7 @@ class _PrivateViewAndroidState extends State<PrivateViewAndroid> {
                         _showList = value;
                       });
                     },
-                    initValue: _showList,
+                    initValue: _showList, path: '.',
                   ),
                 );
               },

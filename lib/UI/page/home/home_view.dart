@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
 import 'package:treex_app_next/UI/global_widget/logo.dart';
-import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/UI/tools/app_search_tool.dart';
 
 class HomeView extends StatefulWidget {
