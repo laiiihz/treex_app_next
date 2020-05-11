@@ -27,6 +27,7 @@ dependencies:
   qr_flutter: 
   intl:
   quick_actions:
+  image_picker:
   folding_cell:
   path_provider:
   crypto: 
