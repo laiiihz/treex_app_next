@@ -183,7 +183,12 @@ class _FileWidgetState extends State<FileWidget> {
                 child: Text(S.of(context).rename),
               ),
               CupertinoActionSheetAction(
-                onPressed: widget.share ? _checkDelete : _delete,
+                onPressed: widget.share
+                    ? _checkDelete
+                    : () {
+                        _delete();
+                        Navigator.of(context, rootNavigator: true).pop();
+                      },
                 child: Text(
                   S.of(context).delete,
                   style: TextStyle(color: CP.warn(context)),
