@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:treex_app_next/Utils/network/network_profile.dart';
 import 'package:treex_app_next/Utils/network/network_util.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
 
@@ -94,6 +95,13 @@ class NP extends ChangeNotifier {
     if (!init) {
       SPU.shared.setString('token', token);
     }
+    notifyListeners();
+  }
+
+  SpaceEntity _spaceEntity;
+  SpaceEntity get spaceEntity => _spaceEntity;
+  setSpaceEntity(SpaceEntity entity) {
+    _spaceEntity = entity;
     notifyListeners();
   }
 }

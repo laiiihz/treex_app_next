@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/page/account/widget/used_space_box.dart';
 import 'package:treex_app_next/UI/page/views/account_detail_view.dart';
 import 'package:treex_app_next/Utils/network/network_logout.dart';
+import 'package:treex_app_next/Utils/network/network_profile.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/provider/network_provider.dart';
@@ -19,6 +20,17 @@ class _AccountViewState extends State<AccountView>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      final np = Provider.of<NP>(context, listen: false);
+      NetworkProfile(context: context).space().then((value) {
+        np.setSpaceEntity(value);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);

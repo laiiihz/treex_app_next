@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:treex_app_next/provider/network_provider.dart';
 
 class UsedSpaceBox extends StatefulWidget {
   @override
@@ -8,9 +10,14 @@ class UsedSpaceBox extends StatefulWidget {
 class _UsedSpaceBoxState extends State<UsedSpaceBox> {
   @override
   Widget build(BuildContext context) {
+    final np = Provider.of<NP>(context);
     return Column(
       children: <Widget>[
-        LinearProgressIndicator(),
+        LinearProgressIndicator(
+          value: np.spaceEntity == null
+              ? null
+              : np.spaceEntity.used / np.spaceEntity.all,
+        ),
         Row(
           children: <Widget>[],
         ),

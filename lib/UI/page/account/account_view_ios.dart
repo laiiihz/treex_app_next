@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/page/account/widget/used_space_box.dart';
 import 'package:treex_app_next/UI/page/views/account_detail_view.dart';
+import 'package:treex_app_next/Utils/file_util.dart';
 import 'package:treex_app_next/Utils/network/network_logout.dart';
+import 'package:treex_app_next/Utils/network/network_profile.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
@@ -18,6 +20,17 @@ class AccountViewIOS extends StatefulWidget {
 }
 
 class _AccountView extends State<AccountViewIOS> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      final np = Provider.of<NP>(context, listen: false);
+      NetworkProfile(context: context).space().then((value) {
+        np.setSpaceEntity(value);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final np = Provider.of<NP>(context);
@@ -47,7 +60,8 @@ class _AccountView extends State<AccountViewIOS> {
                       ),
                       Text(np.profile.name),
                       Spacer(),
-                      Text('已使用1G/5G'),
+                      Text(
+                          '已使用${FileUtil.getFileSize(np.spaceEntity.used)}/${FileUtil.getFileSize(np.spaceEntity.all)}'),
                     ],
                   ),
                 ],

@@ -100,9 +100,27 @@ class FileUtil {
     TimeMill.MONTH: 1000 * 60 * 60 * 24 * 30,
   };
 
+  static Map<FileSize, int> fileSizeMap = {
+    FileSize.B: 1,
+    FileSize.KB: 1024,
+    FileSize.MB: 1024 * 1024,
+    FileSize.GB: 1024 * 1024 * 1024,
+  };
+
   static getNetworkPathParent(String path) {
     print(path.substring(0, path.lastIndexOf('/')));
     return '.';
+  }
+
+  static String getFileSize(int size) {
+    if (size < fileSizeMap[FileSize.KB])
+      return '$size B';
+    else if (size < fileSizeMap[FileSize.MB])
+      return '${(size / fileSizeMap[FileSize.KB]).toStringAsFixed(2)} KB';
+    else if (size < fileSizeMap[FileSize.GB])
+      return '${(size ~/ fileSizeMap[FileSize.MB]).toStringAsFixed(2)} MB';
+    else
+      return '${(size / fileSizeMap[FileSize.GB]).toStringAsFixed(2)} GB';
   }
 }
 
@@ -113,4 +131,11 @@ enum TimeMill {
   DAY,
   MONTH,
   YEAR,
+}
+
+enum FileSize {
+  B,
+  KB,
+  MB,
+  GB,
 }

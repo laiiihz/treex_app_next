@@ -175,7 +175,7 @@ class _SignUpState extends State<SignUpView> {
                           borderRadius: UU.widgetBorderRadius(),
                         ),
                         color: Theme.of(context).primaryColor,
-                        child: Text(S.of(context).agree),
+                        child: Text(S.of(context).signUp),
                       ),
                     ),
                   ],
