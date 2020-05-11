@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_miui/flutter_miui.dart';
 import 'package:provider/provider.dart';
+import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_blur_parent.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_field.dart';
 import 'package:treex_app_next/Utils/file_util.dart';
@@ -189,7 +191,7 @@ class _FileWidgetState extends State<FileWidget> {
       RenderBox renderBox = context.findRenderObject() as RenderBox;
       Offset offset = renderBox.localToGlobal(Offset.zero);
       final size = MediaQuery.of(context).size;
-      showMenu(
+      showMenu<String>(
         context: context,
         shape: RoundedRectangleBorder(
           borderRadius: UU.widgetBorderRadius(),
@@ -202,6 +204,7 @@ class _FileWidgetState extends State<FileWidget> {
         ),
         items: [
           PopupMenuItem(
+            value: 'download',
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -211,9 +214,11 @@ class _FileWidgetState extends State<FileWidget> {
             ),
           ),
           PopupMenuItem(
+            value: 'rename',
             child: Text(S.of(context).rename),
           ),
           PopupMenuItem(
+            value: 'delete',
             child: Text(
               S.of(context).delete,
               style: TextStyle(
@@ -222,17 +227,43 @@ class _FileWidgetState extends State<FileWidget> {
             ),
           ),
         ],
+      ).then(
+        (value) {
+          switch (value) {
+            case 'download':
+              break;
+            case 'rename':
+              showMIUIConfirmDialog(
+                context: context,
+                child: TextField(
+                  controller: _textEditingController,
+                  decoration: InputDecoration(
+                    border: TF.border(),
+                  ),
+                ),
+                title: S.of(context).rename,
+                confirm: _onlyRename,
+              );
+              break;
+            case 'delete':
+              break;
+          }
+        },
       );
     }
   }
 
   _rename() {
+    _onlyRename();
+    Navigator.of(context, rootNavigator: true).pop();
+  }
+
+  _onlyRename() {
     NetworkList(context: context).rename(
       path: widget.entity.path,
       name: _textEditingController.text,
       share: widget.share,
     );
-    Navigator.of(context, rootNavigator: true).pop();
   }
 
   _showRenameDialog() {
