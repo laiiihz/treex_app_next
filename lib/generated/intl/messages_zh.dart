@@ -64,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "lightMode" : MessageLookupByLibrary.simpleMessage("亮色模式"),
     "local" : MessageLookupByLibrary.simpleMessage("本地"),
     "login" : MessageLookupByLibrary.simpleMessage("登录"),
+    "logout" : MessageLookupByLibrary.simpleMessage("退出登录"),
     "material" : MessageLookupByLibrary.simpleMessage("质感设计"),
     "minutesAgo" : MessageLookupByLibrary.simpleMessage("分钟前"),
     "mobile" : MessageLookupByLibrary.simpleMessage("移动网络"),

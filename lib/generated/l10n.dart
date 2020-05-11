@@ -749,7 +749,7 @@ class S {
 
   String get download {
     return Intl.message(
-      '下载',
+      'Download',
       name: 'download',
       desc: '',
       args: [],
@@ -758,7 +758,7 @@ class S {
 
   String get rename {
     return Intl.message(
-      '重命名',
+      'Rename',
       name: 'rename',
       desc: '',
       args: [],
@@ -767,7 +767,7 @@ class S {
 
   String get delete {
     return Intl.message(
-      '删除',
+      'Delete',
       name: 'delete',
       desc: '',
       args: [],
@@ -776,8 +776,17 @@ class S {
 
   String get operation {
     return Intl.message(
-      '操作',
+      'Operation',
       name: 'operation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get logout {
+    return Intl.message(
+      'LOGOUT',
+      name: 'logout',
       desc: '',
       args: [],
     );

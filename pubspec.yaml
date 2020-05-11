@@ -25,7 +25,8 @@ dependencies:
   connectivity: 
   qr_code_scanner: 
   qr_flutter: 
-  intl: 
+  intl:
+  quick_actions:
   folding_cell:
   path_provider:
   crypto: 

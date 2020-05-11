@@ -5,9 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/page/account/widget/used_space_box.dart';
 import 'package:treex_app_next/UI/page/views/account_detail_view.dart';
+import 'package:treex_app_next/Utils/shared_preferences_util.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/provider/network_provider.dart';
+import 'package:treex_app_next/static/color_palettes.dart';
 
 class AccountViewIOS extends StatefulWidget {
   @override
@@ -98,6 +100,18 @@ class _AccountView extends State<AccountViewIOS> {
               onPressed: () {
                 Navigator.of(context, rootNavigator: true)
                     .pushNamed('settings');
+              },
+            ),
+            SizedBox(height: 50),
+            CupertinoButton(
+              child: Text(
+                S.of(context).logout,
+                style: TextStyle(color: CP.warn(context)),
+              ),
+              onPressed: () {
+                SPU.shared.setString('token', '');
+                Navigator.of(context, rootNavigator: true)
+                    .pushReplacementNamed('login');
               },
             ),
           ]),
