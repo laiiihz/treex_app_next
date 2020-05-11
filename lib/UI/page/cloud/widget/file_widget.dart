@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:treex_app_next/UI/global_widget/cupertino_blur_parent.dart';
+import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_field.dart';
 import 'package:treex_app_next/Utils/file_util.dart';
 import 'package:treex_app_next/Utils/network/network_list.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
@@ -14,15 +17,24 @@ class FileWidget extends StatefulWidget {
     @required this.entity,
     this.isGrid = false,
     @required this.onPressed,
+    @required this.share,
   }) : super(key: key);
   final NTLEntity entity;
   final bool isGrid;
   final VoidCallback onPressed;
+  final bool share;
   @override
   State<StatefulWidget> createState() => _FileWidgetState();
 }
 
 class _FileWidgetState extends State<FileWidget> {
+  TextEditingController _textEditingController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController.text = widget.entity.name;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -33,10 +45,15 @@ class _FileWidgetState extends State<FileWidget> {
                   padding: EdgeInsets.all(10),
                   child: CupertinoContextMenu(
                     actions: [
-                      CupertinoContextMenuAction(child: Text('重命名')),
+                      CupertinoContextMenuAction(
+                          child: Text(S.of(context).download)),
+                      CupertinoContextMenuAction(
+                        child: Text(S.of(context).rename),
+                        onPressed: _showRenameDialog,
+                      ),
                       CupertinoContextMenuAction(
                           child: Text(
-                        '删除',
+                        S.of(context).delete,
                         style: TextStyle(color: CP.warn(context)),
                       )),
                     ],
@@ -147,15 +164,19 @@ class _FileWidgetState extends State<FileWidget> {
         context: context,
         builder: (BuildContext context) {
           return CupertinoActionSheet(
-            title: Text('操作'),
+            title: Text(S.of(context).operation),
             actions: <Widget>[
-              CupertinoActionSheetAction(onPressed: () {}, child: Text('重命名')),
               CupertinoActionSheetAction(
-                  onPressed: () {},
-                  child: Text(
-                    '删除',
-                    style: TextStyle(color: CP.warn(context)),
-                  )),
+                onPressed: _showRenameDialog,
+                child: Text(S.of(context).rename),
+              ),
+              CupertinoActionSheetAction(
+                onPressed: () {},
+                child: Text(
+                  S.of(context).delete,
+                  style: TextStyle(color: CP.warn(context)),
+                ),
+              ),
             ],
             cancelButton: CupertinoButton(
               child: Text(S.of(context).cancelUpper),
@@ -181,11 +202,20 @@ class _FileWidgetState extends State<FileWidget> {
         ),
         items: [
           PopupMenuItem(
-            child: Text('重命名'),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(S.of(context).download),
+                Icon(MaterialCommunityIcons.download),
+              ],
+            ),
+          ),
+          PopupMenuItem(
+            child: Text(S.of(context).rename),
           ),
           PopupMenuItem(
             child: Text(
-              '删除',
+              S.of(context).delete,
               style: TextStyle(
                 color: CP.warn(context),
               ),
@@ -194,5 +224,42 @@ class _FileWidgetState extends State<FileWidget> {
         ],
       );
     }
+  }
+
+  _rename() {
+    NetworkList(context: context).rename(
+      path: widget.entity.path,
+      name: _textEditingController.text,
+      share: widget.share,
+    );
+    Navigator.of(context, rootNavigator: true).pop();
+  }
+
+  _showRenameDialog() {
+    Navigator.of(context, rootNavigator: true).pop();
+    showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text(S.of(context).rename),
+          content: TreexCupertinoTextFieldIOS(
+            context: context,
+            controller: _textEditingController,
+          ),
+          actions: <Widget>[
+            CupertinoDialogAction(
+              child: Text(S.of(context).cancelUpper),
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+              },
+            ),
+            CupertinoDialogAction(
+              child: Text(S.of(context).confirmUpper),
+              onPressed: _rename,
+            ),
+          ],
+        );
+      },
+    );
   }
 }

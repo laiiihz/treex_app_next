@@ -79,5 +79,9 @@
   "fileDisplay": "File Display",
   "detailDate": "Smart Date Time",
   "newFolder": "New Folder",
-  "emptyFolder": "Empty Folder"
+  "emptyFolder": "Empty Folder",
+  "download": "下载",
+  "rename": "重命名",
+  "delete": "删除",
+  "operation": "操作"
 }

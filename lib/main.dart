@@ -16,6 +16,7 @@ import 'package:treex_app_next/UI/page/views/settings_view.dart';
 import 'package:treex_app_next/UI/page/views/transfer/transfer_download_view.dart';
 import 'package:treex_app_next/UI/startup/first_startup.dart';
 import 'package:treex_app_next/UI/startup/splash.dart';
+import 'package:treex_app_next/Utils/local_file_util.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/provider/app_provider.dart';
@@ -25,6 +26,7 @@ import 'package:treex_app_next/static/theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SPU.init();
+  await LFU.init();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => AP()),

@@ -358,13 +358,7 @@ class _LoginState extends State<LoginView> {
             type: StatusType.SUCCESS,
           );
           showLoading(context);
-          initProfile() async {
-            await Future.delayed(Duration(milliseconds: 2000), () {});
-          }
-          initProfile().then((value) {
-            closeLoading();
-            Navigator.of(context).pushReplacementNamed('home');
-          });
+          Navigator.of(context).pushReplacementNamed('home');
           break;
         case loginResult.PASSWORD_WRONG:
           showTN(

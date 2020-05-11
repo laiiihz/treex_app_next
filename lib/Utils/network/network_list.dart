@@ -17,6 +17,21 @@ class NetworkList extends NUT {
     filesRaw.forEach((element) => files.add(NTLEntity.fromDynamic(element)));
     return files;
   }
+
+  Future rename({
+    @required String path,
+    @required String name,
+    @required bool share,
+  }) async {
+    Response response = await dio.put(
+      '/treex/file/rename',
+      queryParameters: {
+        'new': name,
+        'share': share,
+        'file': path,
+      },
+    );
+  }
 }
 
 ///Network List Entity

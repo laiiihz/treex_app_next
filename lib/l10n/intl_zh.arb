@@ -79,5 +79,9 @@
   "fileDisplay": "文件显示",
   "detailDate": "智能显示时间",
   "newFolder": "新建文件夹",
-  "emptyFolder": "空文件夹"
+  "emptyFolder": "空文件夹",
+  "download": "下载",
+  "rename": "重命名",
+  "delete": "删除",
+  "operation": "操作"
 }

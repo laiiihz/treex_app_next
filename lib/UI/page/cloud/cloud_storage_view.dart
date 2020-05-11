@@ -155,6 +155,7 @@ class _CloudStorageViewState extends State<CloudStorageView> {
                                 onPressed: () {
                                   _onTap(index);
                                 },
+                                share: widget.type == 'share',
                               );
                             },
                             itemCount: _files.length,
@@ -171,6 +172,7 @@ class _CloudStorageViewState extends State<CloudStorageView> {
                                 onPressed: () {
                                   _onTap(index);
                                 },
+                                share: widget.type == 'share',
                               );
                             },
                             itemCount: _files.length,

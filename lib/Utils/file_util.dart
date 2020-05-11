@@ -14,7 +14,36 @@ class FileUtil {
     switch (suffix) {
       case 'txt':
         return MaterialCommunityIcons.text;
-
+      case 'md':
+      case 'MD':
+        return MaterialCommunityIcons.markdown_outline;
+      case 'pptx':
+      case 'ppt':
+        return MaterialCommunityIcons.file_powerpoint;
+      case 'doc':
+      case 'docx':
+        return MaterialCommunityIcons.file_word;
+      case 'xlsx':
+      case 'xls':
+        return MaterialCommunityIcons.file_excel;
+      case 'zip':
+      case 'rar':
+      case 'zipx':
+        return MaterialCommunityIcons.folder_zip;
+      case 'tar':
+        return MaterialCommunityIcons.zip_box;
+      case 'exe':
+        return MaterialCommunityIcons.windows;
+      case 'bmp':
+      case 'jpg':
+      case 'jpeg':
+      case 'heic':
+        return MaterialCommunityIcons.image_outline;
+      case 'mp4':
+      case 'flv':
+        return MaterialCommunityIcons.video_outline;
+      case 'html':
+        return MaterialCommunityIcons.language_html5;
       default:
         return MaterialCommunityIcons.file;
     }

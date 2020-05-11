@@ -746,6 +746,42 @@ class S {
       args: [],
     );
   }
+
+  String get download {
+    return Intl.message(
+      '下载',
+      name: 'download',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get rename {
+    return Intl.message(
+      '重命名',
+      name: 'rename',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get delete {
+    return Intl.message(
+      '删除',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get operation {
+    return Intl.message(
+      '操作',
+      name: 'operation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

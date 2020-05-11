@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/Utils/crypto_util.dart';
+import 'package:treex_app_next/Utils/local_file_util.dart';
 import 'package:treex_app_next/Utils/network/network_util.dart';
 import 'package:treex_app_next/provider/network_provider.dart';
 
@@ -46,6 +48,7 @@ class NetworkAuth extends NU {
       'name': account,
       'password': hmacPassword,
     }).catchError((err) {
+      closeLoading();
       return Future.value(loginResult.ERR);
     });
     switch (response?.data['loginResult']['code']) {
@@ -54,6 +57,8 @@ class NetworkAuth extends NU {
       case 1:
         np.setToken(response.data['token']);
         np.setProfile(response.data['user']);
+        //todo init profile
+        await LFU.initMyFile(np.profile.name);
         return loginResult.SUCCESS;
       case 2:
         return loginResult.PASSWORD_WRONG;

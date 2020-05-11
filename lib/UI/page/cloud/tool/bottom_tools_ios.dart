@@ -38,7 +38,9 @@ class _BottomToolsIOSState extends State<BottomToolsIOS> {
                   ),
                   md.IconButton(
                     icon: Icon(md.Icons.add),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {});
+                    },
                   ),
                 ],
               ),
