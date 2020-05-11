@@ -54,10 +54,20 @@ class _FileWidgetState extends State<FileWidget> {
                         onPressed: _showRenameDialog,
                       ),
                       CupertinoContextMenuAction(
-                          child: Text(
-                        S.of(context).delete,
-                        style: TextStyle(color: CP.warn(context)),
-                      )),
+                        child: Text(
+                          S.of(context).delete,
+                          style: TextStyle(color: CP.warn(context)),
+                        ),
+                        onPressed: widget.share
+                            ? () {
+                                _checkDelete();
+                              }
+                            : () {
+                                _delete();
+                                Navigator.of(context, rootNavigator: true)
+                                    .pop();
+                              },
+                      ),
                     ],
                     child: Material(
                       color: Colors.transparent,
@@ -173,7 +183,7 @@ class _FileWidgetState extends State<FileWidget> {
                 child: Text(S.of(context).rename),
               ),
               CupertinoActionSheetAction(
-                onPressed: () {},
+                onPressed: widget.share ? _checkDelete : _delete,
                 child: Text(
                   S.of(context).delete,
                   style: TextStyle(color: CP.warn(context)),
@@ -246,6 +256,14 @@ class _FileWidgetState extends State<FileWidget> {
               );
               break;
             case 'delete':
+              widget.share
+                  ? showMIUIConfirmDialog(
+                      context: context,
+                      child: SizedBox(),
+                      title: S.of(context).delete,
+                      confirm: _delete,
+                    )
+                  : _delete();
               break;
           }
         },
@@ -287,6 +305,36 @@ class _FileWidgetState extends State<FileWidget> {
             CupertinoDialogAction(
               child: Text(S.of(context).confirmUpper),
               onPressed: _rename,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  _delete() {
+    NetworkList(context: context)
+        .delete(share: widget.share, path: widget.entity.path);
+  }
+
+  _checkDelete() {
+    Navigator.of(context, rootNavigator: true).pop();
+    showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text(S.of(context).delete),
+          actions: <Widget>[
+            CupertinoDialogAction(
+              child: Text(S.of(context).cancelUpper),
+              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+            ),
+            CupertinoDialogAction(
+              child: Text(S.of(context).confirmUpper),
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+                _delete();
+              },
             ),
           ],
         );

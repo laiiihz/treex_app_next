@@ -32,6 +32,16 @@ class NetworkList extends NUT {
       },
     );
   }
+
+  Future delete({
+    @required bool share,
+    @required String path,
+  }) async {
+    Response response = await dio.delete(
+      '/treex/${share ? 'share' : 'file'}',
+      queryParameters: {'path': path},
+    );
+  }
 }
 
 ///Network List Entity
