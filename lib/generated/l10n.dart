@@ -791,6 +791,15 @@ class S {
       args: [],
     );
   }
+
+  String get networkFail {
+    return Intl.message(
+      '网络错误',
+      name: 'networkFail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

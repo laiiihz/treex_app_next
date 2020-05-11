@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
+import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/auth/license/sign_up_license.dart';
 import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_icon_button.dart';
@@ -15,8 +16,10 @@ import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_field.dart'
 import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/UI/painter/circle_painter.dart';
 import 'package:treex_app_next/Utils/network/network_auth.dart';
+import 'package:treex_app_next/Utils/network/network_test.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
+import 'package:treex_app_next/provider/network_provider.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -43,6 +46,26 @@ class _LoginState extends State<LoginView> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration.zero, () {
+      final np = Provider.of<NP>(context, listen: false);
+      NetworkTest(
+        port: np.networkPort,
+        baseUrl: np.urlPrefix,
+        https: np.https,
+        context: context,
+        onErr: () {},
+      ).check().then((value) {
+        if (!value) {
+          Navigator.of(context).pushNamed('network');
+          showTN(
+            context,
+            title: S.of(context).networkFail,
+            icon: MaterialCommunityIcons.network_off,
+            type: StatusType.FAIL,
+          );
+        }
+      });
+    });
     _timer = Timer.periodic(
       Duration(milliseconds: 3000),
       (timer) {

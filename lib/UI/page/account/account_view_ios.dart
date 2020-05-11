@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/page/account/widget/used_space_box.dart';
 import 'package:treex_app_next/UI/page/views/account_detail_view.dart';
+import 'package:treex_app_next/Utils/network/network_logout.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
@@ -109,6 +110,7 @@ class _AccountView extends State<AccountViewIOS> {
                 style: TextStyle(color: CP.warn(context)),
               ),
               onPressed: () {
+                NetworkLogout(context: context).logout();
                 SPU.shared.setString('token', '');
                 Navigator.of(context, rootNavigator: true)
                     .pushReplacementNamed('login');

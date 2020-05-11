@@ -84,11 +84,14 @@ class AP extends ChangeNotifier {
   bool _transparentStatusBar = false;
   bool get transparentStatusBar => _transparentStatusBar;
   //修改沉浸状态栏
-  setStatusBarTransparent(bool state) {
+  setStatusBarTransparent(bool state, {bool init = false}) {
     _transparentStatusBar = state;
     _systemUiOverlayStyle = _systemUiOverlayStyle.copyWith(
       statusBarColor: state ? Colors.transparent : Colors.black26,
     );
+    if (!init) {
+      SPU.shared.setBool('transparent', state);
+    }
     _updateSystemOverlay();
     notifyListeners();
   }

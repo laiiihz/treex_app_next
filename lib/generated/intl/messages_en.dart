@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "material" : MessageLookupByLibrary.simpleMessage("Material"),
     "minutesAgo" : MessageLookupByLibrary.simpleMessage("minutes ago"),
     "mobile" : MessageLookupByLibrary.simpleMessage("Mobile"),
+    "networkFail" : MessageLookupByLibrary.simpleMessage("网络错误"),
     "networkSettings" : MessageLookupByLibrary.simpleMessage("Network Settings"),
     "networkStatus" : MessageLookupByLibrary.simpleMessage("Network Status"),
     "newFolder" : MessageLookupByLibrary.simpleMessage("New Folder"),

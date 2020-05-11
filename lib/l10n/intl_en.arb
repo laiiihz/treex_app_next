@@ -84,5 +84,6 @@
   "rename": "Rename",
   "delete": "Delete",
   "operation": "Operation",
-  "logout": "LOGOUT"
+  "logout": "LOGOUT",
+  "networkFail": "网络错误"
 }

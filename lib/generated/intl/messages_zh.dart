@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "material" : MessageLookupByLibrary.simpleMessage("质感设计"),
     "minutesAgo" : MessageLookupByLibrary.simpleMessage("分钟前"),
     "mobile" : MessageLookupByLibrary.simpleMessage("移动网络"),
+    "networkFail" : MessageLookupByLibrary.simpleMessage("网络错误"),
     "networkSettings" : MessageLookupByLibrary.simpleMessage("网络设置"),
     "networkStatus" : MessageLookupByLibrary.simpleMessage("网络状态"),
     "newFolder" : MessageLookupByLibrary.simpleMessage("新建文件夹"),
