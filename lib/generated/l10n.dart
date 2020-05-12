@@ -794,8 +794,44 @@ class S {
 
   String get networkFail {
     return Intl.message(
-      '网络错误',
+      'Network Fail',
       name: 'networkFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get usedString {
+    return Intl.message(
+      'Used',
+      name: 'usedString',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get phoneNumber {
+    return Intl.message(
+      'Phone Number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get updateColor {
+    return Intl.message(
+      'Update Color',
+      name: 'updateColor',
       desc: '',
       args: [],
     );

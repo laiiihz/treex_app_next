@@ -85,5 +85,9 @@
   "delete": "Delete",
   "operation": "Operation",
   "logout": "LOGOUT",
-  "networkFail": "网络错误"
+  "networkFail": "Network Fail",
+  "usedString": "Used",
+  "phoneNumber": "Phone Number",
+  "email": "Email",
+  "updateColor": "Update Color"
 }

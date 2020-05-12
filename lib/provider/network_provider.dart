@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:treex_app_next/Utils/network/network_profile.dart';
@@ -102,6 +104,13 @@ class NP extends ChangeNotifier {
   SpaceEntity get spaceEntity => _spaceEntity;
   setSpaceEntity(SpaceEntity entity) {
     _spaceEntity = entity;
+    notifyListeners();
+  }
+
+  File _avatarFile;
+  File get avatarFile => _avatarFile;
+  setAvatarFile(File file) {
+    _avatarFile = file;
     notifyListeners();
   }
 }

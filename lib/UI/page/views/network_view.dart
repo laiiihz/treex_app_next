@@ -24,6 +24,8 @@ import 'package:treex_app_next/provider/network_provider.dart';
 import 'package:treex_app_next/static/color_palettes.dart';
 
 class NetworkView extends StatefulWidget {
+  NetworkView({Key key, this.readonly = false}) : super(key: key);
+  final bool readonly;
   @override
   State<StatefulWidget> createState() => _NetworkViewState();
 }
@@ -139,6 +141,7 @@ class _NetworkViewState extends State<NetworkView> {
                         Padding(
                           padding: EdgeInsets.all(10),
                           child: TreexCupertinoTextFieldIOS(
+                            enabled: !widget.readonly,
                             context: context,
                             light: true,
                             controller: _ipAddrTextEdit,
@@ -154,6 +157,7 @@ class _NetworkViewState extends State<NetworkView> {
                         Padding(
                           padding: EdgeInsets.all(10),
                           child: TreexCupertinoTextFieldIOS(
+                            enabled: !widget.readonly,
                             context: context,
                             light: true,
                             controller: _ipPortTextEdit,
@@ -187,17 +191,21 @@ class _NetworkViewState extends State<NetworkView> {
                               CupertinoSwitch(
                                 trackColor: CP.warn(context),
                                 value: _httpsIsOn,
-                                onChanged: (value) {
-                                  _httpsIsOn = value;
-                                  _buildFullPath();
-                                },
+                                onChanged: widget.readonly
+                                    ? null
+                                    : (value) {
+                                        _httpsIsOn = value;
+                                        _buildFullPath();
+                                      },
                               ),
                             ],
                           ),
-                          onPressed: () {
-                            _httpsIsOn = !_httpsIsOn;
-                            _buildFullPath();
-                          },
+                          onPressed: widget.readonly
+                              ? null
+                              : () {
+                                  _httpsIsOn = !_httpsIsOn;
+                                  _buildFullPath();
+                                },
                         ),
                         ExtraNetworkSettings(),
                       ]),
@@ -217,13 +225,14 @@ class _NetworkViewState extends State<NetworkView> {
                         onLongPress: _checkRealNetwork,
                         child: CupertinoButton(
                           child: Icon(MaterialCommunityIcons.refresh),
-                          onPressed: _checkTreexNetwork,
+                          onPressed:
+                              widget.readonly ? null : _checkTreexNetwork,
                         ),
                       ),
                       Expanded(
                         child: CupertinoButton.filled(
                           child: Text(S.of(context).save),
-                          onPressed: _saveData,
+                          onPressed: widget.readonly ? null : _saveData,
                         ),
                       ),
                     ],
@@ -300,6 +309,7 @@ class _NetworkViewState extends State<NetworkView> {
                           Padding(
                             padding: EdgeInsets.all(10),
                             child: TextField(
+                              enabled: !widget.readonly,
                               controller: _ipAddrTextEdit,
                               focusNode: _ipAddrFocusNode,
                               onChanged: (value) {
@@ -319,6 +329,7 @@ class _NetworkViewState extends State<NetworkView> {
                           Padding(
                             padding: EdgeInsets.all(10),
                             child: TextField(
+                              enabled: !widget.readonly,
                               controller: _ipPortTextEdit,
                               focusNode: _ipPortFocusNode,
                               onChanged: (value) {
@@ -346,16 +357,20 @@ class _NetworkViewState extends State<NetworkView> {
                                       _httpsIsOn ? Colors.green : Colors.red),
                               duration: Duration(milliseconds: 500),
                             ),
-                            onTap: () {
-                              _httpsIsOn = !_httpsIsOn;
-                              _buildFullPath();
-                            },
+                            onTap: widget.readonly
+                                ? null
+                                : () {
+                                    _httpsIsOn = !_httpsIsOn;
+                                    _buildFullPath();
+                                  },
                             trailing: Switch(
                               value: _httpsIsOn,
-                              onChanged: (value) {
-                                _httpsIsOn = !_httpsIsOn;
-                                _buildFullPath();
-                              },
+                              onChanged: widget.readonly
+                                  ? null
+                                  : (value) {
+                                      _httpsIsOn = !_httpsIsOn;
+                                      _buildFullPath();
+                                    },
                             ),
                           ),
                           ExtraNetworkSettings(),
@@ -369,7 +384,7 @@ class _NetworkViewState extends State<NetworkView> {
                   child: Row(
                     children: <Widget>[
                       MaterialButton(
-                        onPressed: _checkTreexNetwork,
+                        onPressed: widget.readonly ? null : _checkTreexNetwork,
                         onLongPress: _checkRealNetwork,
                         child: Icon(MaterialCommunityIcons.refresh),
                         shape: RoundedRectangleBorder(
@@ -378,7 +393,7 @@ class _NetworkViewState extends State<NetworkView> {
                       ),
                       Expanded(
                         child: RaisedButton(
-                          onPressed: _saveData,
+                          onPressed: widget.readonly ? null : _saveData,
                           shape: RoundedRectangleBorder(
                             borderRadius: UU.widgetBorderRadius(),
                           ),

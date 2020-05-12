@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/UI/page/account/widget/used_space_box.dart';
 import 'package:treex_app_next/UI/page/views/account_detail_view.dart';
+import 'package:treex_app_next/UI/page/views/network_view.dart';
 import 'package:treex_app_next/Utils/file_util.dart';
 import 'package:treex_app_next/Utils/network/network_logout.dart';
 import 'package:treex_app_next/Utils/network/network_profile.dart';
@@ -52,6 +53,9 @@ class _AccountView extends State<AccountViewIOS> {
                         child: Hero(
                           tag: 'avatar',
                           child: md.CircleAvatar(
+                            backgroundImage: np.avatarFile == null
+                                ? null
+                                : FileImage(np.avatarFile),
                             backgroundColor:
                                 Color(0xff000000 + np.profile.backgroundColor),
                             child: Text(np.profile.name[0]),
@@ -60,8 +64,17 @@ class _AccountView extends State<AccountViewIOS> {
                       ),
                       Text(np.profile.name),
                       Spacer(),
-                      Text(
-                          '已使用${FileUtil.getFileSize(np.spaceEntity.used)}/${FileUtil.getFileSize(np.spaceEntity.all)}'),
+                      np.spaceEntity == null
+                          ? md.CircularProgressIndicator()
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                    '${S.of(context).usedString}${FileUtil.getFileSize(np.spaceEntity.used)}'),
+                                Text(
+                                    '${FileUtil.getFileSize(np.spaceEntity.all)}'),
+                              ],
+                            ),
                     ],
                   ),
                 ],
@@ -80,7 +93,11 @@ class _AccountView extends State<AccountViewIOS> {
               text: S.of(context).networkSettings,
               color: CupertinoColors.systemGrey,
               onPressed: () {
-                Navigator.of(context, rootNavigator: true).pushNamed('network');
+                Navigator.of(context, rootNavigator: true).push(
+                  CupertinoPageRoute(
+                    builder: (context) => NetworkView(readonly: true),
+                  ),
+                );
               },
             ),
             _buildSettingsItem(

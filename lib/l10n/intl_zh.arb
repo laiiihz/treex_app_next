@@ -85,5 +85,9 @@
   "delete": "删除",
   "operation": "操作",
   "logout": "退出登录",
-  "networkFail": "网络错误"
+  "networkFail": "网络错误",
+  "usedString": "已使用",
+  "phoneNumber": "手机号码",
+  "email": "电子邮箱",
+  "updateColor": "更新背景色"
 }

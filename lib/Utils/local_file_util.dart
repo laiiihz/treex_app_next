@@ -34,10 +34,10 @@ class LFU {
     });
   }
 
-  Directory get appPath => _appPath;
-  Directory get avatarPath => _avatarPath;
-  Directory get sharePath => _sharePath;
-  Directory get privatePath => _privatePath;
+  static Directory get appPath => _appPath;
+  static Directory get avatarPath => _avatarPath;
+  static Directory get sharePath => _sharePath;
+  static Directory get privatePath => _privatePath;
   static initMyFile(String name) async {
     bool isInit = await Directory('${_privatePath.path}/$name').exists();
     if (!isInit) await Directory('${_privatePath.path}/$name').create();

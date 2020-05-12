@@ -4,6 +4,7 @@ import 'package:flutter_miui/flutter_miui.dart';
 import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/page/account/widget/used_space_box.dart';
 import 'package:treex_app_next/UI/page/views/account_detail_view.dart';
+import 'package:treex_app_next/UI/page/views/network_view.dart';
 import 'package:treex_app_next/Utils/network/network_logout.dart';
 import 'package:treex_app_next/Utils/network/network_profile.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
@@ -44,18 +45,24 @@ class _AccountViewState extends State<AccountView>
             floating: true,
             stretch: true,
             expandedHeight: 200,
+            backgroundColor: Color(0xff000000 + np.profile.backgroundColor),
             flexibleSpace: FlexibleSpaceBar(
               title: Text(np.profile.name),
               background: Stack(
                 children: <Widget>[
                   Hero(
                     tag: 'account',
-                    child: Container(
-                      color: Color(0xff000000 + np.profile.backgroundColor),
-                    ),
+                    child: np.avatarFile == null
+                        ? SizedBox()
+                        : Image.file(
+                            np.avatarFile,
+                            fit: BoxFit.cover,
+                            height: MediaQuery.of(context).size.width,
+                            width: MediaQuery.of(context).size.width,
+                          ),
                   ),
                   Material(
-                    color: Colors.transparent,
+                    color: Colors.black54,
                     child: InkWell(
                       onTap: () {
                         Navigator.of(context).push(
@@ -75,7 +82,11 @@ class _AccountViewState extends State<AccountView>
               UsedSpaceBox(),
               ListTile(
                 onTap: () {
-                  Navigator.of(context).pushNamed('network');
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => NetworkView(readonly: true),
+                    ),
+                  );
                 },
                 title: Text(S.of(context).networkSettings),
                 leading: Icon(MaterialCommunityIcons.network),
