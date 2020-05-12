@@ -19,10 +19,10 @@ class CloudStorageViewIOS extends StatefulWidget {
     Key key,
     @required this.icon,
     @required this.name,
-    @required this.type,
+    @required this.share,
   }) : super(key: key);
   final String name;
-  final String type;
+  final bool share;
   final IconData icon;
   @override
   State<StatefulWidget> createState() => _CloudStorageViewIOSState();
@@ -101,7 +101,7 @@ class _CloudStorageViewIOSState extends State<CloudStorageViewIOS> {
                                     onPressed: () {
                                       _onTap(index);
                                     },
-                                    share: widget.type == 'share',
+                                    share: widget.share,
                                   );
                                 },
                                 itemCount: _files.length,
@@ -124,7 +124,7 @@ class _CloudStorageViewIOSState extends State<CloudStorageViewIOS> {
                                     onPressed: () {
                                       _onTap(index);
                                     },
-                                    share: widget.type == 'share',
+                                    share: widget.share,
                                   );
                                 },
                                 itemCount: _files.length,
@@ -221,7 +221,7 @@ class _CloudStorageViewIOSState extends State<CloudStorageViewIOS> {
       _loading = true;
     });
     await NetworkList(context: context)
-        .getFile(widget.type, path: _pathStack[0].path)
+        .getFile(widget.share ? 'share' : 'file', path: _pathStack[0].path)
         .then((list) {
       _files = list;
       _loading = false;

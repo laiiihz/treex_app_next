@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
 import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
+import 'package:treex_app_next/Utils/network/network_list.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
@@ -12,11 +13,13 @@ class MoreTools extends StatefulWidget {
     this.onChanged,
     @required this.initValue,
     @required this.path,
+    @required this.share,
   }) : super(key: key);
   final bool initValue;
   final String heroTag;
   final ValueChanged onChanged;
   final String path;
+  final bool share;
   @override
   State<StatefulWidget> createState() => _MoreToolsState();
 }
@@ -24,6 +27,7 @@ class MoreTools extends StatefulWidget {
 class _MoreToolsState extends State<MoreTools> {
   bool _showFirst = true;
   bool _init = true;
+  TextEditingController _textEditingController = TextEditingController();
 
   @override
   void initState() {
@@ -76,6 +80,7 @@ class _MoreToolsState extends State<MoreTools> {
                                     showMIUIConfirmDialog(
                                       context: context,
                                       child: TextField(
+                                        controller: _textEditingController,
                                         decoration: InputDecoration(
                                           border: TF.border(),
                                           prefixIcon: Icon(
@@ -85,7 +90,11 @@ class _MoreToolsState extends State<MoreTools> {
                                       ),
                                       title: S.of(context).newFolder,
                                       confirm: () {
-                                        //TODO new folder
+                                        NetworkList(context: context).newFolder(
+                                          path: widget.path,
+                                          folder: _textEditingController.text,
+                                          share: widget.share,
+                                        );
                                       },
                                     );
                                   },

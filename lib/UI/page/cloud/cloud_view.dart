@@ -52,7 +52,7 @@ class _CloudViewState extends State<CloudView> {
                                 heroTag: 'share_store',
                                 icon: Icons.inbox,
                                 name: S.of(context).shareFiles,
-                                type: 'share',
+                                share: true,
                               ),
                             ));
                           },
@@ -69,7 +69,7 @@ class _CloudViewState extends State<CloudView> {
                                 heroTag: 'private_store',
                                 icon: Icons.dns,
                                 name: S.of(context).privateFiles,
-                                type: 'file',
+                                share: false,
                               ),
                             ));
                           },

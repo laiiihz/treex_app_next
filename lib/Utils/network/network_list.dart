@@ -42,6 +42,21 @@ class NetworkList extends NUT {
       queryParameters: {'path': path},
     );
   }
+
+  Future newFolder({
+    @required String path,
+    @required String folder,
+    @required bool share,
+  }) async {
+    Response response = await dio.put(
+      '/treex/file/newFolder',
+      queryParameters: {
+        'path': path,
+        'folder': folder,
+        'share': share,
+      },
+    );
+  }
 }
 
 ///Network List Entity

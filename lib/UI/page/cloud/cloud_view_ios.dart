@@ -25,7 +25,7 @@ class _CloudViewState extends State<CloudViewIOS> {
             _buildFileButton(
               text: S.of(context).shareFiles,
               view: CloudStorageViewIOS(
-                type: 'share',
+                share: true,
                 icon: Icons.inbox,
                 name: S.of(context).shareFiles,
               ),
@@ -34,7 +34,7 @@ class _CloudViewState extends State<CloudViewIOS> {
             _buildFileButton(
               text: S.of(context).privateFiles,
               view: CloudStorageViewIOS(
-                type: 'file',
+                share: false,
                 icon: Icons.dns,
                 name: S.of(context).privateFiles,
               ),
