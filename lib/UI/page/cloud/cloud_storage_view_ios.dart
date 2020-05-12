@@ -56,6 +56,7 @@ class _CloudStorageViewIOSState extends State<CloudStorageViewIOS> {
         backgroundColor: CP.cupertinoBG(context),
         middle: buildCupertinoTitle(context, widget.name),
         previousPageTitle: S.of(context).cloudView,
+        trailing: _loading ? md.CircularProgressIndicator() : SizedBox(),
       ),
       child: Listener(
         onPointerDown: (event) {

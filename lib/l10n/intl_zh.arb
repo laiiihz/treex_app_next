@@ -89,5 +89,7 @@
   "usedString": "已使用",
   "phoneNumber": "手机号码",
   "email": "电子邮箱",
-  "updateColor": "更新背景色"
+  "updateColor": "更新背景色",
+  "downloaded": "Downloaded",
+  "upload": "Upload"
 }

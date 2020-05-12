@@ -89,5 +89,7 @@
   "usedString": "Used",
   "phoneNumber": "Phone Number",
   "email": "Email",
-  "updateColor": "Update Color"
+  "updateColor": "Update Color",
+  "downloaded": "Downloaded",
+  "upload": "Upload"
 }

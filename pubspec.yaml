@@ -28,6 +28,7 @@ dependencies:
   intl:
   quick_actions:
   image_picker:
+  file_picker:
   folding_cell:
   path_provider:
   crypto: 

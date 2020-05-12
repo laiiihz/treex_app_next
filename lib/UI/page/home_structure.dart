@@ -13,6 +13,7 @@ import 'package:treex_app_next/UI/page/home/home_view_ios.dart';
 import 'package:treex_app_next/UI/page/search/search_view_ios.dart';
 import 'package:treex_app_next/UI/tools/tools_page.dart';
 import 'package:treex_app_next/Utils/transfer_system/trans_download.dart';
+import 'package:treex_app_next/Utils/transfer_system/trans_upload.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/provider/app_provider.dart';
 import 'package:treex_app_next/provider/network_provider.dart';
@@ -38,6 +39,7 @@ class _HomeStructureState extends wd.State<HomeStructure> {
 
       //init download system
       TransDownload.init(np.fullUrl, np.token);
+      TransUpload.init(np.fullUrl, np.token);
 
       showTN(
         context,

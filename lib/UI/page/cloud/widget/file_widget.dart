@@ -4,7 +4,6 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
 import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
-import 'package:treex_app_next/UI/global_widget/cupertino_blur_parent.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/Utils/file_util.dart';
@@ -42,7 +41,6 @@ class _FileWidgetState extends State<FileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final ap = Provider.of<AP>(context);
     return Material(
       color: Colors.transparent,
       child: widget.isGrid
@@ -52,7 +50,12 @@ class _FileWidgetState extends State<FileWidget> {
                   child: CupertinoContextMenu(
                     actions: [
                       CupertinoContextMenuAction(
-                          child: Text(S.of(context).download)),
+                        child: Text(S.of(context).download),
+                        onPressed: () {
+                          Navigator.of(context, rootNavigator: true).pop();
+                          _onDownload();
+                        },
+                      ),
                       CupertinoContextMenuAction(
                         child: Text(S.of(context).rename),
                         onPressed: _showRenameDialog,
@@ -154,6 +157,11 @@ class _FileWidgetState extends State<FileWidget> {
 
   _buildListTile() {
     final ap = Provider.of<AP>(context);
+    final date = FileUtil.getFileDate(
+      widget.entity.date,
+      context: context,
+      detail: ap.fileDetail,
+    );
     return ListTile(
       onTap: widget.onPressed,
       onLongPress: () {
@@ -166,11 +174,14 @@ class _FileWidgetState extends State<FileWidget> {
         ),
       ),
       title: Text(widget.entity.name),
-      subtitle: Text(FileUtil.getFileDate(
-        widget.entity.date,
-        context: context,
-        detail: ap.fileDetail,
-      )),
+      trailing: Chip(
+        label: widget.entity.isDir
+            ? Text('${widget.entity.child}')
+            : Text('${FileUtil.getFileSize(widget.entity.length)}'),
+      ),
+      subtitle: Text(
+        date,
+      ),
     );
   }
 
@@ -182,6 +193,13 @@ class _FileWidgetState extends State<FileWidget> {
           return CupertinoActionSheet(
             title: Text(S.of(context).operation),
             actions: <Widget>[
+              CupertinoActionSheetAction(
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true).pop();
+                  _onDownload();
+                },
+                child: Text(S.of(context).download),
+              ),
               CupertinoActionSheetAction(
                 onPressed: _showRenameDialog,
                 child: Text(S.of(context).rename),
@@ -248,22 +266,9 @@ class _FileWidgetState extends State<FileWidget> {
         ],
       ).then(
         (value) {
-          final np = Provider.of<NP>(context, listen: false);
           switch (value) {
             case 'download':
-              TransDownload.download(
-                entity: widget.entity,
-                onDir: () {
-                  showTN(
-                    context,
-                    title: 'Download Done',
-                    icon: MaterialCommunityIcons.check,
-                    type: StatusType.SUCCESS,
-                  );
-                },
-                share: widget.share,
-                name: np.profile.name,
-              );
+              _onDownload();
               break;
             case 'rename':
               showMIUIConfirmDialog(
@@ -362,6 +367,23 @@ class _FileWidgetState extends State<FileWidget> {
           ],
         );
       },
+    );
+  }
+
+  _onDownload() {
+    final np = Provider.of<NP>(context, listen: false);
+    TransDownload.download(
+      entity: widget.entity,
+      onDir: () {
+        showTN(
+          context,
+          title: 'Download Done',
+          icon: MaterialCommunityIcons.check,
+          type: StatusType.SUCCESS,
+        );
+      },
+      share: widget.share,
+      name: np.profile.name,
     );
   }
 }

@@ -836,6 +836,24 @@ class S {
       args: [],
     );
   }
+
+  String get downloaded {
+    return Intl.message(
+      'Downloaded',
+      name: 'downloaded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get upload {
+    return Intl.message(
+      'Upload',
+      name: 'upload',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

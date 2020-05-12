@@ -122,6 +122,14 @@ class FileUtil {
     else
       return '${(size / fileSizeMap[FileSize.GB]).toStringAsFixed(2)} GB';
   }
+
+  static String getFileName(String name) {
+    int lastIndex = name.lastIndexOf('/');
+    if (lastIndex == -1)
+      return name;
+    else
+      return name.substring(lastIndex + 1);
+  }
 }
 
 enum TimeMill {

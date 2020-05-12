@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:treex_app_next/Utils/file_util.dart';
 import 'package:treex_app_next/Utils/local_file_util.dart';
 import 'package:treex_app_next/Utils/network/network_list.dart';
 import 'package:treex_app_next/Utils/network/network_with_token.dart';
@@ -35,8 +34,8 @@ class TransDownload {
       //build DownloadTask
       DownloadTask downloadTask = DownloadTask(
         name: entity.name,
-        all: entity.length,
         file: file,
+        entity: entity,
       );
       //add task to taskList
       downloadTasks.add(downloadTask);
@@ -47,8 +46,14 @@ class TransDownload {
           'share': share,
           'path': entity.path,
         },
+        cancelToken: downloadTask.cancelToken,
         onReceiveProgress: (get, all) {
-          //if (get == all) downloadTasks.remove(downloadTask);
+          downloadTasks[downloadTasks.indexOf(downloadTask)].percent =
+              get / all;
+          if (get == all) {
+            downloadedTasks.add(downloadTask);
+            downloadTasks.remove(downloadTask);
+          }
         },
       );
     }
@@ -57,15 +62,13 @@ class TransDownload {
 
 class DownloadTask {
   String name = '';
-  int all = 0;
-  int downloaded = 0;
   CancelToken cancelToken = new CancelToken();
   File file;
-  double get percent => all / downloaded;
+  double percent = 0;
+  NTLEntity entity;
   DownloadTask({
     @required this.name,
-    @required this.all,
     @required this.file,
-    this.downloaded,
+    @required this.entity,
   });
 }

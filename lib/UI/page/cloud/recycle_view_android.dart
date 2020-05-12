@@ -1,7 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:treex_app_next/UI/page/cloud/tool/more_tools.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
 class RecycleViewAndroid extends StatefulWidget {
@@ -17,29 +16,7 @@ class _RecycleViewAndroidState extends State<RecycleViewAndroid> {
       floatingActionButton: FloatingActionButton(
         heroTag: 'fab',
         child: Icon(MaterialCommunityIcons.filter),
-        onPressed: () {
-          Navigator.of(context, nullOk: false).push(
-            PageRouteBuilder(
-              opaque: false,
-              pageBuilder: (BuildContext context, Animation<double> animation,
-                  Animation<double> secondaryAnimation) {
-                return FadeTransition(
-                  opacity: animation,
-                  child: MoreTools(
-                    heroTag: 'fab',
-                    onChanged: (value) {
-                      setState(() {
-                        _showList = value;
-                      });
-                    },
-                    initValue: _showList,
-                    path: '.',
-                  ),
-                );
-              },
-            ),
-          );
-        },
+        onPressed: () {},
       ),
       appBar: AppBar(
         title: Text(S.of(context).recycleBin),
