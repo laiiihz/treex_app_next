@@ -6,11 +6,14 @@ import 'package:provider/provider.dart';
 import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_blur_parent.dart';
 import 'package:treex_app_next/UI/global_widget/treex_cupertino_text_field.dart';
+import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/Utils/file_util.dart';
 import 'package:treex_app_next/Utils/network/network_list.dart';
+import 'package:treex_app_next/Utils/transfer_system/trans_download.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/provider/app_provider.dart';
+import 'package:treex_app_next/provider/network_provider.dart';
 import 'package:treex_app_next/static/color_palettes.dart';
 
 class FileWidget extends StatefulWidget {
@@ -39,6 +42,7 @@ class _FileWidgetState extends State<FileWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final ap = Provider.of<AP>(context);
     return Material(
       color: Colors.transparent,
       child: widget.isGrid
@@ -244,8 +248,22 @@ class _FileWidgetState extends State<FileWidget> {
         ],
       ).then(
         (value) {
+          final np = Provider.of<NP>(context, listen: false);
           switch (value) {
             case 'download':
+              TransDownload.download(
+                entity: widget.entity,
+                onDir: () {
+                  showTN(
+                    context,
+                    title: 'Download Done',
+                    icon: MaterialCommunityIcons.check,
+                    type: StatusType.SUCCESS,
+                  );
+                },
+                share: widget.share,
+                name: np.profile.name,
+              );
               break;
             case 'rename':
               showMIUIConfirmDialog(

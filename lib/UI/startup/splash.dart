@@ -6,6 +6,7 @@ import 'package:treex_app_next/UI/global_widget/treex_notification.dart';
 import 'package:treex_app_next/Utils/network/network_profile.dart';
 import 'package:treex_app_next/Utils/network/network_test.dart';
 import 'package:treex_app_next/Utils/shared_preferences_util.dart';
+import 'package:treex_app_next/Utils/transfer_system/trans_download.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/provider/app_provider.dart';

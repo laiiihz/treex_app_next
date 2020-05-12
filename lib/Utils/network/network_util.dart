@@ -2,7 +2,6 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 
 class NU {
-  //app provider
   Dio dio;
   String baseUrl;
   String port;
@@ -45,6 +44,33 @@ class NU {
     port:$port
     timeOut:$timeOut
     ''';
+  }
+}
+
+class NUFullUrl {
+  Dio dio;
+  String fullUrl;
+  int timeOut;
+  NUFullUrl({
+    this.fullUrl = '',
+    this.timeOut = 3000,
+  });
+
+  init() {
+    dio = Dio()
+      ..options.connectTimeout = timeOut
+      ..options.baseUrl = this.fullUrl;
+    //https check
+    if (this.fullUrl.contains('https://')) {
+      print('https');
+      (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (client) {
+        client.badCertificateCallback = (cert, host, port) {
+          return true;
+          //todo:Self sign file check here
+        };
+      };
+    }
   }
 }
 

@@ -18,3 +18,14 @@ class NUT extends NU {
       };
   }
 }
+
+class NUTFullURL extends NUFullUrl {
+  NUTFullURL({@required String token, @required String fullURL}) : super() {
+    this.fullUrl = fullURL;
+    this.init();
+    dio
+      ..options.headers = {
+        'Authorization': token,
+      };
+  }
+}
