@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:treex_app_next/Utils/network/network_with_token.dart';
 
 class NetworkList extends NUT {
@@ -57,6 +58,20 @@ class NetworkList extends NUT {
       },
     );
   }
+
+  Future recycle() async {
+    Response response = await dio.get('/treex/file/recycle');
+    List<dynamic> rawList = response.data['recycleFiles'];
+    List<RecycleEntity> recycleLists = [];
+    rawList.forEach((element) {
+      recycleLists.add(RecycleEntity.fromDynamic(element));
+    });
+    return recycleLists;
+  }
+
+  Future clearRecycle() async {
+    await dio.delete('/treex/file/clear');
+  }
 }
 
 ///Network List Entity
@@ -83,4 +98,13 @@ class PathEntity {
   String parent;
   String path;
   PathEntity({this.name, this.parent, this.path});
+}
+
+class RecycleEntity {
+  String name = '';
+  String path = '';
+  RecycleEntity.fromDynamic(dynamic entity) {
+    this.name = entity['name'];
+    this.path = entity['path'];
+  }
 }

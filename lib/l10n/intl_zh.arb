@@ -90,6 +90,6 @@
   "phoneNumber": "手机号码",
   "email": "电子邮箱",
   "updateColor": "更新背景色",
-  "downloaded": "Downloaded",
-  "upload": "Upload"
+  "downloaded": "已下载",
+  "upload": "上传"
 }

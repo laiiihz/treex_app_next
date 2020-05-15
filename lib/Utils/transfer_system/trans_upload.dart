@@ -20,14 +20,18 @@ class TransUpload {
     UploadTask uploadTask =
         UploadTask(name: FileUtil.getFileName(file.path), file: file);
     uploadTasks.add(uploadTask);
+    print(_nut.dio.options.headers);
     Response response = await _nut.dio.post(
       '/treex/upload',
       data: FormData.fromMap({
         'file': await MultipartFile.fromFile(file.path),
         'path': path,
         'share': share,
+        'name': FileUtil.getFileName(file.path),
       }),
-      onReceiveProgress: (put, all) {},
+      onSendProgress: (put, all) {
+        uploadTasks[uploadTasks.indexOf(uploadTask)].percent = put / all;
+      },
       cancelToken: uploadTask.cancelToken,
     );
   }

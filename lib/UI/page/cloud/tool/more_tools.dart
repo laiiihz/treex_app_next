@@ -1,8 +1,10 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_miui/flutter_miui.dart';
 import 'package:treex_app_next/UI/auth/widget/login_text_field.dart';
 import 'package:treex_app_next/Utils/network/network_list.dart';
+import 'package:treex_app_next/Utils/transfer_system/trans_upload.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 
@@ -102,7 +104,15 @@ class _MoreToolsState extends State<MoreTools> {
                                 IconButton(
                                   tooltip: S.of(context).uploadFile,
                                   icon: Icon(MaterialCommunityIcons.upload),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    FilePicker.getFile().then((file) {
+                                      TransUpload.upload(
+                                        file: file,
+                                        share: widget.share,
+                                        path: widget.path,
+                                      );
+                                    });
+                                  },
                                 ),
                                 IconButton(
                                   tooltip: S.of(context).view,

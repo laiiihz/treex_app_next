@@ -7,6 +7,7 @@ import 'package:treex_app_next/UI/global_widget/cupertino_icon_button.dart';
 import 'package:treex_app_next/UI/global_widget/cupertino_title.dart';
 import 'package:treex_app_next/Utils/file_util.dart';
 import 'package:treex_app_next/Utils/transfer_system/trans_download.dart';
+import 'package:treex_app_next/Utils/transfer_system/trans_upload.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/static/color_palettes.dart';
 import 'package:flutter/material.dart' as md;
@@ -154,7 +155,6 @@ class _TransferDownloadViewIOSState extends State<TransferDownloadViewIOS> {
                                         _showDownloaded = !_showDownloaded;
                                       });
                                     },
-                                    onVerticalDragDown: (event) {},
                                   ),
                                   Center(
                                     child: Text(
@@ -200,8 +200,17 @@ class _TransferDownloadViewIOSState extends State<TransferDownloadViewIOS> {
                       )
                     : ListView.builder(
                         itemBuilder: (BuildContext context, int index) {
-                          return Text('test');
+                          final task = TransUpload.uploadTasks[index];
+                          return md.Material(
+                            child: md.ListTile(
+                              title: Text(task.name),
+                              subtitle: AnimatedLinearProgress(
+                                value: task.percent,
+                              ),
+                            ),
+                          );
                         },
+                        itemCount: TransUpload.uploadTasks.length,
                       ),
               ),
               color: md.Colors.transparent,

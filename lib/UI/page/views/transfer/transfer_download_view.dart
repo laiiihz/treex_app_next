@@ -6,6 +6,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:treex_app_next/UI/global_widget/animated_linear_progress.dart';
 import 'package:treex_app_next/Utils/file_util.dart';
 import 'package:treex_app_next/Utils/transfer_system/trans_download.dart';
+import 'package:treex_app_next/Utils/transfer_system/trans_upload.dart';
 import 'package:treex_app_next/Utils/ui_util.dart';
 import 'package:treex_app_next/generated/l10n.dart';
 import 'package:treex_app_next/static/color_palettes.dart';
@@ -47,11 +48,9 @@ class _TransferDownloadViewState extends State<TransferDownloadView>
         bottom: TabBar(
           controller: _tabController,
           tabs: [
+            Tab(text: S.of(context).download),
             Tab(
-              child: Text('test'),
-            ),
-            Tab(
-              child: Text('test'),
+              child: Text(S.of(context).upload),
             ),
           ],
         ),
@@ -116,13 +115,13 @@ class _TransferDownloadViewState extends State<TransferDownloadView>
                               height: 5,
                               width: 50,
                               decoration: BoxDecoration(
-                                color: CP.cupertinoBG(context),
+                                color: CP.cupertinoBG(context, reverse: true),
                                 borderRadius: BorderRadius.circular(5),
                               ),
                             ),
                           ),
                         ),
-                        onTap: () {
+                        onVerticalDragStart: (event) {
                           setState(() {
                             _downloadedView = !_downloadedView;
                           });
@@ -163,8 +162,15 @@ class _TransferDownloadViewState extends State<TransferDownloadView>
             children: <Widget>[
               ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  return Text('test');
+                  final task = TransUpload.uploadTasks[index];
+                  return ListTile(
+                    title: Text(task.name),
+                    subtitle: AnimatedLinearProgress(
+                      value: task.percent,
+                    ),
+                  );
                 },
+                itemCount: TransUpload.uploadTasks.length,
               ),
             ],
           ),
